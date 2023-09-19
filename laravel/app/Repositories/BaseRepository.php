@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Contracts\BaseRepositoryInterface;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class BaseRepository
@@ -38,7 +40,16 @@ class BaseRepository implements BaseRepositoryInterface
      */
     public function create($data)
     {
-        return $this->model->create($data);
+        try {
+            DB::beginTransaction();
+
+            return $this->model->firstOrCreate($data);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return $e->getMessage();
+        }
+
     }
 
     /**
