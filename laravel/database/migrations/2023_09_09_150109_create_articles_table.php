@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("category")->nullable();
             $table->text("description")->nullable();
             $table->string("url")->nullable();
-            $table->string("url_to_image")->nullable();
+            $table->string("image")->nullable();
             $table->string("published_at")->nullable();
 
             $table->timestamps();

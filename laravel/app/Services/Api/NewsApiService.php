@@ -32,7 +32,7 @@ class NewsApiService extends BaseApiService
                     $article->description = $item->description ?? NULL;
                     $article->category = 'General';
                     $article->url = $item->url;
-                    $article->url_to_image = $item->urlToImage ?? 'https://placehold.co/400x300';
+                    $article->image = $item->urlToImage ?? 'https://placehold.co/400x300';
                     $article->published_at = $item->publishedAt;
                     $article->save();
 

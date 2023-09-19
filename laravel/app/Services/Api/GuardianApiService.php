@@ -37,7 +37,7 @@ class GuardianApiService extends BaseApiService
                 $article->description = $item->webTitle;
                 $article->category = $item->sectionName;
                 $article->url = $item->webUrl;
-                $article->url_to_image = 'api/guardian-300x201.png';
+                $article->image = 'api/guardian-300x201.png';
                 $article->published_at = $item->webPublicationDate;
                 $article->save();
 

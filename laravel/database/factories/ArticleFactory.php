@@ -26,7 +26,7 @@ class ArticleFactory extends Factory
             'description' => 'test description',
             'category' => 'UK news',
             'url' => 'https://www.theguardian.com/uk-news/live/2023/sep/09/daniel-khalife-escaped-terror-suspect-caught-in-london-chiswick-wandsworth-prison',
-            'url_to_image' => 'https://birn.eu.com/wp-content/uploads/2018/11/guardian-300x201.png',
+            'image' => 'https://birn.eu.com/wp-content/uploads/2018/11/guardian-300x201.png',
             'published_at' => now(),
         ];
     }

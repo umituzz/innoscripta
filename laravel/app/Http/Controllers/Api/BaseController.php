@@ -22,8 +22,8 @@ class BaseController extends Controller
     {
         $response = [
             'statusCode' => $statusCode,
+            'message' => $message,
             'data' => $data,
-            'message' => $message
         ];
 
         return response()->json($response);
@@ -41,8 +41,8 @@ class BaseController extends Controller
     {
         $response = [
             'statusCode' => $statusCode,
+            'message' => $message,
             'errors' => $errors,
-            'message' => $message
         ];
 
         return response()->json($response, $statusCode);

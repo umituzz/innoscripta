@@ -17,7 +17,7 @@ class Article extends BaseModel
         'description',
         'category',
         'url',
-        'url_to_image',
+        'image',
         'published_at'
     ];
 

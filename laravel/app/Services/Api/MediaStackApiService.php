@@ -31,7 +31,7 @@ class MediaStackApiService extends BaseApiService
                     $article->description = $item->description ?? NULL;
                     $article->category = $item->category ?? 'General';
                     $article->url = $item->url;
-                    $article->url_to_image = 'https://placehold.co/400x300';
+                    $article->image = 'https://placehold.co/400x300';
                     $article->published_at = $item->published_at;
                     $article->save();
 
