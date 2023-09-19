@@ -16,7 +16,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create(['name' => 'Admin', 'email' => 'admin@laravelreact.com', 'password' => bcrypt(123456789)]);
-        User::create(['name' => 'User', 'email' => 'user@laravelreact.com', 'password' => bcrypt(123456789)]);
+        User::create(['name' => 'Ümit UZ', 'email' => 'umituz9999@gmail.com', 'password' => bcrypt(123456789)]);
+        User::create(['name' => 'Admin', 'email' => 'admin@innoscripta.com', 'password' => bcrypt(123456789)]);
+        User::create(['name' => 'User', 'email' => 'user@innoscripta.com', 'password' => bcrypt(123456789)]);
     }
 }
