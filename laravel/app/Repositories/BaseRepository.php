@@ -34,25 +34,6 @@ class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-     * Insert a new record
-     * @param $data
-     * @return mixed
-     */
-    public function create($data)
-    {
-        try {
-            DB::beginTransaction();
-
-            return $this->model->firstOrCreate($data);
-        } catch (Exception $e) {
-            DB::rollBack();
-
-            return $e->getMessage();
-        }
-
-    }
-
-    /**
      * Find related record by value
      *
      * @param $key
@@ -62,5 +43,59 @@ class BaseRepository implements BaseRepositoryInterface
     public function findBy($key, $value)
     {
         return $this->model->where($key, $value)->first();
+    }
+
+    /**
+     * Insert a new record
+     * @param $data
+     * @return mixed
+     */
+    public function create($data)
+    {
+        try {
+//            DB::beginTransaction();
+
+            return $this->model->firstOrCreate($data);
+        } catch (Exception $e) {
+//            DB::rollBack();
+
+            return $e->getMessage();
+        }
+
+    }
+
+    /**
+     * @param $id
+     * @param $data
+     * @return mixed
+     */
+    public function update($id, $data)
+    {
+        try {
+//            DB::beginTransaction();
+
+            return $this->model->where('id', $id)->update($data);
+        } catch (Exception $e) {
+//            DB::rollBack();
+
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        try {
+//            DB::beginTransaction();
+
+            return $this->model->where('id', $id)->delete();
+        } catch (Exception $e) {
+//            DB::rollBack();
+
+            return $e->getMessage();
+        }
     }
 }

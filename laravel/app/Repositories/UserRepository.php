@@ -19,4 +19,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         $this->user = $user;
     }
+
+    public function getAuthenticatedUser()
+    {
+        return auth()->user();
+    }
+
+
 }

@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Contracts\ArticleRepositoryInterface;
+use App\Contracts\NotificationRepositoryInterface;
 use App\Contracts\ResourceRepositoryInterface;
 use App\Contracts\UserRepositoryInterface;
 use App\Repositories\ArticleRepository;
+use App\Repositories\NotificationRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -30,6 +32,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
         $this->app->bind(ResourceRepositoryInterface::class, ResourceRepository::class);
         $this->app->bind(ArticleRepositoryInterface::class, ArticleRepository::class);
     }
