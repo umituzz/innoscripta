@@ -32,20 +32,19 @@ class BaseController extends Controller
     /**
      * Return error status
      *
-     * @param $message
      * @param array $errors
-     * @param int $code
+     * @param string $message
+     * @param int $statusCode
      * @return JsonResponse
      */
-    public function error($message, array $errors = [], int $code = 404): JsonResponse
+    public function error(array $errors, string $message , int $statusCode = 404): JsonResponse
     {
         $response = [
             'statusCode' => $statusCode,
+            'errors' => $errors,
             'message' => $message
         ];
 
-        if (!empty($errors)) $response['data'] = $errors;
-
-        return response()->json($response, $code);
+        return response()->json($response, $statusCode);
     }
 }

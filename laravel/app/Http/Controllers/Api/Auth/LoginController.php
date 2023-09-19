@@ -28,9 +28,11 @@ class LoginController extends BaseController
      */
     public function login(LoginRequest $request)
     {
-        $user = $this->loginService->login($request);
+        $data = $this->loginService->login($request);
 
-        return $this->ok($user, Response::HTTP_OK, __('User Logged In'));
+        return is_array($data) ?
+            $this->error($data['errors'], $data['message'], $data['statusCode']) :
+            $this->ok($data, Response::HTTP_OK, __('User Logged In'));
     }
 
     /**

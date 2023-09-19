@@ -22,16 +22,19 @@ class LoginService
 
     /**
      * @param $request
-     * @return JsonResponse|mixed
+     * @return UserResource|array
      */
     public function login($request)
     {
         if (!auth()->attempt($request->only('email', 'password'))) {
-            return response()->json([
+            return [
                 'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
-                'errors' => __('The provided credentials are incorrect!'),
-                'message' => __('Login Failed')
-            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+                'errors' => [
+                    'email' => __('The provided credentials are incorrect!')
+                ],
+                'message' => __('Login Failed'),
+            ];
+
         }
 
         $user = $this->userRepository->findBy('email', $request->input('email'));
