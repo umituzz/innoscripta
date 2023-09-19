@@ -31,17 +31,18 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
             $items = $this->httpService->getResult($url)->data;
 
             foreach ($items as $item) {
-                    $article = new Article();
-                    $article->resource_id = $resourceId;
-                    $article->title = $item->title;
-                    $article->category = $item->category ?? 'General';
-                    $article->url = $item->url;
-                    $article->image = 'https://placehold.co/400x300';
-                    $article->published_at = $item->published_at;
-                    $article->save();
 
-                    $this->redisData[] = $article;
-                }
+                $article = Article::firstOrCreate([
+                    'resource_id' => $resourceId,
+                    'title' => $item->title,
+                    'category' => $item->category ?? 'General',
+                    'url' => $item->url,
+                    'image' => 'https://placehold.co/400x300',
+                    'published_at' => $item->published_at,
+                ]);
+
+                $this->redisData[] = $article;
+            }
 
             $this->redisService->set($this->redisKey, $this->redisData);
 

@@ -17,7 +17,7 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
      */
     public function getUrl(): string
     {
-        return env('GUARDIAN_API_URL') . '/search?api_key=' . env('GUARDIAN_API_KEY');
+        return env('GUARDIAN_API_URL') . '/search?api-key=' . env('GUARDIAN_API_KEY');
     }
 
     /**
@@ -31,14 +31,15 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
             $items = $this->httpService->getResult($url)->response->results;
 
             foreach ($items as $item) {
-                $article = new Article();
-                $article->resource_id = $resourceId;
-                $article->title = $item->webTitle;
-                $article->url = $item->webUrl;
-                $article->category = $item->sectionName ?? 'General';
-                $article->image = 'https://placehold.co/400x300';
-                $article->published_at = $item->webPublicationDate;
-                $article->save();
+
+                $article = Article::firstOrCreate([
+                    'resource_id' => $resourceId,
+                    'title' => $item->webTitle,
+                    'category' => $item->sectionName ?? 'General',
+                    'url' => $item->webUrl,
+                    'image' => 'https://placehold.co/400x300',
+                    'published_at' => $item->webPublicationDate,
+                ]);
 
                 $this->redisData[] = $article;
             }

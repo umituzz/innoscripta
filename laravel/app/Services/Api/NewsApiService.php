@@ -32,16 +32,16 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
 
             foreach ($items as $item) {
 
-                    $article = new Article();
-                    $article->resource_id = $resourceId;
-                    $article->title = $item->title;
-                    $article->category = 'General';
-                    $article->url = $item->url;
-                    $article->image = 'https://placehold.co/400x300';
-                    $article->published_at = $item->publishedAt;
-                    $article->save();
+                $article = Article::firstOrCreate([
+                    'resource_id' => $resourceId,
+                    'title' => $item->title,
+                    'category' => $item->category ?? 'General',
+                    'url' => $item->url,
+                    'image' => 'https://placehold.co/400x300',
+                    'published_at' => $item->publishedAt,
+                ]);
 
-                    $this->redisData[] = $article;
+                $this->redisData[] = $article;
             }
 
             $this->redisService->set($this->redisKey, $this->redisData);
