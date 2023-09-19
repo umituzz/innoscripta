@@ -1,4 +1,4 @@
-import {Alert, Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
@@ -8,8 +8,7 @@ import {CreateData} from "../services/DataCreateService";
 export default function Register() {
     const router = useRouter();
     const [formData, setFormData] = useState({
-        first_name: "",
-        last_name: "",
+        name: "",
         email: "",
         password: "",
         password_confirmation: "",
@@ -28,8 +27,7 @@ export default function Register() {
             alert("Kullanıcı kaydı başarılı");
 
             setFormData({
-                first_name: "",
-                last_name: "",
+                name: "",
                 email: "",
                 password: "",
                 password_confirmation: "",
@@ -52,27 +50,15 @@ export default function Register() {
                         <h3>Registration</h3>
                     </div>
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="formBasicFirstName">
+                        <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label className="text-center">First Name <span
                                 className="text-danger">*</span></Form.Label>
                             <Form.Control
                                 type="text"
-                                name="first_name"
-                                value={formData.first_name}
+                                name="name"
+                                value={formData.name}
                                 onChange={handleChange}
-                                placeholder="Enter First Name"
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicLastName">
-                            <Form.Label className="text-center">Last Name <span
-                                className="text-danger">*</span></Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="last_name"
-                                value={formData.last_name}
-                                onChange={handleChange}
-                                placeholder="Enter Last Name"
+                                placeholder="Enter Name"
                                 required
                             />
                         </Form.Group>

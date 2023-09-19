@@ -1,12 +1,10 @@
 import {Button, Form, Col, Container, Row} from "react-bootstrap";
 import Link from "next/link";
 import Image from "next/image";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useRouter} from "next/router";
 import {CreateData} from "../services/DataCreateService";
-import {useDispatch, useSelector} from "react-redux";
-import {LoadListData} from "../services/DataListService";
-import {setOrders} from "../stores/actions/orderAction";
+import {useDispatch} from "react-redux";
 import {login} from "../stores/actions/authAction";
 
 export default function Login() {

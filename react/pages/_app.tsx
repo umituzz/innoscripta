@@ -7,8 +7,6 @@ import {store} from "../stores"
 import {Provider} from "react-redux";
 
 export default function App({Component, pageProps}: AppProps) {
-
-
     return (
         <div className="main">
             <Provider store={store}>
