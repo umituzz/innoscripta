@@ -22,6 +22,7 @@ export default function Register() {
         e.preventDefault();
 
         try {
+            alert("hey");
             await CreateData('register', formData)
 
             alert("Kullanıcı kaydı başarılı");
@@ -51,7 +52,7 @@ export default function Register() {
                     </div>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formBasicName">
-                            <Form.Label className="text-center">First Name <span
+                            <Form.Label className="text-center">Name <span
                                 className="text-danger">*</span></Form.Label>
                             <Form.Control
                                 type="text"
