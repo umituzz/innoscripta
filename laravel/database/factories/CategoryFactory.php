@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Setting;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Setting>
+ * @extends Factory<Category>
  */
-class ResourceFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,6 +19,7 @@ class ResourceFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
+            'slug' => $this->faker->slug,
         ];
     }
 }

@@ -11,9 +11,13 @@ use App\Models\Article;
  */
 class GuardianApiService extends BaseApiService
 {
-    const API_URL = 'https://content.guardianapis.com/search?api-key=';
-
-    const API_KEY = 'test';
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return env('GUARDIAN_API_URL') . '/search?api_key=' . env('GUARDIAN_API_KEY');
+    }
 
     /**
      * Get data from the guardian resource
@@ -23,20 +27,22 @@ class GuardianApiService extends BaseApiService
     public function getData($resourceId)
     {
         try {
-            $url = self::API_URL . self::API_KEY;
+            $url = $this->getUrl();
             $items = $this->httpService->getResult($url)->response->results;
 
             foreach ($items as $item) {
                 $article = new Article();
                 $article->resource_id = $resourceId;
+                $article->title = $item->webTitle;
+                $article->url = $item->webUrl;
+
                 $article->source_id = $item->id ?? NULL;
                 $article->source_name = 'The Guardian';
                 $article->api = 'The Guardian';
                 $article->author = 'Guardian';
-                $article->title = $item->webTitle;
                 $article->description = $item->webTitle;
                 $article->category = $item->sectionName;
-                $article->url = $item->webUrl;
+
                 $article->image = 'api/guardian-300x201.png';
                 $article->published_at = $item->webPublicationDate;
                 $article->save();
