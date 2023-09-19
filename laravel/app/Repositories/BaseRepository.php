@@ -46,6 +46,16 @@ class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
+     * Get total records count
+     *
+     * @return mixed
+     */
+    public function total()
+    {
+        return $this->model->count();
+    }
+
+    /**
      * Insert a new record
      * @param $data
      * @return mixed
