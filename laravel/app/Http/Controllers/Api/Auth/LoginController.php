@@ -30,9 +30,9 @@ class LoginController extends BaseController
     {
         $data = $this->loginService->login($request);
 
-        return is_array($data) ?
-            $this->error($data['errors'], $data['message'], $data['statusCode']) :
-            $this->ok($data, Response::HTTP_OK, __('User Logged In'));
+        return array_key_exists('token', $data) ?
+            $this->ok($data, Response::HTTP_OK, __('User Logged In')) :
+            $this->error($data['errors'], $data['message'], $data['statusCode']);
     }
 
     /**

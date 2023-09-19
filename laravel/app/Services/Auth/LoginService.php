@@ -4,7 +4,6 @@ namespace App\Services\Auth;
 
 use App\Contracts\UserRepositoryInterface;
 use App\Http\Resources\UserResource;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 /**
@@ -22,7 +21,7 @@ class LoginService
 
     /**
      * @param $request
-     * @return UserResource|array
+     * @return array
      */
     public function login($request)
     {
@@ -38,8 +37,13 @@ class LoginService
         }
 
         $user = $this->userRepository->findBy('email', $request->input('email'));
+        $token = $user->createToken('userToken')->plainTextToken;
+        $item = new UserResource($user);
 
-        return new UserResource($user);
+        return [
+            'user' => $item,
+            'token' => $token
+        ];
     }
 
     /**
