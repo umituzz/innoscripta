@@ -2,6 +2,7 @@
 
 namespace App\Services\Api;
 
+use App\Contracts\ApiServiceInterface;
 use App\Models\Article;
 use Exception;
 
@@ -9,11 +10,15 @@ use Exception;
  * Class NewsApiService
  * @package App\Services
  */
-class NewsApiService extends BaseApiService
+class NewsApiService extends BaseApiService implements ApiServiceInterface
 {
-    const API_URL = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=';
-
-    const API_KEY = 'c95ec738abe74b708871b99d6673cc85';
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return env('NEWS_API_URL') . '/top-headlines?country=us&apiKey=' . env('NEWS_API_KEY');
+    }
 
     /**
      * @param $resourceId
@@ -22,7 +27,7 @@ class NewsApiService extends BaseApiService
     public function getData($resourceId)
     {
         try {
-            $url = self::API_URL . self::API_KEY;
+            $url = $this->getUrl();
             $items = $this->httpService->getResult($url)->articles;
 
             foreach ($items as $item) {

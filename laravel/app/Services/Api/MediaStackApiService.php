@@ -2,6 +2,7 @@
 
 namespace App\Services\Api;
 
+use App\Contracts\ApiServiceInterface;
 use App\Models\Article;
 use Exception;
 
@@ -9,20 +10,24 @@ use Exception;
  * Class MediaStackApiService
  * @package App\Services
  */
-class MediaStackApiService extends BaseApiService
+class MediaStackApiService extends BaseApiService implements ApiServiceInterface
 {
-    const API_URL = 'http://api.mediastack.com/v1/news?access_key=';
-
-    const API_KEY = '6490528b65c9d28894748cf10c6d0a52';
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return env('MEDIA_STACK_API_URL') . '/news?access_key=' . env('MEDIA_STACK_API_KEY');
+    }
 
     /**
      * @param $resourceId
-     * @return string[]
+     * @return string[]|void
      */
     public function getData($resourceId)
     {
         try {
-            $url = self::API_URL . self::API_KEY;
+            $url = $this->getUrl();
             $items = $this->httpService->getResult($url)->data;
 
             foreach ($items as $item) {

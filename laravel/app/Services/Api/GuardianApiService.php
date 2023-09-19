@@ -2,6 +2,7 @@
 
 namespace App\Services\Api;
 
+use App\Contracts\ApiServiceInterface;
 use Exception;
 use App\Models\Article;
 
@@ -9,7 +10,7 @@ use App\Models\Article;
  * Class GuardianApiService
  * @package App\Services\Api
  */
-class GuardianApiService extends BaseApiService
+class GuardianApiService extends BaseApiService implements ApiServiceInterface
 {
     /**
      * @return string
@@ -20,9 +21,8 @@ class GuardianApiService extends BaseApiService
     }
 
     /**
-     * Get data from the guardian resource
-     *
-     * @return string[]
+     * @param $resourceId
+     * @return string[]|void
      */
     public function getData($resourceId)
     {
@@ -35,16 +35,16 @@ class GuardianApiService extends BaseApiService
                 $article->resource_id = $resourceId;
                 $article->title = $item->webTitle;
                 $article->url = $item->webUrl;
+                $article->category = $item->sectionName;
+                $article->published_at = $item->webPublicationDate;
 
                 $article->source_id = $item->id ?? NULL;
                 $article->source_name = 'The Guardian';
                 $article->api = 'The Guardian';
                 $article->author = 'Guardian';
                 $article->description = $item->webTitle;
-                $article->category = $item->sectionName;
 
                 $article->image = 'api/guardian-300x201.png';
-                $article->published_at = $item->webPublicationDate;
                 $article->save();
 
                 $this->redisData[] = $article;
