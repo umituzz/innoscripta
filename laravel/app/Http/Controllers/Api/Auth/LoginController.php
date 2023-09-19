@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\LoginRequest;
 use App\Services\Auth\LoginService;
-use App\Services\Auth\RegisterService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
@@ -31,5 +31,16 @@ class LoginController extends BaseController
         $user = $this->loginService->login($request);
 
         return $this->ok($user, Response::HTTP_OK, __('User Logged In'));
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    public function logout(Request $request)
+    {
+        $result = $this->loginService->logout($request);
+
+        $this->ok($result, Response::HTTP_OK, __('Logout successful'));
     }
 }
