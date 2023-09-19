@@ -14,7 +14,8 @@ class BaseController extends Controller
     /**
      * Return success status
      *
-     * @param $result
+     * @param $data
+     * @param $statusCode
      * @param $message
      * @return JsonResponse
      */
