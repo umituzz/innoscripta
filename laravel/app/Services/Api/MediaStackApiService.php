@@ -33,12 +33,7 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
             foreach ($items as $item) {
                     $article = new Article();
                     $article->resource_id = $resourceId;
-                    $article->source_id = $item->source ?? 'Unknown';
-                    $article->source_name = $item->source ?? 'Unknown';
-                    $article->api = 'Media Stack';
-                    $article->author = $item->author ?? NULL;
                     $article->title = $item->title;
-                    $article->description = $item->description ?? NULL;
                     $article->category = $item->category ?? 'General';
                     $article->url = $item->url;
                     $article->image = 'https://placehold.co/400x300';

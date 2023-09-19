@@ -45,6 +45,14 @@ class MediaStackApiCommand extends Command
     public function handle()
     {
         $item = $this->resourceRepository->findBy('name', 'Media Stack API');
-        $this->mediaStackApiService->getData($item->id);
+
+        if ($item) {
+            $this->mediaStackApiService->getData($item->id);
+
+            return Command::SUCCESS;
+        }
+
+        return Command::FAILURE;
+
     }
 }

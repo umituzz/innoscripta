@@ -16,6 +16,8 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory()->create();
+//        Category::factory()->create();
+
+        Category::create(['name' => 'Category', 'slug' => 'category']);
     }
 }

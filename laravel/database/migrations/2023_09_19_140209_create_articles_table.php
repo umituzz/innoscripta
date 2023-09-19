@@ -14,13 +14,8 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('resource_id')->constrained();
-            $table->string("source_id")->nullable();
-            $table->string("source_name")->nullable();
-            $table->string("api")->nullable();
-            $table->string("author")->nullable();
             $table->string("title")->unique();
             $table->string("category")->nullable();
-            $table->text("description")->nullable();
             $table->string("url")->nullable();
             $table->string("image")->nullable();
             $table->string("published_at")->nullable();

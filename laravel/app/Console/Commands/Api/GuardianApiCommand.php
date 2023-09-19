@@ -47,6 +47,12 @@ class GuardianApiCommand extends Command
     public function handle()
     {
         $item = $this->resourceRepository->findBy('name', 'Guardian API');
-        $this->guardianApiService->getData($item->id);
+
+        if ($item) {
+
+            return Command::SUCCESS;
+        }
+
+        return Command::FAILURE;
     }
 }

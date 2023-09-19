@@ -35,16 +35,9 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
                 $article->resource_id = $resourceId;
                 $article->title = $item->webTitle;
                 $article->url = $item->webUrl;
-                $article->category = $item->sectionName;
+                $article->category = $item->sectionName ?? 'General';
+                $article->image = 'https://placehold.co/400x300';
                 $article->published_at = $item->webPublicationDate;
-
-                $article->source_id = $item->id ?? NULL;
-                $article->source_name = 'The Guardian';
-                $article->api = 'The Guardian';
-                $article->author = 'Guardian';
-                $article->description = $item->webTitle;
-
-                $article->image = 'api/guardian-300x201.png';
                 $article->save();
 
                 $this->redisData[] = $article;

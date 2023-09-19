@@ -34,15 +34,10 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
 
                     $article = new Article();
                     $article->resource_id = $resourceId;
-                    $article->source_id = $item->source->id ?? NULL;
-                    $article->source_name = $item->source->name ?? NULL;
-                    $article->api = 'News API';
-                    $article->author = $item->author ?? NULL;
                     $article->title = $item->title;
-                    $article->description = $item->description ?? NULL;
                     $article->category = 'General';
                     $article->url = $item->url;
-                    $article->image = $item->urlToImage ?? 'https://placehold.co/400x300';
+                    $article->image = 'https://placehold.co/400x300';
                     $article->published_at = $item->publishedAt;
                     $article->save();
 

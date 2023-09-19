@@ -46,6 +46,13 @@ class NewsApiCommand extends Command
     public function handle()
     {
         $item = $this->resourceRepository->findBy('name', 'News API');
-        $this->newsApiService->getData($item->id);
+
+        if ($item) {
+            $this->newsApiService->getData($item->id);
+
+            return Command::SUCCESS;
+        }
+
+        return Command::FAILURE;
     }
 }
