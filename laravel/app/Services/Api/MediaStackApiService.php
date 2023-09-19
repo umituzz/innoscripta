@@ -15,7 +15,11 @@ class MediaStackApiService extends BaseApiService
 
     const API_KEY = '6490528b65c9d28894748cf10c6d0a52';
 
-    public function getData()
+    /**
+     * @param $resourceId
+     * @return string[]
+     */
+    public function getData($resourceId)
     {
         try {
             $url = self::API_URL . self::API_KEY;
@@ -23,6 +27,7 @@ class MediaStackApiService extends BaseApiService
 
             foreach ($items as $item) {
                     $article = new Article();
+                    $article->resource_id = $resourceId;
                     $article->source_id = $item->source ?? 'Unknown';
                     $article->source_name = $item->source ?? 'Unknown';
                     $article->api = 'Media Stack';
@@ -40,9 +45,9 @@ class MediaStackApiService extends BaseApiService
 
             $this->redisService->set($this->redisKey, $this->redisData);
 
-            return response([
+            return [
                 'message' => 'Data inserted successfully'
-            ], 201);
+            ];
         } catch (Exception $exception) {
             $this->notificationService->error($exception->getMessage());
         }

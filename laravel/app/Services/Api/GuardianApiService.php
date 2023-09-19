@@ -20,15 +20,15 @@ class GuardianApiService extends BaseApiService
      *
      * @return string[]
      */
-    public function getData()
+    public function getData($resourceId)
     {
         try {
             $url = self::API_URL . self::API_KEY;
             $items = $this->httpService->getResult($url)->response->results;
 
             foreach ($items as $item) {
-
                 $article = new Article();
+                $article->resource_id = $resourceId;
                 $article->source_id = $item->id ?? NULL;
                 $article->source_name = 'The Guardian';
                 $article->api = 'The Guardian';

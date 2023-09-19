@@ -15,7 +15,11 @@ class NewsApiService extends BaseApiService
 
     const API_KEY = 'c95ec738abe74b708871b99d6673cc85';
 
-    public function getData()
+    /**
+     * @param $resourceId
+     * @return string[]|void
+     */
+    public function getData($resourceId)
     {
         try {
             $url = self::API_URL . self::API_KEY;
@@ -24,6 +28,7 @@ class NewsApiService extends BaseApiService
             foreach ($items as $item) {
 
                     $article = new Article();
+                    $article->resource_id = $resourceId;
                     $article->source_id = $item->source->id ?? NULL;
                     $article->source_name = $item->source->name ?? NULL;
                     $article->api = 'News API';

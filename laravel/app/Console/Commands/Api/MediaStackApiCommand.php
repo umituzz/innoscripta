@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Api;
 
+use App\Contracts\ResourceRepositoryInterface;
 use App\Services\Api\MediaStackApiService;
 use Illuminate\Console\Command;
 
@@ -25,12 +26,17 @@ class MediaStackApiCommand extends Command
      */
     protected $description = 'Get api data from MediaStack';
     private MediaStackApiService $mediaStackApiService;
+    private ResourceRepositoryInterface $resourceRepository;
 
-    public function __construct(MediaStackApiService $mediaStackApiService)
+    public function __construct(
+        MediaStackApiService $mediaStackApiService,
+        ResourceRepositoryInterface $resourceRepository
+    )
     {
         parent::__construct();
 
         $this->mediaStackApiService = $mediaStackApiService;
+        $this->resourceRepository = $resourceRepository;
     }
 
     /**
@@ -38,6 +44,7 @@ class MediaStackApiCommand extends Command
      */
     public function handle()
     {
-        $this->mediaStackApiService->getData();
+        $item = $this->resourceRepository->findBy('name', 'Media Stack API');
+        $this->mediaStackApiService->getData($item->id);
     }
 }

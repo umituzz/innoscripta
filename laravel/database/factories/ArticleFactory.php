@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Article;
+use App\Models\Resource;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
+            'resource_id' => Resource::factory(),
             'source_id' => 'uk-news/live/2023/sep/09/daniel-khalife-escaped-terror-suspect-caught-in-london-chiswick-wandsworth-prison',
             'source_name' => 'The Guardian',
             'api' => 'The Guardian',
