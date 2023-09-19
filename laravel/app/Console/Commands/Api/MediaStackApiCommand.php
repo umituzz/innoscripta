@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Contracts\ResourceRepositoryInterface;
+use App\Contracts\SourceRepositoryInterface;
 use App\Services\Api\MediaStackApiService;
 use Illuminate\Console\Command;
 
@@ -26,11 +26,11 @@ class MediaStackApiCommand extends Command
      */
     protected $description = 'Get api data from MediaStack';
     private MediaStackApiService $mediaStackApiService;
-    private ResourceRepositoryInterface $resourceRepository;
+    private SourceRepositoryInterface $resourceRepository;
 
     public function __construct(
         MediaStackApiService $mediaStackApiService,
-        ResourceRepositoryInterface $resourceRepository
+        SourceRepositoryInterface $resourceRepository
     )
     {
         parent::__construct();

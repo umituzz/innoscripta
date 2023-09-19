@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Contracts\ResourceRepositoryInterface;
+use App\Contracts\SourceRepositoryInterface;
 use App\Services\Api\NewsApiService;
 use Illuminate\Console\Command;
 
@@ -27,11 +27,11 @@ class NewsApiCommand extends Command
     protected $description = 'Get api data from NewsAPI';
 
     private NewsApiService $newsApiService;
-    private ResourceRepositoryInterface $resourceRepository;
+    private SourceRepositoryInterface $resourceRepository;
 
     public function __construct(
         NewsApiService $newsApiService,
-        ResourceRepositoryInterface $resourceRepository
+        SourceRepositoryInterface $resourceRepository
     )
     {
         parent::__construct();

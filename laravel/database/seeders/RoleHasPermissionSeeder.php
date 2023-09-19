@@ -6,6 +6,10 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class RoleHasPermissionSeeder
+ * @package Database\Seeders
+ */
 class RoleHasPermissionSeeder extends Seeder
 {
     public function run(): void

@@ -24,7 +24,7 @@ class ArticleService
      */
     public function getList()
     {
-        $items = $this->articleRepository->get();
+        $items = $this->articleRepository->getWith();
 
         return ArticleResource::collection($items);
     }

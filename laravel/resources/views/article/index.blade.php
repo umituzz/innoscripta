@@ -13,7 +13,7 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>{{ __('Resource') }}</th>
+                        <th>{{ __('Source') }}</th>
                         <th>{{ __('Title') }}</th>
                         <th>{{ __('Category') }}</th>
                         <th>{{ __('Published At') }}</th>
@@ -22,16 +22,13 @@
                     </thead>
                     <tbody>
                     @forelse($articles as $article)
-
                         <tr>
                             <td>{{ $article->id }}</td>
-                            <td>{{ $article->resource_id  }}</td>
+                            <td>{{ $article->source->name??NULL  }}</td>
                             <td>{{ $article->title }}</td>
                             <td>{{ $article->category }}</td>
                             <td>{{ $article->published_at }}</td>
-                            <td>
-
-                            </td>
+                            <td></td>
                         </tr>
                     @empty
                     @endforelse

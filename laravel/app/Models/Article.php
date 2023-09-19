@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * Class Article
  * @package App\Models
@@ -9,16 +11,20 @@ namespace App\Models;
 class Article extends BaseModel
 {
     protected $fillable = [
-        'source_id',
-        'source_name',
-        'api',
-        'author',
+        'resource_id',
         'title',
-        'description',
         'category',
         'url',
         'image',
         'published_at'
     ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function source(): BelongsTo
+    {
+        return $this->belongsTo(Source::class);
+    }
 
 }

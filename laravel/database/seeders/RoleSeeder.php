@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class RoleSeeder
+ * @package Database\Seeders
+ */
 class RoleSeeder extends Seeder
 {
     /**

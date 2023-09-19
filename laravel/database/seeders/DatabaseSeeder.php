@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             RoleHasPermissionSeeder::class,
             SettingSeeder::class,
             CategorySeeder::class,
-            ResourceSeeder::class,
+            SourceSeeder::class,
             ArticleSeeder::class,
         ]);
     }

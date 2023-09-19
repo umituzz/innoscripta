@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Article;
-use App\Models\Resource;
+use App\Models\Source;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +19,7 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'resource_id' => Resource::factory(),
+            'source_id' => Source::factory(),
             'title' => 'Daniel Khalife captured after he was pulled off a bicycle while riding along a towpath, police say – live',
             'category' => 'UK news',
             'url' => 'https://www.theguardian.com/uk-news/live/2023/sep/09/daniel-khalife-escaped-terror-suspect-caught-in-london-chiswick-wandsworth-prison',

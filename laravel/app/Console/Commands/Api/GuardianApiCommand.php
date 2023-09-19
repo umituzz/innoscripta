@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Contracts\ResourceRepositoryInterface;
+use App\Contracts\SourceRepositoryInterface;
 use App\Services\Api\GuardianApiService;
 use Illuminate\Console\Command;
 
@@ -27,11 +27,11 @@ class GuardianApiCommand extends Command
     protected $description = 'Get api data from Guardian';
 
     private GuardianApiService $guardianApiService;
-    private ResourceRepositoryInterface $resourceRepository;
+    private SourceRepositoryInterface $resourceRepository;
 
     public function __construct(
         GuardianApiService $guardianApiService,
-        ResourceRepositoryInterface $resourceRepository
+        SourceRepositoryInterface $resourceRepository
     )
     {
         parent::__construct();

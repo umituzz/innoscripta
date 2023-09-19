@@ -19,4 +19,9 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
 
         $this->article = $article;
     }
+
+    public function getWith()
+    {
+        return $this->article->with('source')->get();
+    }
 }

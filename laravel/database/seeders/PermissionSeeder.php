@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class PermissionSeeder
+ * @package Database\Seeders
+ */
 class PermissionSeeder extends Seeder
 {
     /**
