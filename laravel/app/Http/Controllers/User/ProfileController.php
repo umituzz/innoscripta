@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Contracts\UserRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\Auth\ProfileUpdateRequest;
 use App\Services\User\UserService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;

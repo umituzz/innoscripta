@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 /**
  * Class ProfileUpdateRequest
- * @package App\Http\Requests
+ * @package App\Http\Requests\Auth
  */
 class ProfileUpdateRequest extends FormRequest
 {
