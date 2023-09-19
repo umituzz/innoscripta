@@ -24,7 +24,7 @@ class GuardianApiService extends BaseApiService
     {
         try {
             $url = self::API_URL . self::API_KEY;
-            $items = $this->httpService->getResult($url);
+            $items = $this->httpService->getResult($url)->response->results;
 
             foreach ($items as $item) {
 

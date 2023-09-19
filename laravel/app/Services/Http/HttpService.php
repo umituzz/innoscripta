@@ -14,6 +14,6 @@ class HttpService
     {
         $response = Http::get($url);
 
-        return json_decode($response->body())->response->results;
+        return json_decode($response->body());
     }
 }

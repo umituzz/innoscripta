@@ -22,6 +22,7 @@ class SetupCommand extends Command
         Artisan::call('redis:flush-db');
 
         Artisan::call('api:guardian');
+        Artisan::call('api:news');
 
     }
 }
