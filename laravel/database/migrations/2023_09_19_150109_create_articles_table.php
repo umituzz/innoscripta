@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-
             $table->string("source_id")->nullable();
             $table->string("source_name")->nullable();
             $table->string("api")->nullable();
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->string("url")->nullable();
             $table->string("image")->nullable();
             $table->string("published_at")->nullable();
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory<Setting>
  */
-class SettingFactory extends Factory
+class ResourceFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +19,6 @@ class SettingFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
-            'type' => $this->faker->word,
             'name' => $this->faker->word,
         ];
     }
