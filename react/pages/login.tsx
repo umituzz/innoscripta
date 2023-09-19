@@ -24,13 +24,14 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const data = await CreateData('login', formData)
+            const response = await CreateData('login', formData)
+            const token = response.data.token;
 
-            if (data.token != 'undefined') {
+            if (token != 'undefined') {
 
-                dispatch(login(data.token))
+                dispatch(login(token))
 
-                localStorage.setItem("token", JSON.stringify(data.token));
+                localStorage.setItem("token", JSON.stringify(token));
 
                 alert("Kullanıcı girişi başarılı");
 

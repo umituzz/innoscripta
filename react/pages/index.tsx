@@ -1,5 +1,6 @@
 import {Row, Container} from "react-bootstrap";
 import {authCheck} from "../helpers/authHelper";
+import Link from "next/link";
 
 export default function Home() {
     let display;
@@ -7,7 +8,11 @@ export default function Home() {
     if (!authCheck()) {
         display = 'You should login first!'
     } else {
-        display = 'You logged in!'
+        display = (
+            <>
+                <Link href="articles">Articles</Link>
+            </>
+        )
     }
 
     return (
