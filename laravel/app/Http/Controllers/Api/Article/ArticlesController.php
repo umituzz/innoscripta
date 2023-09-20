@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Article;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Services\Article\ArticleService;
+use App\Services\Article\CategoryService;
 use Illuminate\Http\Response;
 
 /**
@@ -12,9 +12,9 @@ use Illuminate\Http\Response;
  */
 class ArticlesController extends BaseController
 {
-    private ArticleService $articleService;
+    private CategoryService $articleService;
 
-    public function __construct(ArticleService $articleService)
+    public function __construct(CategoryService $articleService)
     {
         $this->articleService = $articleService;
     }

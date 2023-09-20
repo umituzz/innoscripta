@@ -7,7 +7,7 @@ use App\Models\Article;
 
 /**
  * Class ArticleRepository
- * @package App\Models
+ * @package App\Repositories
  */
 class ArticleRepository extends BaseRepository implements ArticleRepositoryInterface
 {

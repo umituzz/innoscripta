@@ -7,7 +7,7 @@ use App\Http\Resources\NotificationResource;
 
 /**
  * Class NotificationRepository
- * @package App\Models
+ * @package App\Repositories
  */
 class NotificationRepository implements NotificationRepositoryInterface
 {

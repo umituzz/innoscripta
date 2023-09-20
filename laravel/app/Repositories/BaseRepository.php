@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Contracts\BaseRepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class BaseRepository

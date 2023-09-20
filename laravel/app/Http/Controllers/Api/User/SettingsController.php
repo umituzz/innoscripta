@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Services\User\SettingService;
+use App\Services\Redis\RedisService;
 use Illuminate\Http\Response;
 
 /**
@@ -12,17 +12,21 @@ use Illuminate\Http\Response;
  */
 class SettingsController extends BaseController
 {
-    private SettingService $settingService;
+    private RedisService $redisService;
 
-    public function __construct(SettingService $settingService)
+    public function __construct(RedisService $redisService)
     {
-        $this->settingService = $settingService;
+        $this->redisService = $redisService;
     }
 
     public function index()
     {
-        $items = $this->settingService->getList(auth()->id());
+        $sources = $this->redisService->get('sources');
+        $categories = $this->redisService->get('categories');
 
-        return $this->ok($items, Response::HTTP_OK, __('User Setting'));
+        return $this->ok([
+            'sources' => $sources,
+            'categories' => $categories,
+        ], Response::HTTP_OK, __('Initial Data'));
     }
 }

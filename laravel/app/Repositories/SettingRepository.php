@@ -6,8 +6,8 @@ use App\Contracts\SettingRepositoryInterface;
 use App\Models\Setting;
 
 /**
- * Class UserRepository
- * @package App\Models
+ * Class SettingRepository
+ * @package App\Repositories
  */
 class SettingRepository extends BaseRepository implements SettingRepositoryInterface
 {

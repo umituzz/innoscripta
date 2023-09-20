@@ -7,7 +7,7 @@ use App\Models\User;
 
 /**
  * Class UserRepository
- * @package App\Models
+ * @package App\Repositories
  */
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {

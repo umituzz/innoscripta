@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
-use App\Services\Article\ArticleService;
+use App\Services\Article\CategoryService;
 
 /**
  * Class ArticlesController
@@ -11,9 +11,9 @@ use App\Services\Article\ArticleService;
  */
 class ArticlesController extends Controller
 {
-    private ArticleService $articleService;
+    private CategoryService $articleService;
 
-    public function __construct(ArticleService $articleService)
+    public function __construct(CategoryService $articleService)
     {
         $this->articleService = $articleService;
     }
