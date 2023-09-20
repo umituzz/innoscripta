@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ArticleEnums;
 use App\Observers\OnlySearchableModelObserver;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
@@ -14,6 +15,8 @@ use Laravel\Scout\SearchableScope;
 class Article extends BaseModel
 {
     use Searchable;
+
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'source_id',
@@ -33,7 +36,7 @@ class Article extends BaseModel
 
     public function searchableAs(): string
     {
-        return 'articles_index';
+        return ArticleEnums::ELASTICSEARCH_INDEX_NAME;
     }
 
     public function toSearchableArray(): array
