@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands\Elasticsearch;
 
-use App\Models\Article;
+use App\Enums\ArticleEnums;
+use App\Enums\ElasticsearchEnums;
+use App\Services\Article\ArticleService;
 use App\Services\Elasticsearch\ElasticsearchService;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\AuthenticationException;
@@ -32,15 +34,20 @@ class SyncArticleCommand extends Command
     protected $description = 'Add articles data to elasticsearch';
 
     private Client $client;
+    private ArticleService $articleService;
 
     /**
      * @throws AuthenticationException
      */
-    public function __construct(ElasticsearchService $elasticsearchService)
+    public function __construct(
+        ElasticsearchService $elasticsearchService,
+        ArticleService       $articleService
+    )
     {
         parent::__construct();
 
         $this->client = $elasticsearchService->getClient();
+        $this->articleService = $articleService;
     }
 
     /**
@@ -52,16 +59,15 @@ class SyncArticleCommand extends Command
      */
     public function handle()
     {
-        $indexName = 'articles';
+        $indexName = ArticleEnums::ELASTICSEARCH_INDEX_NAME;
+        $defaultTimeout = ElasticsearchEnums::DEFAULT_TIMEOUT;
+        $items = $this->articleService->getList();
 
-        $items = Article::orderByDesc('id')->get();
-
-        foreach ($items as $item) {
-
+        $items->map(function ($item) use ($indexName, $defaultTimeout) {
             $params = [
                 'index' => $indexName,
                 'id' => $item->id,
-                'timeout' => '5s',
+                'timeout' => $defaultTimeout,
                 'client' => [
                     'timeout' => 6,
                     'connect_timeout' => 1
@@ -70,7 +76,6 @@ class SyncArticleCommand extends Command
             ];
 
             $this->client->index($params);
-        }
-
+        });
     }
 }
