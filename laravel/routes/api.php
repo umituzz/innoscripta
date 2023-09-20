@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Article\ArticlesController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\User\SettingsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::group(['prefix' => '/articles', 'as' => 'articles.',], function () {
         Route::get('/', [ArticlesController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix' => '/users', 'as' => 'users.',], function () {
+        Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     });
 });

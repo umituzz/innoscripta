@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 
 /**
  * Class ArticlesController
- * @package App\Http\Controllers\Api\Auth
+ * @package App\Http\Controllers\Api\Article
  */
 class ArticlesController extends BaseController
 {

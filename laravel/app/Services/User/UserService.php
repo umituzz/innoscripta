@@ -6,7 +6,7 @@ use App\Contracts\UserRepositoryInterface;
 
 /**
  * Class UserService
- * @package App\Services\Article
+ * @package App\Services\User
  */
 class UserService
 {

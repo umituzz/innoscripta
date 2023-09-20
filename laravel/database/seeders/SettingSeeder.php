@@ -16,6 +16,6 @@ class SettingSeeder extends Seeder
      */
     public function run(): void
     {
-        Setting::factory()->create();
+        Setting::factory()->create(['user_id' => 1]);
     }
 }
