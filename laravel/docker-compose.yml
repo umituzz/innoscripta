@@ -24,6 +24,7 @@ services:
         depends_on:
             - mysql
             - redis
+            - elasticsearch
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -63,6 +64,14 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+        environment:
+            - discovery.type=single-node
+        ports:
+            - '9200:9200'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
