@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Auth\Events\Lockout;
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 /**
  * Class LoginRequest
  * @package App\Http\Requests\Api
  */
-class LoginRequest extends FormRequest
+class LoginRequest extends BaseApiRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -28,6 +27,8 @@ class LoginRequest extends FormRequest
             'password' => ['required', 'string', 'min:6'],
         ];
     }
+
+
 
     /**
      * Attempt to authenticate the request's credentials.

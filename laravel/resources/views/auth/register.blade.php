@@ -23,18 +23,23 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 </div>
                                 <form class="user" method="POST" action="{{ route('register') }}">
                                     @csrf
 
                                     <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input name="first_name" type="text" class="form-control form-control-user" id="exampleFirstName"
-                                                   placeholder="{{ __('First Name') }}">
-                                        </div>
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input name="last_name" type="text" class="form-control form-control-user" id="exampleLastName"
-                                                   placeholder="{{ __('Last Name') }}">
+                                        <div class="col-sm-12 mb-6 mb-sm-0">
+                                            <input name="name" type="text" class="form-control form-control-user" id="exampletName"
+                                                   placeholder="{{ __('Name') }}">
                                         </div>
                                     </div>
                                     <div class="form-group">

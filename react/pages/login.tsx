@@ -9,6 +9,7 @@ import {login} from "../stores/actions/authAction";
 
 export default function Login() {
     const router = useRouter();
+    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -24,32 +25,27 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await CreateData('login', formData)
-            const token = response.data.token;
+            const response = await CreateData('login', formData);
 
-            if (token != 'undefined') {
-
-                dispatch(login(token))
-
-                localStorage.setItem("token", JSON.stringify(token));
-
-                alert("Kullanıcı girişi başarılı");
-
-                setFormData({
-                    first_name: "",
-                    last_name: "",
-                    email: "",
-                    password: "",
-                    password_confirmation: "",
-                });
-
-                await router.push('/')
+            if (response.statusCode == 422) {
+                setErrors(response.errors)
             } else {
-                console.error("Undefined Token");
-            }
+                const token = response.data.token;
 
+                if (token != undefined) {
+                    dispatch(login(token));
+                    localStorage.setItem("token", JSON.stringify(token));
+                    setFormData({
+                        email: "",
+                        password: "",
+                    });
+                    await router.push('/');
+                } else {
+                    console.error("Undefined Token");
+                }
+            }
         } catch (error) {
-            console.error("API isteği hatası:", error);
+            console.error("API Request Error:", error);
         }
     };
 
@@ -65,7 +61,6 @@ export default function Login() {
                     </div>
                     <Row className="justify-content-center">
                         <Form onSubmit={handleSubmit}>
-                            {/*{errorMessage && <Alert variant="danger">{errorMessage}</Alert>}*/}
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label className="text-center">
                                     Email <span className="text-danger">*</span>
@@ -76,9 +71,8 @@ export default function Login() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="Enter Email"
-                                    required
                                 />
-                                {/*{vError && <p className="text-danger pt-1">{vError.email}</p>}*/}
+                                {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>
@@ -90,13 +84,10 @@ export default function Login() {
                                     value={formData.password}
                                     onChange={handleChange}
                                     placeholder="Enter Password"
-                                    required
                                 />
-                                {/*{vError && <p className="text-danger pt-1">{vError.password}</p>}*/}
+                                {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
                             </Form.Group>
-                            <Button variant="outline-primary" type="submit"
-                                // disabled={loading}
-                            >
+                            <Button variant="outline-primary" type="submit">
                                 Login
                             </Button>
                         </Form>

@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Contracts\UserRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
+use App\Services\Auth\RegisterService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 /**
@@ -20,11 +15,11 @@ use Illuminate\View\View;
  */
 class RegisteredUserController extends Controller
 {
-    private UserRepositoryInterface $userRepository;
+    private RegisterService $registerService;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(RegisterService $registerService)
     {
-        $this->userRepository = $userRepository;
+        $this->registerService = $registerService;
     }
 
     /**
@@ -38,28 +33,12 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param Request $request
+     * @param RegisterRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterRequest $request): RedirectResponse
     {
-        $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = $this->userRepository->create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
+        $this->registerService->registerAndLogin($request);
 
         return redirect(RouteServiceProvider::HOME);
     }

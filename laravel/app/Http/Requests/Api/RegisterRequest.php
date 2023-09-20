@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules;
 
 /**
  * Class RegisterRequest
  * @package App\Http\Requests\Api
  */
-class RegisterRequest extends FormRequest
+class RegisterRequest extends BaseApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +27,9 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:100'],
-            'email' => ['required', 'email', 'unique:users,email', 'min:9'],
-            'password' => ['required', 'string', 'confirmed', 'min:6'],
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'email' => ['required', 'email', 'unique:users,email', 'min:9', 'max:255'],
+            'password' => ['required', 'string', 'confirmed', 'max:255', Rules\Password::defaults()],
         ];
     }
 }

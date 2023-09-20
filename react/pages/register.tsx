@@ -7,6 +7,7 @@ import {CreateData} from "../services/DataCreateService";
 
 export default function Register() {
     const router = useRouter();
+    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -22,21 +23,24 @@ export default function Register() {
         e.preventDefault();
 
         try {
-            alert("hey");
-            await CreateData('register', formData)
 
-            alert("Kullanıcı kaydı başarılı");
+            const response = await CreateData('register', formData)
 
-            setFormData({
-                name: "",
-                email: "",
-                password: "",
-                password_confirmation: "",
-            });
+            if (response.statusCode == 422) {
+                setErrors(response.errors)
+            } else {
+                setFormData({
+                    name: "",
+                    email: "",
+                    password: "",
+                    password_confirmation: "",
+                });
 
-            await router.push('/login')
+                await router.push('/login')
+            }
+
         } catch (error) {
-            console.error("API isteği hatası:", error);
+            console.error("API Request Error:", error);
         }
     };
 
@@ -60,8 +64,8 @@ export default function Register() {
                                 value={formData.name}
                                 onChange={handleChange}
                                 placeholder="Enter Name"
-                                required
                             />
+                            {errors.name && <p className="text-danger pt-1">{errors.name}</p>}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label className="text-center">Email <span
@@ -72,8 +76,8 @@ export default function Register() {
                                 value={formData.email}
                                 onChange={handleChange}
                                 placeholder="Enter Email"
-                                required
                             />
+                            {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password <span className="text-danger">*</span></Form.Label>
@@ -83,8 +87,8 @@ export default function Register() {
                                 value={formData.password}
                                 onChange={handleChange}
                                 placeholder="Enter Password"
-                                required
                             />
+                            {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
                             <Form.Label>Confirm Password <span className="text-danger">*</span></Form.Label>
@@ -94,9 +98,9 @@ export default function Register() {
                                 value={formData.password_confirmation}
                                 onChange={handleChange}
                                 placeholder="Confirm Password"
-                                required
                             />
                         </Form.Group>
+                        {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
                         <Button variant="outline-primary" type="submit">Register</Button>
                     </Form>
                     <p className="mt-3">
