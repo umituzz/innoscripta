@@ -4,6 +4,7 @@ import Link from "next/link";
 import {useState} from "react";
 import {useRouter} from "next/router";
 import {CreateData} from "../services/DataCreateService";
+import {toast} from 'react-toastify';
 
 export default function Register() {
     const router = useRouter();
@@ -35,7 +36,9 @@ export default function Register() {
                     password: "",
                     password_confirmation: "",
                 });
-
+                toast.success('User Created Successfully!', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
                 await router.push('/login')
             }
 

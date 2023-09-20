@@ -6,6 +6,7 @@ import {useRouter} from "next/router";
 import {CreateData} from "../services/DataCreateService";
 import {useDispatch} from "react-redux";
 import {login} from "../stores/actions/authAction";
+import {toast} from 'react-toastify';
 
 export default function Login() {
     const router = useRouter();
@@ -39,13 +40,16 @@ export default function Login() {
                         email: "",
                         password: "",
                     });
+                    toast.success('Login Succesfully', {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
                     await router.push('/');
                 } else {
                     console.error("Undefined Token");
                 }
             }
         } catch (error) {
-            console.error("API Request Error:", error);
+            toast.error("An error occurred while creating the order.");
         }
     };
 
