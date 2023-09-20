@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Ümit UZ\",\r\n    \"email\": \"umituz9989@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"password_confirmation\": \"123456789\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Ümit UZ\",\r\n    \"email\": \"umituz998@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"password_confirmation\": \"123456789\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -36,8 +36,485 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|PUiULd2PBspHnyHUlbWFZq0hBSFaPOeRa41TFlWy707ce696",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"umituz9999@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		},
+		{
+			"name": "Article",
+			"item": [
+				{
+					"name": "Articles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|NQakr2elM0tS1l5yXa5Rdw2s4jxwgSe94hl76J126c26df0a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ümit UZ\",\r\n    \"email\": \"umituz998@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"password_confirmation\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/articles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"articles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Settings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|kHmiPCuptvHdn16oobTAQfeS1sKW939o0PzQChBqf4fcafd3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ümit UZ\",\r\n    \"email\": \"umituz998@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"password_confirmation\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/users/settings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"users",
+								"settings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API",
+			"item": [
+				{
+					"name": "Guardian API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://content.guardianapis.com/search?api-key=test",
+							"protocol": "https",
+							"host": [
+								"content",
+								"guardianapis",
+								"com"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "api-key",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "News API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://newsapi.org/v2/top-headlines?country=us&apiKey=c95ec738abe74b708871b99d6673cc85",
+							"protocol": "https",
+							"host": [
+								"newsapi",
+								"org"
+							],
+							"path": [
+								"v2",
+								"top-headlines"
+							],
+							"query": [
+								{
+									"key": "country",
+									"value": "us"
+								},
+								{
+									"key": "apiKey",
+									"value": "c95ec738abe74b708871b99d6673cc85"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Media Stack API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.mediastack.com/v1/news?access_key=6490528b65c9d28894748cf10c6d0a52",
+							"protocol": "https",
+							"host": [
+								"api",
+								"mediastack",
+								"com"
+							],
+							"path": [
+								"v1",
+								"news"
+							],
+							"query": [
+								{
+									"key": "access_key",
+									"value": "6490528b65c9d28894748cf10c6d0a52"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Elasticsearch",
+			"item": [
+				{
+					"name": "Nodes Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}/_cat/nodes?v",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								"_cat",
+								"nodes"
+							],
+							"query": [
+								{
+									"key": "v",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Indexes",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}/_all",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								"_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cluster Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}/_cluster/health",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								"_cluster",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "indices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}/_cat/indices?v",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								"_cat",
+								"indices"
+							],
+							"query": [
+								{
+									"key": "v",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cluster Settings Destructive Requires Name",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"transient\": {\r\n    \"action.destructive_requires_name\": false\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{elasticsearch_url}}/_cluster/settings",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								"_cluster",
+								"settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}/_all/_count",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								"_all",
+								"_count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}",
+							"host": [
+								"{{elasticsearch_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}/:table/_search",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								":table",
+								"_search"
+							],
+							"variable": [
+								{
+									"key": "table",
+									"value": "articles"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mapping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}/:table/_mapping",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								":table",
+								"_mapping"
+							],
+							"variable": [
+								{
+									"key": "table",
+									"value": "articles"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}/_all/_count",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								"_all",
+								"_count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch_url}}/_all/_search",
+							"host": [
+								"{{elasticsearch_url}}"
+							],
+							"path": [
+								"_all",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "elasticsearch_url",
+			"value": "http://localhost:9200",
+			"type": "string"
 		}
 	]
 }
