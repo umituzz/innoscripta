@@ -1,21 +1,22 @@
-import {Button, Form, Col, Container, Row} from "react-bootstrap";
-import Link from "next/link";
-import Image from "next/image";
-import {useState} from "react";
-import {useRouter} from "next/router";
-import {CreateData} from "../services/DataCreateService";
-import {useDispatch} from "react-redux";
-import {login} from "../stores/actions/authAction";
-import {toast} from 'react-toastify';
-import HeadComponent from "../components/HeadComponent";
+import {Button, Form, Col, Container, Row} from 'react-bootstrap';
+import Link from 'next/link';
+import Image from 'next/image';
+import {useState} from 'react';
+import {useRouter} from 'next/router';
+import {CreateData} from '../services/DataCreateService';
+import {useDispatch} from 'react-redux';
+import {login} from '../stores/actions/authAction';
+import HeadComponent from '../components/HeadComponent';
+import ToastMessage from '../components/ToastMessage';
 
 export default function Login() {
     const router = useRouter();
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
     });
+    const [toastMessage, setToastMessage] = useState(null);
 
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
@@ -30,34 +31,31 @@ export default function Login() {
             const response = await CreateData('login', formData);
 
             if (response.statusCode == 422) {
-                setErrors(response.errors)
+                setErrors(response.errors);
             } else {
                 const token = response.data.token;
 
                 if (token != undefined) {
                     dispatch(login(token));
-                    localStorage.setItem("token", JSON.stringify(token));
+                    localStorage.setItem('token', JSON.stringify(token));
                     setFormData({
-                        email: "",
-                        password: "",
+                        email: '',
+                        password: '',
                     });
-                    toast.success('Login Succesfully', {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
+                    setToastMessage({message: 'Login Succesfully', type: 'success'});
                     await router.push('/');
                 } else {
-                    console.error("Undefined Token");
+                    console.error('Undefined Token');
                 }
             }
         } catch (error) {
-            toast.error("An error occurred while creating the order.");
+            setToastMessage({message: 'An error occurred while login.', type: 'error'});
         }
     };
 
     return (
         <Container>
-            <HeadComponent title={`Login`} />
-
+            <HeadComponent title={`Login`}/>
             <Row className="mt-5">
                 <Col md={6}>
                     <Image src="images/background.svg" alt="bg" className="img-fluid" width={500} height={500}/>
@@ -98,10 +96,10 @@ export default function Login() {
                                 Login
                             </Button>
                         </Form>
-
+                        <ToastMessage message={toastMessage?.message} type={toastMessage?.type}/>
                         <p className="mt-3">
                             {`Don't have an account? `}
-                            <Link href={"/register"} className={"text-primary fw-bold text-decoration-none"}>
+                            <Link href={'/register'} className={'text-primary fw-bold text-decoration-none'}>
                                 Register
                             </Link>
                         </p>
@@ -109,5 +107,5 @@ export default function Login() {
                 </Col>
             </Row>
         </Container>
-    )
+    );
 }

@@ -11,7 +11,7 @@ export default function Home() {
     } else {
         display = (
             <>
-                <Link href="articles">Articles</Link>
+                <Link href="/articles">Articles</Link>
             </>
         )
     }

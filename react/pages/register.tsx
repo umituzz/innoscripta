@@ -1,21 +1,22 @@
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import Image from "next/image";
-import Link from "next/link";
-import {useState} from "react";
-import {useRouter} from "next/router";
-import {CreateData} from "../services/DataCreateService";
-import {toast} from 'react-toastify';
-import HeadComponent from "../components/HeadComponent";
+import {Button, Form, Col, Container, Row} from 'react-bootstrap';
+import Link from 'next/link';
+import Image from 'next/image';
+import {useState} from 'react';
+import {useRouter} from 'next/router';
+import {CreateData} from '../services/DataCreateService';
+import HeadComponent from '../components/HeadComponent';
+import ToastMessage from '../components/ToastMessage';
 
 export default function Register() {
     const router = useRouter();
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
     });
+    const [toastMessage, setToastMessage] = useState(null);
 
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
@@ -25,32 +26,28 @@ export default function Register() {
         e.preventDefault();
 
         try {
-
-            const response = await CreateData('register', formData)
+            const response = await CreateData('register', formData);
 
             if (response.statusCode == 422) {
-                setErrors(response.errors)
+                setErrors(response.errors);
             } else {
                 setFormData({
-                    name: "",
-                    email: "",
-                    password: "",
-                    password_confirmation: "",
+                    name: '',
+                    email: '',
+                    password: '',
+                    password_confirmation: '',
                 });
-                toast.success('User Created Successfully!', {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-                await router.push('/login')
+                setToastMessage({message: 'User Created Successfully!', type: 'success'});
+                await router.push('/login');
             }
-
         } catch (error) {
-            console.error("API Request Error:", error);
+            setToastMessage({message: 'An error occurred while creating the user.', type: 'error'});
         }
     };
 
     return (
         <Container>
-            <HeadComponent title={`Register`} />
+            <HeadComponent title={`Register`}/>
             <Row className="mt-5">
                 <Col md={6}>
                     <Image src="images/background.svg" alt="bg" className="img-fluid" width={500} height={500}/>
@@ -61,8 +58,9 @@ export default function Register() {
                     </div>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formBasicName">
-                            <Form.Label className="text-center">Name <span
-                                className="text-danger">*</span></Form.Label>
+                            <Form.Label className="text-center">
+                                Name <span className="text-danger">*</span>
+                            </Form.Label>
                             <Form.Control
                                 type="text"
                                 name="name"
@@ -73,8 +71,9 @@ export default function Register() {
                             {errors.name && <p className="text-danger pt-1">{errors.name}</p>}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label className="text-center">Email <span
-                                className="text-danger">*</span></Form.Label>
+                            <Form.Label className="text-center">
+                                Email <span className="text-danger">*</span>
+                            </Form.Label>
                             <Form.Control
                                 type="email"
                                 name="email"
@@ -85,7 +84,9 @@ export default function Register() {
                             {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password <span className="text-danger">*</span></Form.Label>
+                            <Form.Label>
+                                Password <span className="text-danger">*</span>
+                            </Form.Label>
                             <Form.Control
                                 type="password"
                                 name="password"
@@ -96,7 +97,9 @@ export default function Register() {
                             {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-                            <Form.Label>Confirm Password <span className="text-danger">*</span></Form.Label>
+                            <Form.Label>
+                                Confirm Password <span className="text-danger">*</span>
+                            </Form.Label>
                             <Form.Control
                                 type="password"
                                 name="password_confirmation"
@@ -106,11 +109,16 @@ export default function Register() {
                             />
                         </Form.Group>
                         {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
-                        <Button variant="outline-primary" type="submit">Register</Button>
+                        <Button variant="outline-primary" type="submit">
+                            Register
+                        </Button>
                     </Form>
+                    <ToastMessage message={toastMessage?.message} type={toastMessage?.type}/>
                     <p className="mt-3">
                         {`Already have an account? `}
-                        <Link href={"/login"} className={"text-primary fw-bold text-decoration-none"}>Login</Link>
+                        <Link href={'/login'} className={'text-primary fw-bold text-decoration-none'}>
+                            Login
+                        </Link>
                     </p>
                 </Col>
             </Row>
