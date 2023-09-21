@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Contracts\ArticleRepositoryInterface;
-use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 
 /**
@@ -28,8 +27,6 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
 
     public function getAllElasticData()
     {
-        $items = $this->article->search('*')->get();
-
-        return ArticleResource::collection($items);
+        return $this->article->search('*')->orderBy('id', 'desc')->paginate(15);
     }
 }

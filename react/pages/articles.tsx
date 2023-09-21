@@ -13,7 +13,7 @@ export default function Article() {
         async function fetchData() {
             try {
                 const response = await LoadListData('articles');
-                dispatch(setArticles(response?.data));
+                dispatch(setArticles(response?.data.data));
             } catch (error) {
                 console.error('Data Loading Issue:', error);
             }

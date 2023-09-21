@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\ArticleEnums;
 use App\Observers\OnlySearchableModelObserver;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;

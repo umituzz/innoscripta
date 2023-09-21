@@ -3,8 +3,8 @@
 namespace App\Services\Article;
 
 use App\Contracts\ArticleRepositoryInterface;
+use App\Http\Resources\ArticleCollection;
 use App\Http\Resources\ArticleResource;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * Class ArticleService
@@ -19,9 +19,6 @@ class ArticleService
         $this->articleRepository = $articleRepository;
     }
 
-    /**
-     * @return AnonymousResourceCollection
-     */
     public function getList()
     {
         $items = $this->articleRepository->getWith();
@@ -31,6 +28,8 @@ class ArticleService
 
     public function getAllElasticData()
     {
-        return $this->articleRepository->getAllElasticData();
+        $items = $this->articleRepository->getAllElasticData();
+
+        return new ArticleCollection($items);
     }
 }
