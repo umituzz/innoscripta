@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Services\Api\NewsApiService;
+use App\Jobs\GetNewsApiJob;
 use App\Services\Source\SourceService;
 use Illuminate\Console\Command;
 
@@ -26,17 +26,12 @@ class NewsApiCommand extends Command
      */
     protected $description = 'Get api data from NewsAPI';
 
-    private NewsApiService $newsApiService;
     private SourceService $sourceService;
 
-    public function __construct(
-        NewsApiService $newsApiService,
-        SourceService $sourceService
-    )
+    public function __construct(SourceService $sourceService)
     {
         parent::__construct();
 
-        $this->newsApiService = $newsApiService;
         $this->sourceService = $sourceService;
     }
 
@@ -48,9 +43,7 @@ class NewsApiCommand extends Command
         $item = $this->sourceService->findBy('name', 'News API');
 
         if ($item) {
-            $result = $this->newsApiService->getData($item->id);
-
-            echo $result;
+            GetNewsApiJob::dispatch($item->id);
 
             return Command::SUCCESS;
         }
