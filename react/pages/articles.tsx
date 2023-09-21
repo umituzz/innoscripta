@@ -6,20 +6,25 @@ import HeadComponent from '../components/HeadComponent';
 import PaginationComponent from '../components/PaginationComponent';
 import {LoadListData} from '../services/DataListService';
 import SearchBar from '../components/SearchBar';
-import ToastMessage from '../components/ToastMessage';
+import FilterComponent from '../components/FilterComponent';
+import {setSources} from "../stores/actions/sourceAction";
 
 export default function Article() {
     const dispatch = useDispatch();
     const articles = useSelector((state) => state.articleReducer.articles);
+    const sources = useSelector((state) => state.sourceReducer.sources);
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
     const [toastMessage, setToastMessage] = useState(null);
+    const [sourceFilter, setSourceFilter] = useState('');
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await LoadListData(`articles?page=${currentPage}`);
+                const initial = await LoadListData(`initial`);
                 dispatch(setArticles(response?.data.data));
+                dispatch(setSources(initial?.data.sources));
                 setLastPage(response?.data.last_page);
             } catch (error) {
                 setToastMessage({message: 'Data Loading Issue', type: 'error'});
@@ -27,10 +32,14 @@ export default function Article() {
         }
 
         fetchData();
-    }, [currentPage, dispatch]);
+    }, [currentPage, dispatch, sourceFilter]);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
+    };
+
+    const handleSourceFilterChange = (newSourceFilter) => {
+        setSourceFilter(newSourceFilter);
     };
 
     const handleSearch = async (searchTerm) => {
@@ -68,7 +77,14 @@ export default function Article() {
             <HeadComponent title={`Articles`}/>
             <Row>
                 <Col md={12}>
-                    <SearchBar onSearch={handleSearch}/>
+                    <Row>
+                        <Col md={6}>
+                            <SearchBar onSearch={handleSearch} />
+                        </Col>
+                        <Col md={6}>
+                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={sources} />
+                        </Col>
+                    </Row>
                     <Table responsive>
                         <thead>
                         <tr>

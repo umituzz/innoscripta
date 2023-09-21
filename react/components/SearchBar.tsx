@@ -10,7 +10,7 @@ export default function SearchBar({ onSearch }) {
 
     return (
         <Row>
-            <Col md={3}>
+            <Col md={10}>
                 <Form className="mb-3">
                     <Form.Group controlId="searchTerm">
                         <Form.Control
