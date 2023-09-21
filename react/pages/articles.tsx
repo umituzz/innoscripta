@@ -1,11 +1,10 @@
-import {Row, Container, Col} from "react-bootstrap";
-import Table from "react-bootstrap/Table";
-import {useEffect, useState} from "react";
-import {LoadListData} from "../services/DataListService";
-import {useDispatch, useSelector} from "react-redux";
-import {setArticles} from '../stores/actions/articleAction';
-import { Pagination } from "react-bootstrap";
-import HeadComponent from "../components/HeadComponent";
+import { useEffect, useState } from 'react';
+import { Container, Row, Col, Table } from 'react-bootstrap';
+import { LoadListData } from '../services/DataListService';
+import { useDispatch, useSelector } from 'react-redux';
+import { setArticles } from '../stores/actions/articleAction';
+import HeadComponent from '../components/HeadComponent';
+import PaginationComponent from '../components/PaginationComponent';
 
 export default function Article() {
     const dispatch = useDispatch();
@@ -18,7 +17,7 @@ export default function Article() {
             try {
                 const response = await LoadListData(`articles?page=${currentPage}`);
                 dispatch(setArticles(response?.data.data));
-                setLastPage(response?.data.last_page)
+                setLastPage(response?.data.last_page);
             } catch (error) {
                 console.error('Data Loading Issue:', error);
             }
@@ -26,6 +25,10 @@ export default function Article() {
 
         fetchData();
     }, [currentPage, dispatch]);
+
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+    };
 
     return (
         <Container className="mt-2 minHeight">
@@ -61,32 +64,14 @@ export default function Article() {
                         </tbody>
                     </Table>
                 </Col>
-                <Pagination>
-                    <Pagination.Prev
-                        onClick={() => {
-                            if (currentPage > 1) {
-                                setCurrentPage(currentPage - 1);
-                            }
-                        }}
+                <Col md={12} className="text-center mt-3">
+                    <PaginationComponent
+                        currentPage={currentPage}
+                        lastPage={lastPage}
+                        onPageChange={handlePageChange}
                     />
-                    {Array.from({ length: lastPage }, (_, index) => (
-                        <Pagination.Item
-                            key={index + 1}
-                            active={index + 1 === currentPage}
-                            onClick={() => setCurrentPage(index + 1)}
-                        >
-                            {index + 1}
-                        </Pagination.Item>
-                    ))}
-                    <Pagination.Next
-                        onClick={() => {
-                            if (currentPage < lastPage) {
-                                setCurrentPage(currentPage + 1);
-                            }
-                        }}
-                    />
-                </Pagination>
+                </Col>
             </Row>
         </Container>
-    )
+    );
 }
