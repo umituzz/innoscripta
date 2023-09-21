@@ -27,6 +27,6 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
 
     public function getAllElasticData()
     {
-        return $this->article->search('*')->orderBy('id', 'desc')->paginate(15);
+        return $this->article->search('*')->orderBy('id', 'desc')->paginate(10);
     }
 }
