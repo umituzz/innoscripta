@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Services\Api\GuardianApiService;
+use App\Jobs\GetGuardianApiJob;
 use App\Services\Source\SourceService;
 use Illuminate\Console\Command;
 
@@ -26,17 +26,12 @@ class GuardianApiCommand extends Command
      */
     protected $description = 'Get api data from Guardian';
 
-    private GuardianApiService $guardianApiService;
     private SourceService $sourceService;
 
-    public function __construct(
-        GuardianApiService $guardianApiService,
-        SourceService $sourceService
-    )
+    public function __construct(SourceService $sourceService)
     {
         parent::__construct();
 
-        $this->guardianApiService = $guardianApiService;
         $this->sourceService = $sourceService;
     }
 
@@ -49,9 +44,8 @@ class GuardianApiCommand extends Command
         $item = $this->sourceService->findBy('name', 'Guardian API');
 
         if ($item) {
-            $result = $this->guardianApiService->getData($item->id);
 
-            echo $result;
+            GetGuardianApiJob::dispatch($item->id);
 
             return Command::SUCCESS;
         }
