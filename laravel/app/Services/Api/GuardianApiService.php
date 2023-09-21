@@ -3,9 +3,7 @@
 namespace App\Services\Api;
 
 use App\Contracts\ApiServiceInterface;
-use App\Models\Category;
 use Exception;
-use App\Models\Article;
 
 /**
  * Class GuardianApiService
@@ -31,22 +29,14 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
             $url = $this->getUrl();
             $items = $this->httpService->getResult($url)->response->results;
 
-            collect($items)->map(function ($item) use($sourceId){
-
-                $category = Category::firstOrCreate([
-                    'name' => $item->sectionName,
-                    'slug' => $item->sectionId
-                ]);
-
-                $article = Article::firstOrCreate([
+            collect($items)->map(function ($item) use ($sourceId) {
+                $this->articleService->firstOrCreate('title', [
                     'source_id' => $sourceId,
-                    'category_id' => $category->id,
                     'title' => $item->webTitle,
                     'url' => $item->webUrl,
                     'image' => 'https://placehold.co/400x300',
                     'published_at' => $item->webPublicationDate,
                 ]);
-
             });
 
             return __('Data inserted successfully');

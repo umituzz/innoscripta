@@ -42,4 +42,9 @@ class ArticleService
 
         return new ArticleCollection($items);
     }
+
+    public function firstOrCreate($key, $data)
+    {
+        return $this->articleRepository->firstOrCreate($key, $data);
+    }
 }

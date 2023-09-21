@@ -14,7 +14,6 @@
                     <tr>
                         <th>#</th>
                         <th>{{ __('Source') }}</th>
-                        <th>{{ __('Category') }}</th>
                         <th>{{ __('Title') }}</th>
                         <th>{{ __('Published At') }}</th>
                         <th></th>
@@ -25,7 +24,6 @@
                         <tr>
                             <td>{{ $article->id }}</td>
                             <td>{{ $article->source->name }}</td>
-                            <td>{{ $article->category }}</td>
                             <td>
                                 <a href="{{ $article->url }}" target="_blank">
                                     {{ $article->title }}

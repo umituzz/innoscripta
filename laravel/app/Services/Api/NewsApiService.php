@@ -3,8 +3,6 @@
 namespace App\Services\Api;
 
 use App\Contracts\ApiServiceInterface;
-use App\Models\Article;
-use App\Models\Category;
 use Exception;
 
 /**
@@ -33,14 +31,8 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
 
             collect($items)->map(function ($item) use ($sourceId) {
 
-                $category = Category::firstOrCreate([
-                    'name' => 'General',
-                    'slug' => 'general'
-                ]);
-
-                Article::create([
+                $this->articleService->firstOrCreate('title', [
                     'source_id' => $sourceId,
-                    'category_id' => $category->id,
                     'title' => $item->title,
                     'url' => $item->url,
                     'image' => 'https://placehold.co/400x300',
@@ -51,7 +43,6 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
 
             return __('Data inserted successfully');
         } catch (Exception $exception) {
-            dd($exception->getMessage());
             $this->notificationService->error($exception->getMessage());
         }
     }

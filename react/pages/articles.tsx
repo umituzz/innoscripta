@@ -72,7 +72,6 @@ export default function Article() {
                 <td>{article.id}</td>
                 <td>{article.source}</td>
                 <td>{article.title}</td>
-                <td>{article.category}</td>
                 <td>{article.published_at}</td>
             </tr>
         ));
@@ -97,7 +96,6 @@ export default function Article() {
                             <th>#</th>
                             <th>Source</th>
                             <th>Title</th>
-                            <th>Category</th>
                             <th>Published At</th>
                         </tr>
                         </thead>

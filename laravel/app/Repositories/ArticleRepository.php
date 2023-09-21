@@ -29,4 +29,9 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
     {
         return $this->article->search($searchTerm)->paginate(10);
     }
+
+    public function firstOrCreate($key, $data)
+    {
+        return $this->article->firstOrCreate([$key => $data[$key]], $data);
+    }
 }
