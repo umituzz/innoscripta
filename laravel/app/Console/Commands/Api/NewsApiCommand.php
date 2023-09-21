@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Api;
 
+use App\Enums\SourceEnums;
 use App\Jobs\GetNewsApiJob;
 use App\Services\Source\SourceService;
 use Illuminate\Console\Command;
@@ -40,7 +41,7 @@ class NewsApiCommand extends Command
      */
     public function handle()
     {
-        $item = $this->sourceService->findBy('name', 'News API');
+        $item = $this->sourceService->findBy('name', SourceEnums::NEWS);
 
         if ($item) {
             GetNewsApiJob::dispatch($item->id);

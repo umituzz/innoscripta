@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Contracts\SourceRepositoryInterface;
-use App\Services\Api\MediaStackApiService;
+use App\Enums\SourceEnums;
+use App\Jobs\GetMediaStackApiJob;
 use App\Services\Source\SourceService;
 use Illuminate\Console\Command;
 
@@ -26,17 +26,12 @@ class MediaStackApiCommand extends Command
      * @var string
      */
     protected $description = 'Get api data from MediaStack';
-    private MediaStackApiService $mediaStackApiService;
     private SourceService $sourceService;
 
-    public function __construct(
-        MediaStackApiService $mediaStackApiService,
-        SourceService $sourceService
-    )
+    public function __construct(SourceService $sourceService)
     {
         parent::__construct();
 
-        $this->mediaStackApiService = $mediaStackApiService;
         $this->sourceService = $sourceService;
     }
 
@@ -45,12 +40,10 @@ class MediaStackApiCommand extends Command
      */
     public function handle()
     {
-        $item = $this->sourceService->findBy('name', 'Media Stack API');
+        $item = $this->sourceService->findBy('name', SourceEnums::MEDIA_STACK);
 
         if ($item) {
-            $result = $this->mediaStackApiService->getData($item->id);
-
-            echo $result;
+            GetMediaStackApiJob::dispatch($item->id);
 
             return Command::SUCCESS;
         }
