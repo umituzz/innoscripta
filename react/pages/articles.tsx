@@ -5,6 +5,7 @@ import {LoadListData} from "../services/DataListService";
 import {useDispatch, useSelector} from "react-redux";
 import {setArticles} from '../stores/actions/articleAction';
 import { Pagination } from "react-bootstrap";
+import HeadComponent from "../components/HeadComponent";
 
 export default function Article() {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function Article() {
 
     return (
         <Container className="mt-2 minHeight">
+            <HeadComponent title={`Articles`} />
             <Row>
                 <Col md={12}>
                     <Table responsive>

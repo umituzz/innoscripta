@@ -7,6 +7,7 @@ import {CreateData} from "../services/DataCreateService";
 import {useDispatch} from "react-redux";
 import {login} from "../stores/actions/authAction";
 import {toast} from 'react-toastify';
+import HeadComponent from "../components/HeadComponent";
 
 export default function Login() {
     const router = useRouter();
@@ -55,6 +56,8 @@ export default function Login() {
 
     return (
         <Container>
+            <HeadComponent title={`Login`} />
+
             <Row className="mt-5">
                 <Col md={6}>
                     <Image src="images/background.svg" alt="bg" className="img-fluid" width={500} height={500}/>

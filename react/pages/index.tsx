@@ -1,6 +1,7 @@
 import {Row, Container} from "react-bootstrap";
-import {authCheck} from "../helpers/authHelper";
 import Link from "next/link";
+import {authCheck} from "../helpers/authHelper";
+import HeadComponent from "../components/HeadComponent";
 
 export default function Home() {
     let display;
@@ -17,6 +18,7 @@ export default function Home() {
 
     return (
         <Container className="mt-2 minHeight">
+            <HeadComponent title={`Homepage`} />
             <Row>
                 {display}
             </Row>

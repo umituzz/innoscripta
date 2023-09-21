@@ -5,6 +5,7 @@ import {useState} from "react";
 import {useRouter} from "next/router";
 import {CreateData} from "../services/DataCreateService";
 import {toast} from 'react-toastify';
+import HeadComponent from "../components/HeadComponent";
 
 export default function Register() {
     const router = useRouter();
@@ -49,6 +50,7 @@ export default function Register() {
 
     return (
         <Container>
+            <HeadComponent title={`Register`} />
             <Row className="mt-5">
                 <Col md={6}>
                     <Image src="images/background.svg" alt="bg" className="img-fluid" width={500} height={500}/>
