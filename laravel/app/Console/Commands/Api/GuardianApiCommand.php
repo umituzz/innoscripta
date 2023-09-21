@@ -3,7 +3,7 @@
 namespace App\Console\Commands\Api;
 
 use App\Enums\SourceEnums;
-use App\Jobs\GetGuardianApiJob;
+use App\Jobs\Api\GetGuardianApiJob;
 use App\Services\Source\SourceService;
 use Illuminate\Console\Command;
 

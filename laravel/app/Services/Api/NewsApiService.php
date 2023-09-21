@@ -41,11 +41,7 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
                     'published_at' => $item->publishedAt,
                 ]);
 
-                $this->redisData[] = $article;
-
             });
-
-            $this->redisService->set($this->redisKey, $this->redisData);
 
             return __('Data inserted successfully');
         } catch (Exception $exception) {

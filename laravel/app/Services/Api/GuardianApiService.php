@@ -32,7 +32,7 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
 
             collect($items)->map(function ($item) use($sourceId){
 
-                $article = Article::firstOrCreate([
+                Article::firstOrCreate([
                     'source_id' => $sourceId,
                     'title' => $item->webTitle,
                     'category' => $item->sectionName ?? 'General',
@@ -41,14 +41,9 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
                     'published_at' => $item->webPublicationDate,
                 ]);
 
-                $this->redisData[] = $article;
-
             });
 
-            $this->redisService->set($this->redisKey, $this->redisData);
-
             return __('Data inserted successfully');
-
         } catch (Exception $exception) {
             $this->notificationService->error($exception->getMessage());
         }

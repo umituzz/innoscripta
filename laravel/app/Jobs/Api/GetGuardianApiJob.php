@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Api;
 
 use App\Services\Api\GuardianApiService;
 use Illuminate\Bus\Queueable;
@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 
 /**
  * Class GetGuardianApiJob
- * @package App\Jobs
+ * @package App\Jobs\Api
  */
 class GetGuardianApiJob implements ShouldQueue
 {

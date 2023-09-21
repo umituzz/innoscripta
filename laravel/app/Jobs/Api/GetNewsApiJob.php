@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Api;
 
+use App\Services\Api\NewsApiService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Services\Api\MediaStackApiService;
 
 /**
- * Class GetMediaStackApiJob
- * @package App\Jobs
+ * Class GetNewsApiJob
+ * @package App\Jobs\Api
  */
-class GetMediaStackApiJob implements ShouldQueue
+class GetNewsApiJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -30,8 +30,8 @@ class GetMediaStackApiJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(MediaStackApiService $mediaStackApiService): void
+    public function handle(NewsApiService $newsApiService): void
     {
-        $mediaStackApiService->getData($this->sourceId);
+        $newsApiService->getData($this->sourceId);
     }
 }

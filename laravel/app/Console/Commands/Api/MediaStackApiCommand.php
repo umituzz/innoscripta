@@ -3,7 +3,7 @@
 namespace App\Console\Commands\Api;
 
 use App\Enums\SourceEnums;
-use App\Jobs\GetMediaStackApiJob;
+use App\Jobs\Api\GetMediaStackApiJob;
 use App\Services\Source\SourceService;
 use Illuminate\Console\Command;
 

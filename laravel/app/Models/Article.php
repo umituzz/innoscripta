@@ -36,7 +36,7 @@ class Article extends BaseModel
 
     public function searchableAs(): string
     {
-        return ArticleEnums::ELASTICSEARCH_INDEX_NAME;
+        return 'articles';
     }
 
     public function toSearchableArray(): array

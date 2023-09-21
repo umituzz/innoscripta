@@ -31,5 +31,7 @@ class SetupCommand extends Command
         Artisan::call('redis:sync-sources');
         Artisan::call('redis:sync-categories');
 
+        Artisan::call('elasticsearch:sync-articles');
+
     }
 }

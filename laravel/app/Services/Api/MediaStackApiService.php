@@ -41,11 +41,7 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
                     'published_at' => $item->published_at,
                 ]);
 
-                $this->redisData[] = $article;
-
             });
-
-            $this->redisService->set($this->redisKey, $this->redisData);
 
             return __('Data inserted successfully');
         } catch (Exception $exception) {
