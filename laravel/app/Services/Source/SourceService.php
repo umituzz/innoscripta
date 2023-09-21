@@ -28,4 +28,14 @@ class SourceService
 
         return SourceResource::collection($items);
     }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
+    public function findBy($key, $value)
+    {
+        return $this->sourceRepository->findBy($key, $value);
+    }
 }

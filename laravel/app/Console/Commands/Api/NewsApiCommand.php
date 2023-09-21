@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Contracts\SourceRepositoryInterface;
 use App\Services\Api\NewsApiService;
+use App\Services\Source\SourceService;
 use Illuminate\Console\Command;
 
 /**
@@ -27,17 +27,17 @@ class NewsApiCommand extends Command
     protected $description = 'Get api data from NewsAPI';
 
     private NewsApiService $newsApiService;
-    private SourceRepositoryInterface $resourceRepository;
+    private SourceService $sourceService;
 
     public function __construct(
         NewsApiService $newsApiService,
-        SourceRepositoryInterface $resourceRepository
+        SourceService $sourceService
     )
     {
         parent::__construct();
 
         $this->newsApiService = $newsApiService;
-        $this->resourceRepository = $resourceRepository;
+        $this->sourceService = $sourceService;
     }
 
     /**
@@ -45,10 +45,12 @@ class NewsApiCommand extends Command
      */
     public function handle()
     {
-        $item = $this->resourceRepository->findBy('name', 'News API');
+        $item = $this->sourceService->findBy('name', 'News API');
 
         if ($item) {
-            $this->newsApiService->getData($item->id);
+            $result = $this->newsApiService->getData($item->id);
+
+            echo $result;
 
             return Command::SUCCESS;
         }

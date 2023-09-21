@@ -21,19 +21,19 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
     }
 
     /**
-     * @param $resourceId
+     * @param $sourceId
      * @return string[]|void
      */
-    public function getData($resourceId)
+    public function getData($sourceId)
     {
         try {
             $url = $this->getUrl();
             $items = $this->httpService->getResult($url)->response->results;
 
-            foreach ($items as $item) {
+            collect($items)->map(function ($item) use($sourceId){
 
                 $article = Article::firstOrCreate([
-                    'resource_id' => $resourceId,
+                    'source_id' => $sourceId,
                     'title' => $item->webTitle,
                     'category' => $item->sectionName ?? 'General',
                     'url' => $item->webUrl,
@@ -42,13 +42,12 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
                 ]);
 
                 $this->redisData[] = $article;
-            }
+
+            });
 
             $this->redisService->set($this->redisKey, $this->redisData);
 
-            return [
-                'message' => 'Data inserted successfully'
-            ];
+            return __('Data inserted successfully');
 
         } catch (Exception $exception) {
             $this->notificationService->error($exception->getMessage());

@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands\Api;
 
-use App\Contracts\SourceRepositoryInterface;
 use App\Services\Api\GuardianApiService;
+use App\Services\Source\SourceService;
 use Illuminate\Console\Command;
 
 /**
@@ -27,17 +27,17 @@ class GuardianApiCommand extends Command
     protected $description = 'Get api data from Guardian';
 
     private GuardianApiService $guardianApiService;
-    private SourceRepositoryInterface $resourceRepository;
+    private SourceService $sourceService;
 
     public function __construct(
         GuardianApiService $guardianApiService,
-        SourceRepositoryInterface $resourceRepository
+        SourceService $sourceService
     )
     {
         parent::__construct();
 
         $this->guardianApiService = $guardianApiService;
-        $this->resourceRepository = $resourceRepository;
+        $this->sourceService = $sourceService;
     }
 
 
@@ -46,9 +46,12 @@ class GuardianApiCommand extends Command
      */
     public function handle()
     {
-        $item = $this->resourceRepository->findBy('name', 'Guardian API');
+        $item = $this->sourceService->findBy('name', 'Guardian API');
 
         if ($item) {
+            $result = $this->guardianApiService->getData($item->id);
+
+            echo $result;
 
             return Command::SUCCESS;
         }

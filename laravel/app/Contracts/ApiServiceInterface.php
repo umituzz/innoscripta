@@ -11,7 +11,7 @@ interface ApiServiceInterface
     /**
      * @return string[]
      */
-    public function getData($resourceId);
+    public function getData($sourceId);
 
     /**
      * @return string
