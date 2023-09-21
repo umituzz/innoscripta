@@ -172,6 +172,7 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        Matchish\ScoutElasticSearch\ElasticSearchServiceProvider::class,
     ])->toArray(),
 
     /*

@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use App\Observers\OnlySearchableModelObserver;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
-use Laravel\Scout\SearchableScope;
 
 /**
  * Class Article
@@ -26,29 +24,20 @@ class Article extends BaseModel
         'published_at'
     ];
 
-    public static function bootSearchable(): void
-    {
-        static::addGlobalScope(new SearchableScope);
-        static::observe(new OnlySearchableModelObserver());
-        (new static)->registerSearchableMacros();
-    }
-
     public function searchableAs(): string
     {
         return 'articles';
     }
 
-    public function toSearchableArray(): array
+    public function toSearchableArray()
     {
-        return [
-            'id' => $this->id,
-            'source' => $this->source->name,
-            'title' => $this->title,
-            'category' => $this->category,
-            'url' => $this->url,
-            'image' => $this->image,
-            'published_at' => $this->published_at,
+        $with = [
+            'source',
         ];
+
+        $this->loadMissing($with);
+
+        return $this->toArray();
     }
 
     /**

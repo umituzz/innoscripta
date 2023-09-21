@@ -26,9 +26,10 @@ class ArticleService
         return ArticleResource::collection($items);
     }
 
-    public function getAllElasticData()
+    public function getAllElasticData($request)
     {
-        $items = $this->articleRepository->getAllElasticData();
+        $searchTerm = $request->has('searchTerm') ? $request->input('searchTerm') : '*';
+        $items = $this->articleRepository->getElasticsearchData($searchTerm);
 
         return new ArticleCollection($items);
     }

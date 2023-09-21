@@ -91,7 +91,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "7|NQakr2elM0tS1l5yXa5Rdw2s4jxwgSe94hl76J126c26df0a",
+									"value": "1|4zFwGntwmWNgTtcDUIlXjNxnluXHM7KTrCrqMlc30f7274c3",
 									"type": "string"
 								}
 							]
@@ -100,7 +100,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Ümit UZ\",\r\n    \"email\": \"umituz998@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"password_confirmation\": \"123456789\"\r\n}",
+							"raw": "{\r\n    \"searchTerm\": \"Russia\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -108,7 +108,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/articles",
+							"raw": "http://localhost/api/articles?searchTerm=Russia",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -116,6 +116,12 @@
 							"path": [
 								"api",
 								"articles"
+							],
+							"query": [
+								{
+									"key": "searchTerm",
+									"value": "Russia"
+								}
 							]
 						}
 					},
