@@ -38,8 +38,14 @@ export default function Article() {
         setCurrentPage(newPage);
     };
 
-    const handleSourceFilterChange = (newSourceFilter) => {
-        setSourceFilter(newSourceFilter);
+    const handleSourceFilterChange = async (newSourceFilter) => {
+        try {
+            const response = await LoadListData(`articles?page=${currentPage}&sourceId=${newSourceFilter}`);
+            dispatch(setArticles(response?.data.data));
+            setLastPage(response?.data.last_page);
+        } catch (error) {
+            setToastMessage({message: 'Data Loading Issue', type: 'error'});
+        }
     };
 
     const handleSearch = async (searchTerm) => {

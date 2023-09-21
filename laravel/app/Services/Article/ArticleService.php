@@ -28,7 +28,16 @@ class ArticleService
 
     public function getAllElasticData($request)
     {
-        $searchTerm = $request->has('searchTerm') ? $request->input('searchTerm') : '*';
+        $searchTerm = '*';
+
+        if ($request->has('sourceId') ) {
+            $searchTerm = "source_id:({$request->input('sourceId')})";
+        }
+
+        if ($request->has('searchTerm')) {
+            $searchTerm =  "title:({$request->input('searchTerm')})";
+        }
+
         $items = $this->articleRepository->getElasticsearchData($searchTerm);
 
         return new ArticleCollection($items);

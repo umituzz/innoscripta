@@ -18,9 +18,9 @@ export default function FilterComponent({onFilterChange, sources}) {
                     onChange={handleSourceChange}
                     value={selectedSource}
                 >
-                    <option value="">All Sources</option>
+                    <option value="*">All Sources</option>
                     {sources.map((source) => (
-                        <option key={source.id} value={source.name}>
+                        <option key={source.id} value={source.id}>
                             {source.name}
                         </option>
                     ))}
