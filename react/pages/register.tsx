@@ -9,13 +9,13 @@ import ToastMessage from '../components/ToastMessage';
 
 export default function Register() {
     const router = useRouter();
-    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
         password_confirmation: '',
     });
+    const [errors, setErrors] = useState({});
     const [toastMessage, setToastMessage] = useState(null);
 
     const handleChange = (e) => {
@@ -28,7 +28,7 @@ export default function Register() {
         try {
             const response = await CreateData('register', formData);
 
-            if (response.statusCode == 422) {
+            if (response.statusCode === 422) {
                 setErrors(response.errors);
             } else {
                 setFormData({
@@ -67,6 +67,7 @@ export default function Register() {
                                 value={formData.name}
                                 onChange={handleChange}
                                 placeholder="Enter Name"
+                                required
                             />
                             {errors.name && <p className="text-danger pt-1">{errors.name}</p>}
                         </Form.Group>
@@ -80,6 +81,7 @@ export default function Register() {
                                 value={formData.email}
                                 onChange={handleChange}
                                 placeholder="Enter Email"
+                                required
                             />
                             {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
                         </Form.Group>
@@ -93,6 +95,7 @@ export default function Register() {
                                 value={formData.password}
                                 onChange={handleChange}
                                 placeholder="Enter Password"
+                                required
                             />
                             {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
                         </Form.Group>
@@ -106,9 +109,9 @@ export default function Register() {
                                 value={formData.password_confirmation}
                                 onChange={handleChange}
                                 placeholder="Confirm Password"
+                                required
                             />
                         </Form.Group>
-                        {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
                         <Button variant="outline-primary" type="submit">
                             Register
                         </Button>

@@ -4,24 +4,18 @@ import {authCheck} from "../helpers/authHelper";
 import HeadComponent from "../components/HeadComponent";
 
 export default function Home() {
-    let display;
-
-    if (!authCheck()) {
-        display = 'You should login first!'
-    } else {
-        display = (
-            <>
-                <Link href="/articles">Articles</Link>
-            </>
-        )
-    }
+    const isLoggedIn = authCheck();
 
     return (
         <Container className="mt-2 minHeight">
-            <HeadComponent title={`Homepage`} />
+            <HeadComponent title={`Homepage`}/>
             <Row>
-                {display}
+                {isLoggedIn ? (
+                    <Link href="/articles">Articles</Link>
+                ) : (
+                    <p>You should login first!</p>
+                )}
             </Row>
         </Container>
-    )
+    );
 }

@@ -11,7 +11,6 @@ import ToastMessage from '../components/ToastMessage';
 
 export default function Login() {
     const router = useRouter();
-    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -30,26 +29,23 @@ export default function Login() {
         try {
             const response = await CreateData('login', formData);
 
-            if (response.statusCode == 422) {
-                setErrors(response.errors);
+            if (response.statusCode === 422) {
+                setToastMessage({message: 'Invalid email or password', type: 'error'});
             } else {
                 const token = response.data.token;
 
-                if (token != undefined) {
+                if (token) {
                     dispatch(login(token));
                     localStorage.setItem('token', JSON.stringify(token));
-                    setFormData({
-                        email: '',
-                        password: '',
-                    });
-                    setToastMessage({message: 'Login Succesfully', type: 'success'});
+                    setFormData({email: '', password: ''});
+                    setToastMessage({message: 'Login Successfully', type: 'success'});
                     await router.push('/');
                 } else {
-                    console.error('Undefined Token');
+                    setToastMessage({message: 'Undefined Token', type: 'error'});
                 }
             }
         } catch (error) {
-            setToastMessage({message: 'An error occurred while login.', type: 'error'});
+            setToastMessage({message: 'An error occurred while logging in', type: 'error'});
         }
     };
 
@@ -76,8 +72,8 @@ export default function Login() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="Enter Email"
+                                    required
                                 />
-                                {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>
@@ -89,8 +85,8 @@ export default function Login() {
                                     value={formData.password}
                                     onChange={handleChange}
                                     placeholder="Enter Password"
+                                    required
                                 />
-                                {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
                             </Form.Group>
                             <Button variant="outline-primary" type="submit">
                                 Login
