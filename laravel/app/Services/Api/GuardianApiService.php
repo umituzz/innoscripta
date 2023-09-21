@@ -3,6 +3,7 @@
 namespace App\Services\Api;
 
 use App\Contracts\ApiServiceInterface;
+use App\Models\Category;
 use Exception;
 use App\Models\Article;
 
@@ -32,10 +33,15 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
 
             collect($items)->map(function ($item) use($sourceId){
 
-                Article::firstOrCreate([
+                $category = Category::firstOrCreate([
+                    'name' => $item->sectionName,
+                    'slug' => $item->sectionId
+                ]);
+
+                $article = Article::firstOrCreate([
                     'source_id' => $sourceId,
+                    'category_id' => $category->id,
                     'title' => $item->webTitle,
-                    'category' => $item->sectionName ?? 'General',
                     'url' => $item->webUrl,
                     'image' => 'https://placehold.co/400x300',
                     'published_at' => $item->webPublicationDate,

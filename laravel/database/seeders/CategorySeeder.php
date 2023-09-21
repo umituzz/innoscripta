@@ -18,6 +18,6 @@ class CategorySeeder extends Seeder
     {
 //        Category::factory()->create();
 
-        Category::create(['name' => 'Category', 'slug' => 'category']);
+        Category::create(['name' => 'General', 'slug' => 'general']);
     }
 }

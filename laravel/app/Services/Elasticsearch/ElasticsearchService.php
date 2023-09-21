@@ -5,7 +5,6 @@ namespace App\Services\Elasticsearch;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
 use Elastic\Elasticsearch\Exception\AuthenticationException;
-use GuzzleHttp\Client as HttpClient;
 
 /**
  * Class ElasticsearchService
@@ -23,21 +22,5 @@ class ElasticsearchService
             ->setHosts([env('ELASTICSEARCH_HOST')])
             ->setSSLVerification(env('ELASTICSEARCH_SSL'))
             ->build();
-    }
-
-    public function get($indexName)
-    {
-        $response = $this->getClient()->search([
-            'index' => $indexName,
-            'body' => [
-                'query' => [
-                    'match_all' => [],
-                ],
-            ],
-        ]);
-
-        dd("here", $response);
-
-        return $response['hits']['hits'];
     }
 }

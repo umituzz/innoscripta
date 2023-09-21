@@ -17,8 +17,8 @@ class Article extends BaseModel
 
     protected $fillable = [
         'source_id',
+        'category_id',
         'title',
-        'category',
         'url',
         'image',
         'published_at'
@@ -33,6 +33,7 @@ class Article extends BaseModel
     {
         $with = [
             'source',
+            'category'
         ];
 
         $this->loadMissing($with);
@@ -46,6 +47,14 @@ class Article extends BaseModel
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
 }

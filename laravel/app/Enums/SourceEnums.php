@@ -10,7 +10,7 @@ enum SourceEnums
 {
     const GUARDIAN = 'Guardian API';
 
-    const NEWS = 'New API';
+    const NEWS = 'News API';
 
     const MEDIA_STACK = 'Media Stack API';
 }

@@ -4,6 +4,7 @@ namespace App\Services\Api;
 
 use App\Contracts\ApiServiceInterface;
 use App\Models\Article;
+use App\Models\Category;
 use Exception;
 
 /**
@@ -32,10 +33,15 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
 
             collect($items)->map(function ($item) use($sourceId){
 
-                $article = Article::firstOrCreate([
+                $category = Category::firstOrCreate([
+                    'name' => 'General',
+                    'slug' => 'general'
+                ]);
+
+                Article::firstOrCreate([
                     'source_id' => $sourceId,
                     'title' => $item->title,
-                    'category' => $item->category ?? 'General',
+                    'category_id' => $category->id,
                     'url' => $item->url,
                     'image' => 'https://placehold.co/400x300',
                     'published_at' => $item->published_at,
