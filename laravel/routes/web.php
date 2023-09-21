@@ -8,13 +8,6 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 
-Route::get('/test', function () {
-
-
-    dd("here", \Illuminate\Support\Facades\Artisan::call('api:news'));
-
-});
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
