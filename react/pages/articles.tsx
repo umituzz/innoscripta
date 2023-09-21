@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Container, Row, Col, Table } from 'react-bootstrap';
-import { LoadListData } from '../services/DataListService';
-import { useDispatch, useSelector } from 'react-redux';
-import { setArticles } from '../stores/actions/articleAction';
+import {useEffect, useState} from 'react';
+import {Container, Row, Col, Table} from 'react-bootstrap';
+import {useDispatch, useSelector} from 'react-redux';
+import {setArticles} from '../stores/actions/articleAction';
 import HeadComponent from '../components/HeadComponent';
 import PaginationComponent from '../components/PaginationComponent';
+import {LoadListData} from '../services/DataListService';
 
 export default function Article() {
     const dispatch = useDispatch();
@@ -30,9 +30,29 @@ export default function Article() {
         setCurrentPage(newPage);
     };
 
+    const renderTable = () => {
+        if (articles.length === 0) {
+            return (
+                <tr>
+                    <td colSpan="5">No Data</td>
+                </tr>
+            );
+        }
+
+        return articles.map((article) => (
+            <tr key={article.id}>
+                <td>{article.id}</td>
+                <td>{article.source}</td>
+                <td>{article.title}</td>
+                <td>{article.category}</td>
+                <td>{article.published_at}</td>
+            </tr>
+        ));
+    };
+
     return (
         <Container className="mt-2 minHeight">
-            <HeadComponent title={`Articles`} />
+            <HeadComponent title={`Articles`}/>
             <Row>
                 <Col md={12}>
                     <Table responsive>
@@ -45,23 +65,7 @@ export default function Article() {
                             <th>Published At</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        {articles?.length > 0 ? (
-                            articles.map((article) => (
-                                <tr key={article.id}>
-                                    <td>{article.id}</td>
-                                    <td>{article.source}</td>
-                                    <td>{article.title}</td>
-                                    <td>{article.category}</td>
-                                    <td>{article.published_at}</td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="8">No Data</td>
-                            </tr>
-                        )}
-                        </tbody>
+                        <tbody>{renderTable()}</tbody>
                     </Table>
                 </Col>
                 <Col md={12} className="text-center mt-3">
