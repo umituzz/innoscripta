@@ -95,7 +95,7 @@ export default function Article() {
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Source Name</th>
+                            <th>Source</th>
                             <th>Title</th>
                             <th>Category</th>
                             <th>Published At</th>
