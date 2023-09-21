@@ -24,9 +24,5 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => '/articles', 'as' => 'articles.'], function () {
         Route::get('/', [ArticlesController::class, 'index'])->name('index');
-        Route::get('/{id}/edit', [ArticlesController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [ArticlesController::class, 'update'])->name('update');
-        Route::get('/{id}/destroy', [ArticlesController::class, 'destroy'])->name('destroy');
-        Route::post('/search', [ArticlesController::class, 'search'])->name('search');
     });
 });
