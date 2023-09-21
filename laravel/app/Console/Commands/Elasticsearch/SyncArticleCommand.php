@@ -5,6 +5,7 @@ namespace App\Console\Commands\Elasticsearch;
 use App\Jobs\Elasticsearch\SyncArticleElasticsearchJob;
 use App\Services\Article\ArticleService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 /**
  * Class SyncArticleCommand
@@ -48,6 +49,9 @@ class SyncArticleCommand extends Command
         $items = $this->articleService->getList();
 
         if ($items) {
+
+            Artisan::call('elasticsearch:scout-articles');
+
             SyncArticleElasticsearchJob::dispatch($items);
 
             return Command::SUCCESS;

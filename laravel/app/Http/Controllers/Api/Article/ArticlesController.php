@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Article;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Services\Article\CategoryService;
+use App\Services\Article\ArticleService;
 use Illuminate\Http\Response;
 
 /**
@@ -12,16 +12,16 @@ use Illuminate\Http\Response;
  */
 class ArticlesController extends BaseController
 {
-    private CategoryService $articleService;
+    private ArticleService $articleService;
 
-    public function __construct(CategoryService $articleService)
+    public function __construct(ArticleService $articleService)
     {
         $this->articleService = $articleService;
     }
 
     public function index()
     {
-        $items = $this->articleService->getList();
+        $items = $this->articleService->getAllElasticData();
 
         return $this->ok($items, Response::HTTP_OK, __('Article List'));
     }

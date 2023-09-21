@@ -28,4 +28,9 @@ class ArticleService
 
         return ArticleResource::collection($items);
     }
+
+    public function getAllElasticData()
+    {
+        return $this->articleRepository->getAllElasticData();
+    }
 }

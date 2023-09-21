@@ -8,5 +8,8 @@ namespace App\Contracts;
  */
 interface ArticleRepositoryInterface
 {
+    public function getWith();
+
+    public function getAllElasticData();
 
 }

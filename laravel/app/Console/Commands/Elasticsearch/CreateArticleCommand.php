@@ -3,7 +3,6 @@
 namespace App\Console\Commands\Elasticsearch;
 
 use Exception;
-use App\Enums\ArticleEnums;
 use App\Services\Elasticsearch\ElasticsearchService;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\AuthenticationException;
@@ -54,27 +53,25 @@ class CreateArticleCommand extends Command
      */
     public function handle()
     {
-        $indexName = ArticleEnums::ELASTICSEARCH_INDEX_NAME;
-
-        if ($this->client->indices()->exists(["index" => $indexName])->getStatusCode() === 404) {
+        if ($this->client->indices()->exists(["index" => 'articles'])->getStatusCode() === 404) {
 
             try {
                 $params = [
-                    'index' => $indexName,
+                    'index' => 'articles',
                     'body' => $this->getStructure()
                 ];
 
                 $result = $this->client->indices()->create($params);
 
                 if ($result->getStatusCode() === Response::HTTP_OK) {
-                    echo "{$indexName} created successfully!";
+                    echo "articles created successfully!";
                 }
 
             } catch (Exception $exception) {
                 echo $exception->getMessage();
             }
         } else {
-            echo "{$indexName} already exists";
+            echo "articles already exists";
         }
     }
 

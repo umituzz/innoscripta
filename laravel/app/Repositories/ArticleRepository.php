@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Contracts\ArticleRepositoryInterface;
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 
 /**
@@ -23,5 +24,12 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
     public function getWith()
     {
         return $this->article->with('source')->get();
+    }
+
+    public function getAllElasticData()
+    {
+        $items = $this->article->search('*')->get();
+
+        return ArticleResource::collection($items);
     }
 }

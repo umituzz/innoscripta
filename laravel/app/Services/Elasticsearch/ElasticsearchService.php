@@ -14,17 +14,6 @@ use GuzzleHttp\Client as HttpClient;
 class ElasticsearchService
 {
     /**
-     * @return array
-     */
-    public function getHosts(): array
-    {
-        return [
-            "host" => env("ELASTIC_SEARCH_HOSTNAME"),
-            "port" => env("ELASTIC_SEARCH_PORT")
-        ];
-    }
-
-    /**
      * @return Client
      * @throws AuthenticationException
      */
@@ -36,18 +25,19 @@ class ElasticsearchService
             ->build();
     }
 
-    /**
-     * @return void
-     */
-    public function enableErrorLogConfigurations(): void
+    public function get($indexName)
     {
-        ini_set('max_execution_time', 0);
-        error_reporting(E_ALL);
-        ini_set("display_errors", 1);
-    }
+        $response = $this->getClient()->search([
+            'index' => $indexName,
+            'body' => [
+                'query' => [
+                    'match_all' => [],
+                ],
+            ],
+        ]);
 
-    public function createIndice($params)
-    {
-        return $this->client->indices()->create($params);
+        dd("here", $response);
+
+        return $response['hits']['hits'];
     }
 }

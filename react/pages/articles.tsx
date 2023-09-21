@@ -30,10 +30,7 @@ export default function Article() {
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Source ID</th>
                             <th>Source Name</th>
-                            <th>Api</th>
-                            <th>Author</th>
                             <th>Title</th>
                             <th>Category</th>
                             <th>Published At</th>
@@ -44,10 +41,7 @@ export default function Article() {
                             articles.map((article) => (
                                 <tr key={article.id}>
                                     <td>{article.id}</td>
-                                    <td>{article.source_id}</td>
-                                    <td>{article.source_name}</td>
-                                    <td>{article.api}</td>
-                                    <td>{article.author}</td>
+                                    <td>{article.source}</td>
                                     <td>{article.title}</td>
                                     <td>{article.category}</td>
                                     <td>{article.published_at}</td>
