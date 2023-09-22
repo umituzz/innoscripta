@@ -12,6 +12,7 @@ import InputComponent from "../components/InputComponent";
 
 export default function Login() {
     const router = useRouter();
+    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -31,7 +32,7 @@ export default function Login() {
             const response = await CreateData('login', formData);
 
             if (response.statusCode === 422) {
-                setToastMessage({message: 'Invalid email or password', type: 'error'});
+                setErrors(response.errors);
             } else {
                 const token = response.data.token;
 
@@ -72,6 +73,9 @@ export default function Login() {
                                 placeholder="Enter Email"
                                 required
                             />
+
+                            {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
+
                             <InputComponent
                                 label="Password"
                                 type="password"
@@ -81,6 +85,9 @@ export default function Login() {
                                 placeholder="Enter Password"
                                 required
                             />
+
+                            {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
+
                             <Button variant="outline-primary" type="submit">
                                 Login
                             </Button>
