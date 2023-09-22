@@ -8,6 +8,7 @@ import {useDispatch} from 'react-redux';
 import {login} from '../stores/actions/authAction';
 import HeadComponent from '../components/HeadComponent';
 import ToastMessage from '../components/ToastMessage';
+import InputComponent from "../components/InputComponent";
 
 export default function Login() {
     const router = useRouter();
@@ -62,32 +63,24 @@ export default function Login() {
                     </div>
                     <Row className="justify-content-center">
                         <Form onSubmit={handleSubmit}>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label className="text-center">
-                                    Email <span className="text-danger">*</span>
-                                </Form.Label>
-                                <Form.Control
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    placeholder="Enter Email"
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>
-                                    Password <span className="text-danger">*</span>
-                                </Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    name="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    placeholder="Enter Password"
-                                    required
-                                />
-                            </Form.Group>
+                            <InputComponent
+                                label="Email"
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Enter Email"
+                                required
+                            />
+                            <InputComponent
+                                label="Password"
+                                type="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                placeholder="Enter Password"
+                                required
+                            />
                             <Button variant="outline-primary" type="submit">
                                 Login
                             </Button>
