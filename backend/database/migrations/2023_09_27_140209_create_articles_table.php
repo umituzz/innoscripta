@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('source_id')->constrained();
             $table->string("title");
+            $table->mediumText('description')->nullable();
             $table->string("url");
             $table->string("image");
             $table->string("published_at");
