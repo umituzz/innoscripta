@@ -1,4 +1,4 @@
-import {Button, Form, Col, Container, Row} from 'react-bootstrap';
+import {Form, Col, Container, Row} from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from 'react';
@@ -6,6 +6,8 @@ import {useRouter} from 'next/router';
 import {CreateData} from '../services/DataCreateService';
 import HeadComponent from '../components/HeadComponent';
 import ToastMessage from '../components/ToastMessage';
+import InputComponent from "../components/InputComponent";
+import ButtonComponent from "../components/ButtonComponent";
 
 export default function Register() {
     const router = useRouter();
@@ -57,64 +59,48 @@ export default function Register() {
                         <h3>Registration</h3>
                     </div>
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="formBasicName">
-                            <Form.Label className="text-center">
-                                Name <span className="text-danger">*</span>
-                            </Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                placeholder="Enter Name"
-                                required
-                            />
-                            {errors.name && <p className="text-danger pt-1">{errors.name}</p>}
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label className="text-center">
-                                Email <span className="text-danger">*</span>
-                            </Form.Label>
-                            <Form.Control
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                placeholder="Enter Email"
-                                required
-                            />
-                            {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>
-                                Password <span className="text-danger">*</span>
-                            </Form.Label>
-                            <Form.Control
-                                type="password"
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                placeholder="Enter Password"
-                                required
-                            />
-                            {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-                            <Form.Label>
-                                Confirm Password <span className="text-danger">*</span>
-                            </Form.Label>
-                            <Form.Control
-                                type="password"
-                                name="password_confirmation"
-                                value={formData.password_confirmation}
-                                onChange={handleChange}
-                                placeholder="Confirm Password"
-                                required
-                            />
-                        </Form.Group>
-                        <Button variant="outline-primary" type="submit">
+                        <InputComponent
+                            label="Name"
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Enter Name"
+                            required
+                        />
+                        {errors.name && <p className="text-danger pt-1">{errors.name}</p>}
+                        <InputComponent
+                            label="Email"
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Enter Email"
+                            required
+                        />
+                        {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
+                        <InputComponent
+                            label="Password"
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            placeholder="Enter Password"
+                            required
+                        />
+                        {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
+                        <InputComponent
+                            label="Confirm Password"
+                            type="password"
+                            name="password_confirmation"
+                            value={formData.password_confirmation}
+                            onChange={handleChange}
+                            placeholder="Confirm Password"
+                            required
+                        />
+                        <ButtonComponent variant="outline-primary" type="submit">
                             Register
-                        </Button>
+                        </ButtonComponent>
                     </Form>
                     <ToastMessage message={toastMessage?.message} type={toastMessage?.type}/>
                     <p className="mt-3">
