@@ -13,14 +13,14 @@ import RouterHandler from '../components/RouterHandler';
 function App({Component, pageProps}: AppProps) {
     return (
         <div className="main">
-            <Provider store={store}>
-                <ToastContainer autoClose={500}/>
-                <Header/>
-                <Component {...pageProps} />
-                <Footer/>
-                <WebVitals/>
-                <RouterHandler/>
-            </Provider>
+                <Provider store={store}>
+                    <ToastContainer autoClose={500}/>
+                    <Header/>
+                    <Component {...pageProps} />
+                    <Footer/>
+                    <WebVitals/>
+                    <RouterHandler/>
+                </Provider>
         </div>
     );
 }

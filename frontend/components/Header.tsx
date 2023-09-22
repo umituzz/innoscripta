@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {BoxArrowRight} from "react-bootstrap-icons";
 import {logout} from "../stores/actions/authAction";
 import {PostDataService} from "../services/PostDataService";
-import {useState} from "react";
 
 const Header = () => {
     const router = useRouter();

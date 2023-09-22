@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Row, Col, Table} from 'react-bootstrap';
+import {Container, Row, Col, Table, Card, Button, Pagination} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import {setArticles} from '../stores/actions/articleAction';
 import HeadComponent from '../components/HeadComponent';
 import PaginationComponent from '../components/PaginationComponent';
-import SearchBar from '../components/SearchBar';
 import FilterComponent from '../components/FilterComponent';
-import {setSources} from "../stores/actions/sourceAction";
 import {GetDataService} from "../services/GetDataService";
+import SearchBar from '../components/SearchBar';
+import {setSources} from "../stores/actions/sourceAction";
 
 export default function Article() {
     const dispatch = useDispatch();
@@ -40,7 +40,7 @@ export default function Article() {
 
     const handleSourceFilterChange = async (newSourceFilter) => {
         try {
-            const response = await LoadListData(`articles?page=${currentPage}&sourceId=${newSourceFilter}`);
+            const response = await GetDataService(`articles?page=${currentPage}&sourceId=${newSourceFilter}`);
             dispatch(setArticles(response?.data.data));
             setLastPage(response?.data.last_page);
         } catch (error) {
@@ -50,7 +50,7 @@ export default function Article() {
 
     const handleSearch = async (searchTerm) => {
         try {
-            const response = await LoadListData(`articles?page=${currentPage}&searchTerm=${searchTerm}`);
+            const response = await GetDataService(`articles?page=${currentPage}&searchTerm=${searchTerm}`);
             dispatch(setArticles(response?.data.data));
             setLastPage(response?.data.last_page);
         } catch (error) {
@@ -58,52 +58,65 @@ export default function Article() {
         }
     };
 
-    const renderTable = () => {
+    const renderCard = (article) => {
+
         if (articles.length === 0) {
             return (
-                <tr>
-                    <td colSpan="5">No Data</td>
-                </tr>
+                <Col lg={6}>
+                    <Card className="mb-4">
+                        <Card.Img src={`https://dummyimage.com/700x350/dee2e6/6c757d.jpg`} alt={article.title}/>
+                        <Card.Body>
+                            <p className="card-text">No Data Yet!</p>
+                        </Card.Body>
+                    </Card>
+                </Col>
             );
         }
 
-        return articles.map((article) => (
-            <tr key={article.id}>
-                <td>{article.id}</td>
-                <td>{article.source}</td>
-                <td>{article.title}</td>
-                <td>{article.published_at}</td>
-            </tr>
-        ));
+        return (
+            <Col lg={6} key={article.id}>
+                <Card className="mb-4">
+                    <Card.Img src={`https://dummyimage.com/700x350/dee2e6/6c757d.jpg`} alt={article.title}/>
+                    <Card.Body>
+                        <small className="text-muted">{article.publieshed_at}</small>
+                        <h2 className="card-title h4">{article.title}</h2>
+                        <p className="card-text">description will come here dynamically!</p>
+                        <Button variant="primary" href={`#/${article.id}`}>Read more →</Button>
+                    </Card.Body>
+                </Card>
+            </Col>
+        )
     };
 
     return (
         <Container className="mt-2 minHeight">
             <HeadComponent title={`Articles`}/>
             <Row>
-                <Col md={12}>
+                <Col lg={8}>
                     <Row>
-                        <Col md={6}>
-                            <SearchBar onSearch={handleSearch} />
-                        </Col>
-                        <Col md={6}>
-                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={sources} />
+                        {articles.map((article) => renderCard(article))}
+                    </Row>
+                    <Row>
+                        <Col md={12} className="text-center mt-3">
+                            <PaginationComponent currentPage={currentPage} lastPage={lastPage} onPageChange={handlePageChange}/>
                         </Col>
                     </Row>
-                    <Table responsive>
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Source</th>
-                            <th>Title</th>
-                            <th>Published At</th>
-                        </tr>
-                        </thead>
-                        <tbody>{renderTable()}</tbody>
-                    </Table>
                 </Col>
-                <Col md={12} className="text-center mt-3">
-                    <PaginationComponent currentPage={currentPage} lastPage={lastPage} onPageChange={handlePageChange}/>
+
+                <Col lg={4}>
+                    <Card className="mb-4">
+                        <Card.Header>Search</Card.Header>
+                        <Card.Body>
+                            <SearchBar onSearch={handleSearch}/>
+                        </Card.Body>
+                    </Card>
+
+                    <Card className="mb-4">
+                        <Card.Header>News Sources</Card.Header>
+                        <Card.Body>
+                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={sources}/>
+                        </Card.Body>
+                    </Card>
                 </Col>
             </Row>
         </Container>

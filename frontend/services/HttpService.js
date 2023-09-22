@@ -1,13 +1,11 @@
 import {getRequestOptions, postRequestOptions} from "./RequestOptions"
+import {authToken} from "../helpers/authHelper";
 
 export default class HttpService {
-    // baseUrl = process.env.REACT_APP_BASE_URL;
     baseUrl = 'http://localhost/api'
-    tokenKey = "token"
 
     getData = async (url) => {
-        const token = await JSON.parse(localStorage.getItem(this.tokenKey));
-        const requestOptions = getRequestOptions(token);
+        const requestOptions = getRequestOptions();
 
         return fetch(this.baseUrl + '/' + url, requestOptions)
             .then(
@@ -16,8 +14,7 @@ export default class HttpService {
     }
 
     postData = async (url, item) => {
-        const token = await JSON.parse(localStorage.getItem(this.tokenKey));
-        const requestOptions = postRequestOptions(token, item);
+        const requestOptions = postRequestOptions(item);
 
         return fetch(this.baseUrl + "/" + url, requestOptions)
             .then(

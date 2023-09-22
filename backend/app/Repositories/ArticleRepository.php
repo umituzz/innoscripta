@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Contracts\ArticleRepositoryInterface;
+use App\Enums\ArticleEnums;
 use App\Models\Article;
 
 /**
@@ -27,7 +28,7 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
 
     public function getElasticsearchData($searchTerm)
     {
-        return $this->article->search($searchTerm)->paginate(10);
+        return $this->article->search($searchTerm)->paginate(ArticleEnums::DEFAULT_PAGINATION);
     }
 
     public function firstOrCreate($key, $data)

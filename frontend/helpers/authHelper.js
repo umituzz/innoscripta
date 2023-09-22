@@ -17,3 +17,8 @@ export const authCheck = (redirectToLogin = true) => {
 
     return isLoggedIn;
 };
+
+export const authToken = () => {
+    return useSelector((state) => state.authReducer.token);
+};
+

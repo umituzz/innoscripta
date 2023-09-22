@@ -11,7 +11,7 @@ export default function FilterComponent({onFilterChange, sources}) {
     };
 
     return (
-        <Col md={6}>
+        <Col>
             <Form.Group>
                 <Form.Control
                     as="select"

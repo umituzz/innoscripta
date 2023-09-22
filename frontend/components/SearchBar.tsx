@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Form, Button, Col, Row } from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Card, Form, Button} from 'react-bootstrap';
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({onSearch}) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearch = () => {
@@ -9,24 +9,21 @@ export default function SearchBar({ onSearch }) {
     };
 
     return (
-        <Row>
-            <Col md={10}>
-                <Form className="mb-3">
-                    <Form.Group controlId="searchTerm">
-                        <Form.Control
-                            type="text"
-                            placeholder="Search"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                    </Form.Group>
-                </Form>
-            </Col>
-            <Col md={2}>
-                <Button variant="primary" onClick={handleSearch}>
-                    Search
-                </Button>
-            </Col>
-        </Row>
+        <Form>
+            <Form.Group controlId="searchTerm">
+                <div className="input-group">
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter search term..."
+                        aria-label="Enter search term..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <Button variant="primary" id="button-search" type="button" onClick={handleSearch}>
+                        Go!
+                    </Button>
+                </div>
+            </Form.Group>
+        </Form>
     );
 }

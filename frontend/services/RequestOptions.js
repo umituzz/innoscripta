@@ -1,4 +1,4 @@
-export const getRequestOptions = (token) => {
+export const getRequestOptions = (token = null) => {
     return {
         method: "GET",
         headers: {
@@ -8,7 +8,7 @@ export const getRequestOptions = (token) => {
     }
 }
 
-export const postRequestOptions = (token, item) => {
+export const postRequestOptions = (item, token = null) => {
     return {
         method: "POST",
         headers: {
