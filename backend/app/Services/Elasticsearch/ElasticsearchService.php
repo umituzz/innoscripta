@@ -19,8 +19,8 @@ class ElasticsearchService
     public function getClient(): Client
     {
         return ClientBuilder::create()
-            ->setHosts([env('ELASTICSEARCH_HOST')])
-            ->setSSLVerification(env('ELASTICSEARCH_SSL'))
+            ->setHosts([env('ELASTICSEARCH_HOST', 'http://elasticsearch:9200')])
+            ->setSSLVerification(env('ELASTICSEARCH_SSL',  false))
             ->build();
     }
 }
