@@ -73,9 +73,7 @@ export default function Login() {
                                 placeholder="Enter Email"
                                 required
                             />
-
                             {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
-
                             <InputComponent
                                 label="Password"
                                 type="password"
@@ -85,9 +83,7 @@ export default function Login() {
                                 placeholder="Enter Password"
                                 required
                             />
-
                             {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
-
                             <Button variant="outline-primary" type="submit">
                                 Login
                             </Button>
