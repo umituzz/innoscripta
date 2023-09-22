@@ -3,6 +3,8 @@
 namespace App\Services\Api;
 
 use App\Services\Article\ArticleService;
+use App\Services\Article\AuthorService;
+use App\Services\Article\CategoryService;
 use App\Services\Http\HttpService;
 use App\Services\Notification\NotificationService;
 use App\Services\Redis\RedisService;
@@ -17,15 +19,21 @@ class BaseApiService
     protected RedisService $redisService;
     protected NotificationService $notificationService;
     protected ArticleService $articleService;
+    protected CategoryService $categoryService;
+    protected AuthorService $authorService;
 
     public function __construct(
         HttpService $httpService,
         NotificationService $notificationService,
-        ArticleService $articleService
+        CategoryService $categoryService,
+        AuthorService $authorService,
+        ArticleService $articleService,
     )
     {
         $this->httpService = $httpService;
         $this->notificationService = $notificationService;
+        $this->categoryService = $categoryService;
+        $this->authorService = $authorService;
         $this->articleService = $articleService;
     }
 }

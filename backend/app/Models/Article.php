@@ -17,7 +17,10 @@ class Article extends BaseModel
 
     protected $fillable = [
         'source_id',
+        'author_id',
+        'category_id',
         'title',
+        'description',
         'url',
         'image',
         'published_at'
@@ -45,5 +48,21 @@ class Article extends BaseModel
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(Author::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

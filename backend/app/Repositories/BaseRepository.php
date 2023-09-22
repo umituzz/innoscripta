@@ -107,4 +107,9 @@ class BaseRepository implements BaseRepositoryInterface
             return $e->getMessage();
         }
     }
+
+    public function firstOrCreate($key, $data)
+    {
+        return $this->model->firstOrCreate([$key => $data[$key]], $data);
+    }
 }

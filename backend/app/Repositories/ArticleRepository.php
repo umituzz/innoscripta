@@ -28,11 +28,9 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
 
     public function getElasticsearchData($searchTerm)
     {
-        return $this->article->search($searchTerm)->paginate(ArticleEnums::DEFAULT_PAGINATION);
-    }
-
-    public function firstOrCreate($key, $data)
-    {
-        return $this->article->firstOrCreate([$key => $data[$key]], $data);
+        return $this->article
+            ->search($searchTerm)
+            ->orderBy('id','desc')
+            ->paginate(ArticleEnums::DEFAULT_PAGINATION);
     }
 }

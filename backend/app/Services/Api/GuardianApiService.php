@@ -3,6 +3,8 @@
 namespace App\Services\Api;
 
 use App\Contracts\ApiServiceInterface;
+use App\Enums\AuthorEnums;
+use App\Enums\SourceEnums;
 use Exception;
 
 /**
@@ -29,12 +31,27 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
             $url = $this->getUrl();
             $items = $this->httpService->getResult($url)->response->results;
 
-            collect($items)->map(function ($item) use ($sourceId) {
+            if (!$items) {
+                return;
+            }
+
+            $author = $this->authorService->findBy('name', AuthorEnums::GUARDIAN_AUTHOR);
+
+            collect($items)->map(function ($item) use ($sourceId, $author) {
+
+                $category = $this->categoryService->firstOrCreate('name', [
+                    'name' => $item->sectionName,
+                    'slug' => $item->sectionId,
+                ]);
+
                 $this->articleService->firstOrCreate('title', [
                     'source_id' => $sourceId,
+                    'category_id' => $category->id,
+                    'author_id' => $author->id,
                     'title' => $item->webTitle,
+                    'description' => NULL, // no description field in api
                     'url' => $item->webUrl,
-                    'image' => 'https://placehold.co/400x300',
+                    'image' => SourceEnums::DEFAULT_IMAGE,
                     'published_at' => $item->webPublicationDate,
                 ]);
             });

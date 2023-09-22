@@ -11,12 +11,12 @@ use App\Models\Source;
  */
 class SourceRepository extends BaseRepository implements SourceRepositoryInterface
 {
-    private Source $resource;
+    private Source $source;
 
-    public function __construct(Source $resource)
+    public function __construct(Source $source)
     {
-        parent::__construct($resource);
+        parent::__construct($source);
 
-        $this->resource = $resource;
+        $this->source = $source;
     }
 }

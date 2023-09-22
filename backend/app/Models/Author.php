@@ -8,4 +8,8 @@ namespace App\Models;
  */
 class Author extends BaseModel
 {
+    protected $fillable = [
+        'source_id',
+        'name'
+    ];
 }

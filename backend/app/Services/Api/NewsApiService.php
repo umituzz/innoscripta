@@ -3,6 +3,8 @@
 namespace App\Services\Api;
 
 use App\Contracts\ApiServiceInterface;
+use App\Enums\AuthorEnums;
+use App\Enums\SourceEnums;
 use Exception;
 
 /**
@@ -31,11 +33,21 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
 
             collect($items)->map(function ($item) use ($sourceId) {
 
+                $fistAuthor = explode(',', $item->author)[0] ?? AuthorEnums::NEWS_AUTHOR;
+
+                $author = $this->authorService->firstOrCreate('name', [
+                    'source_id' => $sourceId,
+                    'name' => $fistAuthor,
+                ]);
+
                 $this->articleService->firstOrCreate('title', [
                     'source_id' => $sourceId,
+                    'author_id' => $author->id,
+                    'category_id' => NULL, // no field with related category
                     'title' => $item->title,
+                    'description' => $item->description,
                     'url' => $item->url,
-                    'image' => 'https://placehold.co/400x300',
+                    'image' => $item->urlToImage ?? SourceEnums::DEFAULT_IMAGE,
                     'published_at' => $item->publishedAt,
                 ]);
 

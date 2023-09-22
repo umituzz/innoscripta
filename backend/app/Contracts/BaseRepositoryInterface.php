@@ -15,6 +15,7 @@ interface BaseRepositoryInterface
      */
     public function get();
 
+    public function total();
 
     /**
      * Insert a new record
@@ -32,4 +33,11 @@ interface BaseRepositoryInterface
      * @return mixed
      */
     public function findBy($key, $value);
+
+    public function update($id, $data);
+
+    public function delete($id);
+
+    public function firstOrCreate($key, $data);
+
 }

@@ -76,11 +76,11 @@ export default function Article() {
         return (
             <Col lg={6} key={article.id}>
                 <Card className="mb-4">
-                    <Card.Img src={`https://dummyimage.com/700x350/dee2e6/6c757d.jpg`} alt={article.title}/>
+                    <Card.Img src={article.image} alt={article.title}/>
                     <Card.Body>
                         <small className="text-muted">{article.publieshed_at}</small>
                         <h2 className="card-title h4">{article.title}</h2>
-                        <p className="card-text">description will come here dynamically!</p>
+                        <p className="card-text">{article.description}</p>
                         <Button variant="primary" href={`#/${article.id}`}>Read more →</Button>
                     </Card.Body>
                 </Card>

@@ -22,8 +22,10 @@ class ArticleResource extends JsonResource
         return [
             'id' => $this->id,
             'source' => $this->source->name,
+            'author' => $this->author->name,
+            'category' => $this->category->name,
             'title' => $this->title,
-            'category' => $this->category,
+            'description' => $this->description,
             'url' => $this->url,
             'image' => $this->image,
             'published_at' => Carbon::parse($this->published_at)->format('Y-m-d H:i'),

@@ -3,11 +3,15 @@
 namespace App\Providers;
 
 use App\Contracts\ArticleRepositoryInterface;
+use App\Contracts\AuthorRepositoryInterface;
+use App\Contracts\CategoryRepositoryInterface;
 use App\Contracts\NotificationRepositoryInterface;
 use App\Contracts\SettingRepositoryInterface;
 use App\Contracts\SourceRepositoryInterface;
 use App\Contracts\UserRepositoryInterface;
 use App\Repositories\ArticleRepository;
+use App\Repositories\AuthorRepository;
+use App\Repositories\CategoryRepository;
 use App\Repositories\NotificationRepository;
 use App\Repositories\SettingRepository;
 use App\Repositories\SourceRepository;
@@ -37,6 +41,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
         $this->app->bind(SourceRepositoryInterface::class, SourceRepository::class);
+        $this->app->bind(AuthorRepositoryInterface::class, AuthorRepository::class);
+        $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->bind(ArticleRepositoryInterface::class, ArticleRepository::class);
     }
 }

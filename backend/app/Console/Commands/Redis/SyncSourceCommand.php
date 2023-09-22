@@ -3,8 +3,8 @@
 namespace App\Console\Commands\Redis;
 
 use App\Http\Resources\SourceResource;
+use App\Services\Article\SourceService;
 use App\Services\Redis\RedisService;
-use App\Services\Source\SourceService;
 use Exception;
 use Illuminate\Console\Command;
 

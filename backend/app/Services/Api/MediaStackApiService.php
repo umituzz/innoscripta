@@ -3,7 +3,10 @@
 namespace App\Services\Api;
 
 use App\Contracts\ApiServiceInterface;
+use App\Enums\AuthorEnums;
+use App\Enums\SourceEnums;
 use Exception;
+use Illuminate\Support\Str;
 
 /**
  * Class MediaStackApiService
@@ -31,11 +34,25 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
 
             collect($items)->map(function ($item) use($sourceId){
 
+                $author = $this->authorService->firstOrCreate('name', [
+                    'source_id' => $sourceId,
+                    'name' => $item->author ?? AuthorEnums::MEDIA_STACK_AUTHOR,
+                ]);
+
+
+                $category = $this->categoryService->firstOrCreate('name', [
+                    'name' => ucfirst($item->category),
+                    'slug' => Str::slug($item->category),
+                ]);
+
                 $this->articleService->firstOrCreate('title', [
                     'source_id' => $sourceId,
+                    'category_id' => $category->id,
+                    'author_id' => $author->id,
                     'title' => $item->title,
+                    'description' => $item->description,
                     'url' => $item->url,
-                    'image' => 'https://placehold.co/400x300',
+                    'image' => $item->image ?? SourceEnums::DEFAULT_IMAGE,
                     'published_at' => $item->published_at,
                 ]);
 

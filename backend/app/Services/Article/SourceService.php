@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Services\Source;
+namespace App\Services\Article;
 
 use App\Contracts\SourceRepositoryInterface;
 use App\Http\Resources\SourceResource;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * Class SourceService
- * @package App\Services\Source
+ * @package App\Services\Article
  */
 class SourceService
 {
@@ -19,9 +18,6 @@ class SourceService
         $this->sourceRepository = $sourceRepository;
     }
 
-    /**
-     * @return AnonymousResourceCollection
-     */
     public function getList()
     {
         $items = $this->sourceRepository->get();

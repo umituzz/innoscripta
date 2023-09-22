@@ -11,6 +11,4 @@ interface ArticleRepositoryInterface
     public function getWith();
 
     public function getElasticsearchData($searchTerm);
-
-    public function firstOrCreate($key, $data);
 }
