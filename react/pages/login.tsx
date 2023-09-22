@@ -1,4 +1,4 @@
-import {Button, Form, Col, Container, Row} from 'react-bootstrap';
+import {Form, Col, Container, Row} from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from 'react';
@@ -9,6 +9,7 @@ import {login} from '../stores/actions/authAction';
 import HeadComponent from '../components/HeadComponent';
 import ToastMessage from '../components/ToastMessage';
 import InputComponent from "../components/InputComponent";
+import ButtonComponent from "../components/ButtonComponent";
 
 export default function Login() {
     const router = useRouter();
@@ -84,9 +85,9 @@ export default function Login() {
                                 required
                             />
                             {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
-                            <Button variant="outline-primary" type="submit">
+                            <ButtonComponent variant="outline-primary" type="submit">
                                 Login
-                            </Button>
+                            </ButtonComponent>
                         </Form>
                         <ToastMessage message={toastMessage?.message} type={toastMessage?.type}/>
                         <p className="mt-3">
