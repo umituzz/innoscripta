@@ -3,11 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from 'react';
 import {useRouter} from 'next/router';
-import {CreateData} from '../services/DataCreateService';
 import HeadComponent from '../components/HeadComponent';
 import ToastMessage from '../components/ToastMessage';
 import InputComponent from "../components/InputComponent";
 import ButtonComponent from "../components/ButtonComponent";
+import {PostDataService} from "../services/PostDataService";
 
 export default function Register() {
     const router = useRouter();
@@ -28,7 +28,7 @@ export default function Register() {
         e.preventDefault();
 
         try {
-            const response = await CreateData('register', formData);
+            const response = await PostDataService('register', formData);
 
             if (response.statusCode === 422) {
                 setErrors(response.errors);

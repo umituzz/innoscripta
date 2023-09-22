@@ -14,7 +14,7 @@ function App({Component, pageProps}: AppProps) {
     return (
         <div className="main">
             <Provider store={store}>
-                <ToastContainer autoClose={2000}/>
+                <ToastContainer autoClose={500}/>
                 <Header/>
                 <Component {...pageProps} />
                 <Footer/>

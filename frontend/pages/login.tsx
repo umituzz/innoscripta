@@ -3,13 +3,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from 'react';
 import {useRouter} from 'next/router';
-import {CreateData} from '../services/DataCreateService';
 import {useDispatch} from 'react-redux';
 import {login} from '../stores/actions/authAction';
 import HeadComponent from '../components/HeadComponent';
 import ToastMessage from '../components/ToastMessage';
 import InputComponent from "../components/InputComponent";
 import ButtonComponent from "../components/ButtonComponent";
+import {PostDataService} from "../services/PostDataService";
 
 export default function Login() {
     const router = useRouter();
@@ -30,7 +30,7 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await CreateData('login', formData);
+            const response = await PostDataService('login', formData);
 
             if (response.statusCode === 422) {
                 setErrors(response.errors);

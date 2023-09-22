@@ -1,10 +1,11 @@
 import {Navbar, Container, Nav} from "react-bootstrap";
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {CreateData} from "../services/DataCreateService";
 import {useDispatch, useSelector} from "react-redux";
 import {BoxArrowRight} from "react-bootstrap-icons";
 import {logout} from "../stores/actions/authAction";
+import {PostDataService} from "../services/PostDataService";
+import {useState} from "react";
 
 const Header = () => {
     const router = useRouter();
@@ -15,7 +16,7 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            await CreateData('logout');
+            await PostDataService('logout');
             localStorage.removeItem('token');
             dispatch(logout())
             await router.push('/login')

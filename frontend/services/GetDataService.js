@@ -1,6 +1,6 @@
 import HttpService from "./HttpService";
 
-export const LoadListData = (url) => {
+export const GetDataService = (url) => {
     const http = new HttpService();
 
     return http.getData(url).then(data => {

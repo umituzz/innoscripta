@@ -5,7 +5,6 @@ export const getRequestOptions = (token) => {
             "Authorization": "Bearer " + token,
             "Content-type": "application/json",
         },
-        // mode: 'no-cors',
     }
 }
 
@@ -17,6 +16,5 @@ export const postRequestOptions = (token, item) => {
             "Content-type": "application/json"
         },
         body: JSON.stringify(item),
-        // mode: 'no-cors'
     }
 }

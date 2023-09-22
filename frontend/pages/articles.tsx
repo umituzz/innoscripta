@@ -4,10 +4,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setArticles} from '../stores/actions/articleAction';
 import HeadComponent from '../components/HeadComponent';
 import PaginationComponent from '../components/PaginationComponent';
-import {LoadListData} from '../services/DataListService';
 import SearchBar from '../components/SearchBar';
 import FilterComponent from '../components/FilterComponent';
 import {setSources} from "../stores/actions/sourceAction";
+import {GetDataService} from "../services/GetDataService";
 
 export default function Article() {
     const dispatch = useDispatch();
@@ -21,8 +21,8 @@ export default function Article() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await LoadListData(`articles?page=${currentPage}`);
-                const initial = await LoadListData(`initial`);
+                const response = await GetDataService(`articles?page=${currentPage}`);
+                const initial = await GetDataService(`initial`);
                 dispatch(setArticles(response?.data.data));
                 dispatch(setSources(initial?.data.sources));
                 setLastPage(response?.data.last_page);

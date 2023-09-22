@@ -1,6 +1,6 @@
 import HttpService from "./HttpService"
 
-export const CreateData = async (url, query = null) => {
+export const PostDataService = async (url, query = null) => {
     const http = new HttpService();
 
     return http.postData(url, query).then(data => {
