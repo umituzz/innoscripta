@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Row, Col, Table, Card, Button, Pagination} from 'react-bootstrap';
+import {Card, Col, Container, Row} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import {setArticles} from '../stores/actions/articleAction';
 import HeadComponent from '../components/HeadComponent';
@@ -8,6 +8,7 @@ import FilterComponent from '../components/FilterComponent';
 import {GetDataService} from "../services/GetDataService";
 import SearchBar from '../components/SearchBar';
 import {setSources} from "../stores/actions/sourceAction";
+import ArticleCard from '../components/ArticleCard';
 
 export default function Article() {
     const dispatch = useDispatch();
@@ -58,47 +59,17 @@ export default function Article() {
         }
     };
 
-    const renderCard = (article) => {
-
-        if (articles.length === 0) {
-            return (
-                <Col lg={6}>
-                    <Card className="mb-4">
-                        <Card.Img src={`https://dummyimage.com/700x350/dee2e6/6c757d.jpg`} alt={article.title}/>
-                        <Card.Body>
-                            <p className="card-text">No Data Yet!</p>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            );
-        }
-
-        return (
-            <Col lg={6} key={article.id}>
-                <Card className="mb-4">
-                    <Card.Img src={article.image} alt={article.title}/>
-                    <Card.Body>
-                        <small className="text-muted">{article.publieshed_at}</small>
-                        <h2 className="card-title h4">{article.title}</h2>
-                        <p className="card-text">{article.description}</p>
-                        <Button variant="primary" href={`#/${article.id}`}>Read more →</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-        )
-    };
-
-    return (
-        <Container className="mt-2 minHeight pb-5">
+    return (<Container className="mt-2 minHeight pb-5">
             <HeadComponent title={`Articles`}/>
             <Row>
                 <Col lg={8}>
                     <Row>
-                        {articles.map((article) => renderCard(article))}
+                        {articles.map((article) => (<ArticleCard key={article.id} article={article}/>))}
                     </Row>
                     <Row>
                         <Col md={12} className="text-center mt-3">
-                            <PaginationComponent currentPage={currentPage} lastPage={lastPage} onPageChange={handlePageChange}/>
+                            <PaginationComponent currentPage={currentPage} lastPage={lastPage}
+                                                 onPageChange={handlePageChange}/>
                         </Col>
                     </Row>
                 </Col>
@@ -119,6 +90,5 @@ export default function Article() {
                     </Card>
                 </Col>
             </Row>
-        </Container>
-    );
+        </Container>);
 }
