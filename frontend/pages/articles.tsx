@@ -89,7 +89,7 @@ export default function Article() {
     };
 
     return (
-        <Container className="mt-2 minHeight">
+        <Container className="mt-2 minHeight pb-5">
             <HeadComponent title={`Articles`}/>
             <Row>
                 <Col lg={8}>

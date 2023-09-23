@@ -2,8 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Services\Response\ResponseService;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Throwable;
+use App\Exceptions\UnauthenticatedException;
 
 /**
  * Class Handler
@@ -31,4 +35,20 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof AuthenticationException) {
+            $responseService = new ResponseService();
+
+            return $responseService->error(
+                [],
+                __('Unauthenticated'),
+                Response::HTTP_UNAUTHORIZED
+            );
+        }
+
+        return parent::render($request, $e);
+    }
+
 }

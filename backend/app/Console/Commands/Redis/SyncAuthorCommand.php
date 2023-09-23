@@ -3,42 +3,42 @@
 namespace App\Console\Commands\Redis;
 
 use Exception;
-use App\Http\Resources\SourceResource;
-use App\Services\Article\SourceService;
+use App\Http\Resources\AuthorResource;
+use App\Services\Article\AuthorService;
 use App\Services\Redis\RedisService;
 use Illuminate\Console\Command;
 
 /**
- * Class SyncSourceCommand
+ * Class SyncAuthorCommand
  * @package App\Console\Commands\Redis
  */
-class SyncSourceCommand extends Command
+class SyncAuthorCommand extends Command
 {
-    protected $signature = 'redis:sync-sources';
+    protected $signature = 'redis:sync-authors';
 
-    protected $description = 'Sync sources with redis';
+    protected $description = 'Sync authors with redis';
 
     private RedisService $redisService;
 
-    private SourceService $sourceService;
+    private AuthorService $authorService;
 
     public function __construct(
         RedisService $redisService,
-        SourceService $sourceService
+        AuthorService $authorService
     )
     {
         parent::__construct();
 
         $this->redisService = $redisService;
-        $this->sourceService = $sourceService;
+        $this->authorService = $authorService;
     }
 
     public function handle()
     {
         try {
-            $data = $this->sourceService->getList();
-            $sources = SourceResource::collection($data);
-            $this->redisService->set('sources', $sources);
+            $data = $this->authorService->getList();
+            $authors = AuthorResource::collection($data);
+            $this->redisService->set('authors', $authors);
 
             return Command::SUCCESS;
         } catch (Exception $exception) {

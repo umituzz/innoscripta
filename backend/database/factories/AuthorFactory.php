@@ -19,7 +19,6 @@ class AuthorFactory extends Factory
     public function definition(): array
     {
         return [
-            'source_id' => Source::factory(),
             'name' => $this->faker->word,
         ];
     }

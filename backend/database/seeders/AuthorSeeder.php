@@ -19,8 +19,8 @@ class AuthorSeeder extends Seeder
     {
 //        Author::factory()->create();
 
-        Author::create(['source_id' => 1, 'name' => AuthorEnums::GUARDIAN_AUTHOR]);
-        Author::create(['source_id' => 2, 'name' => AuthorEnums::NEWS_AUTHOR]);
-        Author::create(['source_id' => 3, 'name' => AuthorEnums::MEDIA_STACK_AUTHOR]);
+        Author::create(['name' => AuthorEnums::GUARDIAN_AUTHOR]);
+        Author::create(['name' => AuthorEnums::NEWS_AUTHOR]);
+        Author::create(['name' => AuthorEnums::MEDIA_STACK_AUTHOR]);
     }
 }

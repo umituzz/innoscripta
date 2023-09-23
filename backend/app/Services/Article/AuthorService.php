@@ -3,6 +3,7 @@
 namespace App\Services\Article;
 
 use App\Contracts\AuthorRepositoryInterface;
+use App\Http\Resources\AuthorResource;
 
 /**
  * Class AuthorService
@@ -25,5 +26,12 @@ class AuthorService
     public function findBy($key, $value)
     {
         return $this->authorRepository->findBy($key, $value);
+    }
+
+    public function getList()
+    {
+        $items = $this->authorRepository->get();
+
+        return AuthorResource::collection($items);
     }
 }

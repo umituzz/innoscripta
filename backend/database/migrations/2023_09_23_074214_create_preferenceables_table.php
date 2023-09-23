@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('preferenceables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained();
-            $table->string("type");
-            $table->string("name");
+            $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('preferenceable_id');
+            $table->string('preferenceable_type');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->unique(['user_id', 'preferenceable_id', 'preferenceable_type'], 'user_preference_unique');
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('preferenceables');
     }
 };

@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Setting;
-use App\Models\User;
+use App\Models\Preferenceable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Setting>
+ * @extends Factory<Preferenceable>
  */
-class SettingFactory extends Factory
+class PreferenceableFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,9 +18,7 @@ class SettingFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
-            'type' => $this->faker->word,
-            'name' => $this->faker->word,
+            //
         ];
     }
 }

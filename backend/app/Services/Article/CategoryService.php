@@ -3,6 +3,7 @@
 namespace App\Services\Article;
 
 use App\Contracts\CategoryRepositoryInterface;
+use App\Http\Resources\CategoryResource;
 
 /**
  * Class CategoryService
@@ -20,5 +21,12 @@ class CategoryService
     public function firstOrCreate($key, $data)
     {
         return $this->categoryRepository->firstOrCreate($key, $data);
+    }
+
+    public function getList()
+    {
+        $items = $this->categoryRepository->get();
+
+        return CategoryResource::collection($items);
     }
 }

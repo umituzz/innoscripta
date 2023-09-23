@@ -47,6 +47,9 @@ const Header = () => {
                         <Link className={"nav-link"} href={'/'}>
                             Home
                         </Link>
+                        <Link className={"nav-link"} href={'/preferences'}>
+                            Preferences
+                        </Link>
                     </Nav>
                 </Navbar.Collapse>
 

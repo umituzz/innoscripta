@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('source_id')->constrained();
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();

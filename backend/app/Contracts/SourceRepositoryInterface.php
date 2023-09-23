@@ -8,5 +8,5 @@ namespace App\Contracts;
  */
 interface SourceRepositoryInterface
 {
-
+    public function attachRecords($sourceIds, $userId);
 }

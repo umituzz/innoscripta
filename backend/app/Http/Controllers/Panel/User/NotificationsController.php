@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Panel\User;
 
 use App\Contracts\NotificationRepositoryInterface;
 use App\Http\Controllers\Controller;

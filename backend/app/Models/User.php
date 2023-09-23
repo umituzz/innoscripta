@@ -4,7 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -49,10 +50,10 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return HasOne
+     * @return HasMany
      */
-    public function setting(): HasOne
+    public function preferences(): HasMany
     {
-        return $this->hasOne(Setting::class);
+        return $this->hasMany(Preferenceable::class);
     }
 }

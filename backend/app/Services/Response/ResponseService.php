@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Services\Response;
 
-use App\Http\Controllers\Controller;
-use App\Services\Response\ResponseService;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class BaseController
- * @package App\Http\Controllers\Api
+ * Class ResponseService
+ * @package App\Services\Response
  */
-class BaseController extends Controller
+class ResponseService
 {
     /**
      * Return success status
@@ -22,9 +20,13 @@ class BaseController extends Controller
      */
     public function ok($data, $statusCode, $message): JsonResponse
     {
-        $responseService = new ResponseService();
+        $response = [
+            'statusCode' => $statusCode,
+            'message' => $message,
+            'data' => $data,
+        ];
 
-        return $responseService->ok($data, $statusCode, $message);
+        return response()->json($response, $statusCode);
     }
 
     /**
@@ -37,8 +39,12 @@ class BaseController extends Controller
      */
     public function error(array $errors, string $message , int $statusCode = 404): JsonResponse
     {
-        $responseService = new ResponseService();
+        $response = [
+            'statusCode' => $statusCode,
+            'message' => $message,
+            'errors' => $errors,
+        ];
 
-        return $responseService->error($errors, $message, $statusCode);
+        return response()->json($response, $statusCode);
     }
 }

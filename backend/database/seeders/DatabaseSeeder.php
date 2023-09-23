@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             ModelHasRoleSeeder::class,
             RoleHasPermissionSeeder::class,
-            SettingSeeder::class,
             SourceSeeder::class,
             AuthorSeeder::class,
             CategorySeeder::class,
+            PreferenceableSeeder::class,
             ArticleSeeder::class,
         ]);
     }

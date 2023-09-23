@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Article\ArticlesController;
-use App\Http\Controllers\Dashboard\HomepageController;
-use App\Http\Controllers\User\NotificationsController;
-use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Panel\Article\ArticlesController;
+use App\Http\Controllers\Panel\Dashboard\HomepageController;
+use App\Http\Controllers\Panel\User\NotificationsController;
+use App\Http\Controllers\Panel\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
