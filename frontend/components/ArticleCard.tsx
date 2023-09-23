@@ -1,9 +1,20 @@
 import React from 'react';
 import {Button, Card, Col} from 'react-bootstrap';
 
-function ArticleCard({article}) {
+interface ArticleCardProps {
+    article: {
+        id: number;
+        image: string;
+        published_at: string;
+        title: string;
+        description: string;
+    } | null;
+}
+
+function ArticleCard({article}: ArticleCardProps) {
     if (article) {
-        return (<Col lg={6} key={article.id}>
+        return (
+            <Col lg={6} key={article.id}>
                 <Card className="mb-4">
                     <Card.Img src={article.image} alt={article.title}/>
                     <Card.Body>
@@ -15,16 +26,19 @@ function ArticleCard({article}) {
                         </Button>
                     </Card.Body>
                 </Card>
-            </Col>);
+            </Col>
+        );
     } else {
-        return (<Col lg={6}>
-            <Card className="mb-4">
-                <Card.Img src={`https://dummyimage.com/700x350/dee2e6/6c757d.jpg`} alt="No Data"/>
-                <Card.Body>
-                    <p className="card-text">No Data Yet!</p>
-                </Card.Body>
-            </Card>
-        </Col>);
+        return (
+            <Col lg={6}>
+                <Card className="mb-4">
+                    <Card.Img src={`https://dummyimage.com/700x350/dee2e6/6c757d.jpg`} alt="No Data"/>
+                    <Card.Body>
+                        <p className="card-text">No Data Yet!</p>
+                    </Card.Body>
+                </Card>
+            </Col>
+        );
     }
 }
 
