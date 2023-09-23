@@ -1,41 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import HeadComponent from '../components/HeadComponent';
 import PreferenceItem from '../components/PreferenceItem';
-import { GetDataService } from '../services/GetDataService';
-import { setSources, setCategories, setAuthors } from '../stores/actions/preferenceAction';
-import { useDispatch, useSelector } from 'react-redux';
+import {usePreferenceContext} from "../contexts/PreferenceContext";
 
 function Preference() {
-    const dispatch = useDispatch();
-    const [toastMessage, setToastMessage] = useState(null);
-    const preferenceData = useSelector((state) => state.preferenceReducer);
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const initial = await GetDataService(`articles/preferences`);
-                dispatch(setSources(initial?.data.sources));
-                dispatch(setCategories(initial?.data.categories));
-                dispatch(setAuthors(initial?.data.authors));
-            } catch (error) {
-                setToastMessage({ message: 'Data Loading Issue', type: 'error' });
-            }
-        }
-
-        fetchData();
-    }, [dispatch]);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
-
-    const handleCheckAll = (formId) => (e) => {
-        const checkboxes = document.querySelectorAll(`#${formId} input[type="checkbox"]`);
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = e.target.checked;
-        });
-    };
+    const {
+        preferenceData,
+        handleSubmit,
+        handleCheckAll,
+    } = usePreferenceContext();
 
     return (
         <Container>
