@@ -17,6 +17,7 @@ Route::get('/initial', [InitialController::class, 'index'])->name('index');
 
 Route::group(['prefix' => '/articles', 'as' => 'articles.',], function () {
     Route::get('/', [ArticlesController::class, 'index'])->name('index');
+    Route::get('/preferences', [PreferencesController::class, 'index'])->name('preferences.index');
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -24,6 +25,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
-        Route::get('/preferences/source', [PreferencesController::class, 'sourcePreferences'])->name('preferences.source');
     });
+
 });

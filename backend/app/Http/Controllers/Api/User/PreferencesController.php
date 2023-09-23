@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Services\User\PreferenceService;
+use App\Services\Redis\RedisService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -13,18 +13,19 @@ use Illuminate\Http\Response;
  */
 class PreferencesController extends BaseController
 {
-    private PreferenceService $preferenceService;
+    private RedisService $redisService;
 
-    public function __construct(PreferenceService $preferenceService)
+    public function __construct(RedisService $redisService)
     {
-        $this->preferenceService = $preferenceService;
+        $this->redisService = $redisService;
     }
 
-    public function sourcePreferences(Request $request)
+    public function index(Request $request)
     {
-//        @todo
-//        $this->preferenceService->sourcePreferences($request);
+        $data['sources'] = $this->redisService->get('sources');
+        $data['authors'] = $this->redisService->get('authors');
+        $data['categories'] = $this->redisService->get('categories');
 
-        return $this->ok([], Response::HTTP_OK, __('Source Preferences Added'));
+        return $this->ok($data, Response::HTTP_OK, __('Preferences List'));
     }
 }

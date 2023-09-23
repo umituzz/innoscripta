@@ -2,14 +2,14 @@ import thunk from "redux-thunk";
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {authReducer} from "./reducers/authReducer";
 import {articleReducer} from "./reducers/articleReducer";
-import {sourceReducer} from "./reducers/sourceReducer";
+import {preferenceReducer} from "./reducers/preferenceReducer";
 
 export const middlewares = [thunk];
 
 const rootReducer = combineReducers({
     authReducer: authReducer,
     articleReducer: articleReducer,
-    sourceReducer: sourceReducer,
+    preferenceReducer: preferenceReducer,
 });
 
 export const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);

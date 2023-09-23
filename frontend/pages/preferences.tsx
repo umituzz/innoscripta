@@ -1,8 +1,29 @@
 import { Container, Form, Button, Card, Col, Row } from 'react-bootstrap';
 import HeadComponent from "../components/HeadComponent";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {GetDataService} from "../services/GetDataService";
+import {setSources, setCategories, setAuthors} from "../stores/actions/preferenceAction";
+import {useDispatch} from "react-redux";
 
 function Preference() {
+    const dispatch = useDispatch();
+    const [toastMessage, setToastMessage] = useState(null);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const initial = await GetDataService(`articles/preferences`);
+                dispatch(setSources(initial?.data.sources));
+                dispatch(setCategories(initial?.data.categories));
+                dispatch(setAuthors(initial?.data.authors));
+            } catch (error) {
+                setToastMessage({message: 'Data Loading Issue', type: 'error'});
+            }
+        }
+
+        fetchData();
+    }, [dispatch]);
+
     const handleSubmitNewsSources = (e) => {
         e.preventDefault();
     };

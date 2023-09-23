@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Col, Form} from 'react-bootstrap';
 
-export default function FilterComponent({onFilterChange, sources}) {
+export default function FilterComponent({onFilterChange, sources, title}) {
     const [selectedSource, setSelectedSource] = useState('');
 
     const handleSourceChange = (e) => {
@@ -18,7 +18,7 @@ export default function FilterComponent({onFilterChange, sources}) {
                     onChange={handleSourceChange}
                     value={selectedSource}
                 >
-                    <option value="*">All Sources</option>
+                    <option value="*">{title}</option>
                     {sources.map((source) => (
                         <option key={source.id} value={source.id}>
                             {source.name}

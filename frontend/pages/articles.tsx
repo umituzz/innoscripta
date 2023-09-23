@@ -7,13 +7,15 @@ import PaginationComponent from '../components/PaginationComponent';
 import FilterComponent from '../components/FilterComponent';
 import {GetDataService} from "../services/GetDataService";
 import SearchBar from '../components/SearchBar';
-import {setSources} from "../stores/actions/sourceAction";
+import {setAuthors, setCategories, setSources} from "../stores/actions/preferenceAction";
 import ArticleCard from '../components/ArticleCard';
 
 export default function Article() {
     const dispatch = useDispatch();
     const articles = useSelector((state) => state.articleReducer.articles);
-    const sources = useSelector((state) => state.sourceReducer.sources);
+    const sources = useSelector((state) => state.preferenceReducer.sources);
+    const categories = useSelector((state) => state.preferenceReducer.categories);
+    const authors = useSelector((state) => state.preferenceReducer.authors);
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
     const [toastMessage, setToastMessage] = useState(null);
@@ -23,9 +25,11 @@ export default function Article() {
         async function fetchData() {
             try {
                 const response = await GetDataService(`articles?page=${currentPage}`);
-                const initial = await GetDataService(`initial`);
                 dispatch(setArticles(response?.data.data));
+                const initial = await GetDataService(`articles/preferences`);
                 dispatch(setSources(initial?.data.sources));
+                dispatch(setCategories(initial?.data.categories));
+                dispatch(setAuthors(initial?.data.authors));
                 setLastPage(response?.data.last_page);
             } catch (error) {
                 setToastMessage({message: 'Data Loading Issue', type: 'error'});
@@ -85,7 +89,21 @@ export default function Article() {
                     <Card className="mb-4">
                         <Card.Header>News Sources</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={sources}/>
+                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={sources} title="All Sources"/>
+                        </Card.Body>
+                    </Card>
+
+                    <Card className="mb-4">
+                        <Card.Header>News Categories</Card.Header>
+                        <Card.Body>
+                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={categories} title="All Categories"/>
+                        </Card.Body>
+                    </Card>
+
+                    <Card className="mb-4">
+                        <Card.Header>News Authors</Card.Header>
+                        <Card.Body>
+                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={authors} title="All Authors"/>
                         </Card.Body>
                     </Card>
                 </Col>
