@@ -1,15 +1,6 @@
 import React from 'react';
 import {Button, Card, Col} from 'react-bootstrap';
-
-interface ArticleCardProps {
-    article: {
-        id: number;
-        image: string;
-        published_at: string;
-        title: string;
-        description: string;
-    } | null;
-}
+import { ArticleCardProps } from '../interfaces/ArticleCardProps';
 
 function ArticleCard({article}: ArticleCardProps) {
     if (article) {
