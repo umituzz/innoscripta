@@ -1,12 +1,15 @@
 import React from 'react';
-import { LoginProvider } from './LoginContext';
-import { RegisterProvider } from './RegisterContext';
+import {LoginProvider} from './LoginContext';
+import {RegisterProvider} from './RegisterContext';
+import {ArticleProvider} from "./ArticleContext";
 
-const AppProvider = ({ children }) => {
+const AppProvider = ({children}) => {
     return (
         <LoginProvider>
             <RegisterProvider>
-                {children}
+                <ArticleProvider>
+                    {children}
+                </ArticleProvider>
             </RegisterProvider>
         </LoginProvider>
     );
