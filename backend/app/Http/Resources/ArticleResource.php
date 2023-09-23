@@ -21,9 +21,9 @@ class ArticleResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'source' => $this->source->name,
-            'author' => $this->author->name,
-            'category' => $this->category->name,
+            'source' => new SourceResource($this->source),
+            'author' => new AuthorResource($this->author),
+            'category' => new CategoryResource($this->category),
             'title' => $this->title,
             'description' => $this->description,
             'url' => $this->url,

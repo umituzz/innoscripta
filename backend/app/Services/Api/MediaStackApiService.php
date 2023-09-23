@@ -35,10 +35,8 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
             collect($items)->map(function ($item) use($sourceId){
 
                 $author = $this->authorService->firstOrCreate('name', [
-                    'source_id' => $sourceId,
                     'name' => $item->author ?? AuthorEnums::MEDIA_STACK_AUTHOR,
                 ]);
-
 
                 $category = $this->categoryService->firstOrCreate('name', [
                     'name' => ucfirst($item->category),

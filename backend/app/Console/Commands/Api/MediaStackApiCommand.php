@@ -26,6 +26,7 @@ class MediaStackApiCommand extends Command
      * @var string
      */
     protected $description = 'Get api data from MediaStack';
+
     private SourceService $sourceService;
 
     public function __construct(SourceService $sourceService)

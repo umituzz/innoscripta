@@ -20,8 +20,8 @@ class CategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'slug' => $this->slug,
+            'name' => $this->name ?? NULL,
+            'slug' => $this->slug ?? NULL,
         ];
     }
 }

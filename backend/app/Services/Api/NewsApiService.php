@@ -36,7 +36,6 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
                 $fistAuthor = explode(',', $item->author)[0] ?? AuthorEnums::NEWS_AUTHOR;
 
                 $author = $this->authorService->firstOrCreate('name', [
-                    'source_id' => $sourceId,
                     'name' => $fistAuthor,
                 ]);
 
