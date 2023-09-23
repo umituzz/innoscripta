@@ -2,13 +2,13 @@ import { createContext, useContext, useState } from 'react';
 import {useRouter} from "next/router";
 import {PostDataService} from "../services/PostDataService";
 
-const AuthContext = createContext();
+const RegisterContext = createContext();
 
-export const useAuthContext = () => {
-    return useContext(AuthContext);
+export const useRegisterContext = () => {
+    return useContext(RegisterContext);
 };
 
-export const AuthProvider = ({ children }) => {
+export const RegisterProvider = ({ children }) => {
     const router = useRouter();
     const [formData, setFormData] = useState({
         name: '',
@@ -58,8 +58,8 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={contextValue}>
+        <RegisterContext.Provider value={contextValue}>
             {children}
-        </AuthContext.Provider>
+        </RegisterContext.Provider>
     );
 };

@@ -5,7 +5,7 @@ import HeadComponent from '../components/HeadComponent';
 import ToastMessage from '../components/ToastMessage';
 import InputComponent from "../components/InputComponent";
 import ButtonComponent from "../components/ButtonComponent";
-import { useAuthContext } from '../contexts/AuthContext';
+import {useRegisterContext} from "../contexts/RegisterContext";
 
 export default function Register() {
     const {
@@ -14,7 +14,7 @@ export default function Register() {
         toastMessage,
         handleChange,
         handleSubmit,
-    } = useAuthContext();
+    } = useRegisterContext();
 
     return (
         <Container>

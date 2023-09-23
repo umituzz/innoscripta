@@ -10,22 +10,22 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import WebVitals from '../web-vitals';
 import RouterHandler from '../components/RouterHandler';
-import {AuthProvider} from "../contexts/AuthContext";
+import AppProvider from "../contexts/AppContext";
 
 
 function App({Component, pageProps}: AppProps) {
     return (
         <div className="main">
-            <AuthProvider>
-                <Provider store={store}>
+            <Provider store={store}>
+                <AppProvider>
                     <ToastContainer autoClose={500}/>
                     <Header/>
                     <Component {...pageProps} />
                     <Footer/>
                     <WebVitals/>
                     <RouterHandler/>
-                </Provider>
-            </AuthProvider>
+                </AppProvider>
+            </Provider>
         </div>
     );
 }
