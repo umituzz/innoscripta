@@ -22,7 +22,7 @@ export default function Home() {
 
     return (
         <Container className="mt-2 minHeight pb-5">
-            <HeadComponent title={`Articles`}/>
+            <HeadComponent title={`Homepage`}/>
             <Row>
                 <Col lg={8}>
                     <Row>

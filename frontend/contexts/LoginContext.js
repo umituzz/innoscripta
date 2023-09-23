@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, {createContext, useContext, useState} from 'react';
 import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {PostDataService} from "../services/PostDataService";
-import {login} from "../stores/actions/authAction";
+import {login, logout} from "../stores/actions/authAction";
 
 const LoginContext = createContext();
 
@@ -10,7 +10,7 @@ export const useLoginContext = () => {
     return useContext(LoginContext);
 };
 
-export const LoginProvider = ({ children }) => {
+export const LoginProvider = ({children}) => {
     const router = useRouter();
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
@@ -21,7 +21,7 @@ export const LoginProvider = ({ children }) => {
     const [toastMessage, setToastMessage] = useState(null);
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({...formData, [e.target.name]: e.target.value});
     };
 
 
@@ -38,21 +38,34 @@ export const LoginProvider = ({ children }) => {
 
                 if (token) {
                     dispatch(login(token));
-                    setFormData({ email: '', password: '' });
-                    setToastMessage({ message: 'Login Successfully', type: 'success' });
+                    setFormData({email: '', password: ''});
+                    setToastMessage({message: 'Login Successfully', type: 'success'});
                     await router.push('/');
                 } else {
-                    setToastMessage({ message: 'Undefined Token', type: 'error' });
+                    setToastMessage({message: 'Undefined Token', type: 'error'});
                 }
             }
         } catch (error) {
-            setToastMessage({ message: 'An error occurred while logging in', type: 'error' });
+            setToastMessage({message: 'An error occurred while logging in', type: 'error'});
         }
     };
 
+    const handleLogout = async () => {
+        try {
+            await PostDataService('logout');
+            dispatch(logout());
+            setToastMessage({message: 'Logout Successfully', type: 'success'});
+            await router.push('/login');
+        } catch (error) {
+            setToastMessage({message: 'An error occurred while logging out', type: 'error'});
+        }
+    };
+
+    const isAuthenticated = useSelector((state) => state.authReducer.isAuthenticated);
+
     return (
         <LoginContext.Provider
-            value={{ errors, formData, toastMessage, handleChange, handleLogin }}
+            value={{errors, formData, toastMessage, handleChange, handleLogin, handleLogout, isAuthenticated}}
         >
             {children}
         </LoginContext.Provider>
