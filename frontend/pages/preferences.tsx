@@ -3,11 +3,14 @@ import HeadComponent from "../components/HeadComponent";
 import React, {useEffect, useState} from "react";
 import {GetDataService} from "../services/GetDataService";
 import {setSources, setCategories, setAuthors} from "../stores/actions/preferenceAction";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 function Preference() {
     const dispatch = useDispatch();
     const [toastMessage, setToastMessage] = useState(null);
+    const sources = useSelector((state) => state.preferenceReducer.sources);
+    const categories = useSelector((state) => state.preferenceReducer.categories);
+    const authors = useSelector((state) => state.preferenceReducer.authors);
 
     useEffect(() => {
         async function fetchData() {
@@ -45,7 +48,7 @@ function Preference() {
 
     return (
         <Container>
-            <HeadComponent title={`Preferences`}/>
+            <HeadComponent title={`Preferences`} />
             <Row className="mt-3">
                 <Col md={4}>
                     <Card>
@@ -55,32 +58,20 @@ function Preference() {
                         <Card.Body>
                             <Form id="newsSources" onSubmit={handleSubmitNewsSources}>
                                 <div className="mb-3">
-                                    <Form.Check type="checkbox" label="Select All" onChange={handleCheckAll('newsSources')} />
+                                    <Form.Check
+                                        type="checkbox"
+                                        label="Select All"
+                                        onChange={handleCheckAll('newsSources')}
+                                    />
                                 </div>
-                                <Form.Check type="checkbox" id="source1" label="Source 1" />
-                                <Form.Check type="checkbox" id="source2" label="Source 2" />
-                                <Form.Check type="checkbox" id="source3" label="Source 3" />
-                                <Button variant="primary" size="sm" type="submit" className="mt-2">
-                                    Save
-                                </Button>
-                            </Form>
-                        </Card.Body>
-                    </Card>
-                </Col>
-
-                <Col md={4}>
-                    <Card>
-                        <Card.Header>
-                            <h6>Author Preferences</h6>
-                        </Card.Header>
-                        <Card.Body>
-                            <Form id="authors" onSubmit={handleSubmitAuthors}>
-                                <div className="mb-3">
-                                    <Form.Check type="checkbox" label="Select All" onChange={handleCheckAll('authors')} />
-                                </div>
-                                <Form.Check type="checkbox" id="author1" label="Author 1" />
-                                <Form.Check type="checkbox" id="author2" label="Author 2" />
-                                <Form.Check type="checkbox" id="author3" label="Author 3" />
+                                {sources.map((source) => (
+                                    <Form.Check
+                                        key={source.id}
+                                        type="checkbox"
+                                        id={`source${source.id}`}
+                                        label={source.name}
+                                    />
+                                ))}
                                 <Button variant="primary" size="sm" type="submit" className="mt-2">
                                     Save
                                 </Button>
@@ -97,11 +88,50 @@ function Preference() {
                         <Card.Body>
                             <Form id="categories" onSubmit={handleSubmitCategories}>
                                 <div className="mb-3">
-                                    <Form.Check type="checkbox" label="Select All" onChange={handleCheckAll('categories')} />
+                                    <Form.Check
+                                        type="checkbox"
+                                        label="Select All"
+                                        onChange={handleCheckAll('categories')}
+                                    />
                                 </div>
-                                <Form.Check type="checkbox" id="category1" label="Category 1" />
-                                <Form.Check type="checkbox" id="category2" label="Category 2" />
-                                <Form.Check type="checkbox" id="category3" label="Category 3" />
+                                {categories.map((category) => (
+                                    <Form.Check
+                                        key={category.id}
+                                        type="checkbox"
+                                        id={`category${category.id}`}
+                                        label={category.name}
+                                    />
+                                ))}
+                                <Button variant="primary" size="sm" type="submit" className="mt-2">
+                                    Save
+                                </Button>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Col>
+
+                <Col md={4}>
+                    <Card>
+                        <Card.Header>
+                            <h6>Author Preferences</h6>
+                        </Card.Header>
+                        <Card.Body>
+                            <Form id="authors" onSubmit={handleSubmitAuthors}>
+                                <div className="mb-3">
+                                    <Form.Check
+                                        type="checkbox"
+                                        label="Select All"
+                                        onChange={handleCheckAll('authors')}
+                                    />
+                                </div>
+                                {authors.map((author) => (
+                                    <Form.Check
+                                        key={author.id}
+                                        type="checkbox"
+                                        id={`author${author.id}`}
+                                        label={author.name}
+                                    />
+                                ))}
                                 <Button variant="primary" size="sm" type="submit" className="mt-2">
                                     Save
                                 </Button>
