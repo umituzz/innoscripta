@@ -25,7 +25,7 @@ export const LoginProvider = ({ children }) => {
     };
 
 
-    const handleSubmit = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
@@ -38,7 +38,6 @@ export const LoginProvider = ({ children }) => {
 
                 if (token) {
                     dispatch(login(token));
-                    localStorage.setItem('token', JSON.stringify(token));
                     setFormData({ email: '', password: '' });
                     setToastMessage({ message: 'Login Successfully', type: 'success' });
                     await router.push('/');
@@ -53,7 +52,7 @@ export const LoginProvider = ({ children }) => {
 
     return (
         <LoginContext.Provider
-            value={{ errors, formData, toastMessage, handleChange, handleSubmit }}
+            value={{ errors, formData, toastMessage, handleChange, handleLogin }}
         >
             {children}
         </LoginContext.Provider>

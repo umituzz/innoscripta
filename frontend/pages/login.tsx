@@ -13,7 +13,7 @@ export default function Login() {
         errors,
         toastMessage,
         handleChange,
-        handleSubmit,
+        handleLogin,
     } = useLoginContext();
 
     return (<Container>
@@ -27,7 +27,7 @@ export default function Login() {
                         <h3>Login</h3>
                     </div>
                     <Row className="justify-content-center">
-                        <Form onSubmit={handleSubmit}>
+                        <Form onSubmit={handleLogin}>
                             <InputComponent
                                 label="Email"
                                 type="email"
