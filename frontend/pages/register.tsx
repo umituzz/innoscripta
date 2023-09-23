@@ -1,51 +1,20 @@
 import {Form, Col, Container, Row} from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
-import {useState} from 'react';
-import {useRouter} from 'next/router';
 import HeadComponent from '../components/HeadComponent';
 import ToastMessage from '../components/ToastMessage';
 import InputComponent from "../components/InputComponent";
 import ButtonComponent from "../components/ButtonComponent";
-import {PostDataService} from "../services/PostDataService";
+import { useAuthContext } from '../contexts/AuthContext';
 
 export default function Register() {
-    const router = useRouter();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-    });
-    const [errors, setErrors] = useState({});
-    const [toastMessage, setToastMessage] = useState(null);
-
-    const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await PostDataService('register', formData);
-
-            if (response.statusCode === 422) {
-                setErrors(response.errors);
-            } else {
-                setFormData({
-                    name: '',
-                    email: '',
-                    password: '',
-                    password_confirmation: '',
-                });
-                setToastMessage({message: 'User Created Successfully!', type: 'success'});
-                await router.push('/login');
-            }
-        } catch (error) {
-            setToastMessage({message: 'An error occurred while creating the user.', type: 'error'});
-        }
-    };
+    const {
+        formData,
+        errors,
+        toastMessage,
+        handleChange,
+        handleSubmit,
+    } = useAuthContext();
 
     return (
         <Container>
