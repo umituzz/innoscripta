@@ -1,11 +1,11 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 
-const InputComponent = ({ label, type, name, value, onChange, placeholder, required }) => {
+const InputComponent = ({ label, type, name, value, onChange, placeholder, required, error }) => {
     return (
         <Form.Group className="mb-3" controlId={`formBasic${name}`}>
             <Form.Label className="text-center">
-                {label} <span className="text-danger">*</span>
+                {label} {required && <span className="text-danger">*</span>}
             </Form.Label>
             <Form.Control
                 type={type}
@@ -15,6 +15,7 @@ const InputComponent = ({ label, type, name, value, onChange, placeholder, requi
                 placeholder={placeholder}
                 required={required}
             />
+            {error && <p className="text-danger pt-1">{error}</p>}
         </Form.Group>
     );
 };

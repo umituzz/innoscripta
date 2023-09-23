@@ -67,8 +67,8 @@ export default function Register() {
                             onChange={handleChange}
                             placeholder="Enter Name"
                             required
+                            error={errors.name}
                         />
-                        {errors.name && <p className="text-danger pt-1">{errors.name}</p>}
                         <InputComponent
                             label="Email"
                             type="email"
@@ -77,8 +77,8 @@ export default function Register() {
                             onChange={handleChange}
                             placeholder="Enter Email"
                             required
+                            error={errors.email}
                         />
-                        {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
                         <InputComponent
                             label="Password"
                             type="password"
@@ -87,8 +87,8 @@ export default function Register() {
                             onChange={handleChange}
                             placeholder="Enter Password"
                             required
+                            error={errors.password}
                         />
-                        {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
                         <InputComponent
                             label="Confirm Password"
                             type="password"

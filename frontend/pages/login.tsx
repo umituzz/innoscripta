@@ -1,4 +1,4 @@
-import {Form, Col, Container, Row} from 'react-bootstrap';
+import {Col, Container, Form, Row} from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from 'react';
@@ -15,8 +15,7 @@ export default function Login() {
     const router = useRouter();
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
-        email: '',
-        password: '',
+        email: '', password: '',
     });
     const [toastMessage, setToastMessage] = useState(null);
 
@@ -52,8 +51,7 @@ export default function Login() {
         }
     };
 
-    return (
-        <Container>
+    return (<Container>
             <HeadComponent title={`Login`}/>
             <Row className="mt-5">
                 <Col md={6}>
@@ -73,8 +71,8 @@ export default function Login() {
                                 onChange={handleChange}
                                 placeholder="Enter Email"
                                 required
+                                error={errors.email}
                             />
-                            {errors.email && <p className="text-danger pt-1">{errors.email}</p>}
                             <InputComponent
                                 label="Password"
                                 type="password"
@@ -83,8 +81,8 @@ export default function Login() {
                                 onChange={handleChange}
                                 placeholder="Enter Password"
                                 required
+                                error={errors.password}
                             />
-                            {errors.password && <p className="text-danger pt-1">{errors.password}</p>}
                             <ButtonComponent variant="outline-primary" type="submit">
                                 Login
                             </ButtonComponent>
@@ -99,6 +97,5 @@ export default function Login() {
                     </Row>
                 </Col>
             </Row>
-        </Container>
-    );
+        </Container>);
 }
