@@ -17,10 +17,10 @@ function Preference() {
                 <Col md={12} className="mb-3">
                     <PreferenceItem
                         title="Source Preferences"
-                        formId="newsSources"
+                        formId="sources"
                         items={preferenceData.sources}
                         onSubmit={handleSubmit}
-                        onCheckAllChange={handleCheckAll('newsSources')}
+                        onCheckAllChange={handleCheckAll('sources')}
                     />
                 </Col>
 

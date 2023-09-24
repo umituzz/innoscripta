@@ -3,6 +3,15 @@ import { Button, Card, Form } from 'react-bootstrap';
 import styles from '../styles/PreferenceItem.module.scss';
 
 function PreferenceItem({ title, formId, items, onSubmit, onCheckAllChange }) {
+    if (!items || items.length === 0) {
+        return (
+            <Card>
+                <Card.Body>
+                    <p>No data available for {title}</p>
+                </Card.Body>
+            </Card>
+        );
+    }
     return (
         <Card>
             <Card.Header>
