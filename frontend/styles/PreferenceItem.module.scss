@@ -1,0 +1,14 @@
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .form-check {
+    margin-right: 10px;
+
+    @media (max-width: 768px) {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
+}

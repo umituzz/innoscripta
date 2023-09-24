@@ -38,6 +38,11 @@ class PreferencesController extends BaseController
         return $this->ok($data, Response::HTTP_OK, __('Preferences List'));
     }
 
+    public function userPreferences(Request $request)
+    {
+        dd("here", $request);
+    }
+
     public function saveSource(Request $request)
     {
         $this->preferenceService->savePreferences($request, 'sourceIds', Source::class);
