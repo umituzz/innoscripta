@@ -4,7 +4,6 @@ namespace App\Services\Article;
 
 use App\Contracts\ArticleRepositoryInterface;
 use App\Http\Resources\ArticleCollection;
-use App\Http\Resources\ArticleResource;
 
 /**
  * Class ArticleService
@@ -19,14 +18,21 @@ class ArticleService
         $this->articleRepository = $articleRepository;
     }
 
-    public function getList()
+    /**
+     * @return ArticleCollection
+     */
+    public function getList(): ArticleCollection
     {
         $items = $this->articleRepository->getWith();
 
-        return ArticleResource::collection($items);
+        return new ArticleCollection($items);
     }
 
-    public function getAllElasticData($request)
+    /**
+     * @param $request
+     * @return ArticleCollection
+     */
+    public function getAllElasticData($request): ArticleCollection
     {
         $searchTerm = '*';
 
@@ -51,6 +57,11 @@ class ArticleService
         return new ArticleCollection($items);
     }
 
+    /**
+     * @param $key
+     * @param $data
+     * @return mixed
+     */
     public function firstOrCreate($key, $data)
     {
         return $this->articleRepository->firstOrCreate($key, $data);

@@ -23,7 +23,7 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
 
     public function getWith()
     {
-        return $this->article->with('source')->get();
+        return $this->article->with('source', 'author', 'category')->paginate(10);
     }
 
     public function getElasticsearchData($searchTerm)

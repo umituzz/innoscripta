@@ -14,6 +14,8 @@
                     <tr>
                         <th>#</th>
                         <th>{{ __('Source') }}</th>
+                        <th>{{ __('Author') }}</th>
+                        <th>{{ __('Category') }}</th>
                         <th>{{ __('Title') }}</th>
                         <th>{{ __('Published At') }}</th>
                         <th></th>
@@ -24,6 +26,8 @@
                         <tr>
                             <td>{{ $article->id }}</td>
                             <td>{{ $article->source->name }}</td>
+                            <td>{{ $article->author->name }}</td>
+                            <td>{{ $article->category->name ?? NULL }}</td>
                             <td>
                                 <a href="{{ $article->url }}" target="_blank">
                                     {{ $article->title }}
@@ -35,7 +39,11 @@
                     @empty
                     @endforelse
                     </tbody>
-
+                    <tfoot>
+                    @isset($articles)
+                    {{ $articles->links() }}
+                    @endisset
+                    </tfoot>
                 </table>
             </div>
         </div>

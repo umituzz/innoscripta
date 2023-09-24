@@ -20,6 +20,6 @@ class Author extends BaseModel
      */
     public function users(): MorphToMany
     {
-        return $this->morphToMany(  User::class, 'preferenceable')->withTimestamps();
+        return $this->morphToMany(  User::class, 'preferenceable');
     }
 }

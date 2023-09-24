@@ -6,6 +6,7 @@ use App\Contracts\ApiServiceInterface;
 use App\Enums\AuthorEnums;
 use App\Enums\SourceEnums;
 use Exception;
+use Illuminate\Support\Str;
 
 /**
  * Class NewsApiService
@@ -46,13 +47,19 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
                 $fistAuthor = explode(',', $item->author)[0] ?? AuthorEnums::NEWS_AUTHOR;
 
                 $author = $this->authorService->firstOrCreate('name', [
-                    'name' => $fistAuthor,
+                    'name' => $fistAuthor ?? AuthorEnums::NEWS_AUTHOR,
+                ]);
+
+                $categoryName = 'General';
+                $category = $this->categoryService->firstOrCreate('name', [
+                    'name' => $categoryName,
+                    'slug' => Str::slug($categoryName),
                 ]);
 
                 $this->articleService->firstOrCreate('title', [
                     'source_id' => $sourceId,
                     'author_id' => $author->id,
-                    'category_id' => NULL, // no field with related category
+                    'category_id' => $category->id,
                     'title' => $item->title,
                     'description' => $item->description,
                     'url' => $item->url,
