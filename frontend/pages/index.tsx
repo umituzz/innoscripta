@@ -16,7 +16,7 @@ export default function Home() {
         currentPage,
         lastPage,
         handlePageChange,
-        handleSourceFilterChange,
+        handleItemFilterChange,
         handleSearch,
     } = useArticleContext();
 
@@ -47,7 +47,7 @@ export default function Home() {
                     <Card className="mb-4">
                         <Card.Header>Sources</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleSourceFilterChange} items={sources}
+                            <FilterComponent onFilterChange={handleItemFilterChange} items={sources}
                                              title="All Sources"/>
                         </Card.Body>
                     </Card>
@@ -55,7 +55,7 @@ export default function Home() {
                     <Card className="mb-4">
                         <Card.Header>Categories</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleSourceFilterChange} items={categories}
+                            <FilterComponent onFilterChange={handleItemFilterChange} items={categories}
                                              title="All Categories"/>
                         </Card.Body>
                     </Card>
@@ -63,7 +63,7 @@ export default function Home() {
                     <Card className="mb-4">
                         <Card.Header>Authors</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleSourceFilterChange} items={authors}
+                            <FilterComponent onFilterChange={handleItemFilterChange} items={authors}
                                              title="All Authors"/>
                         </Card.Body>
                     </Card>

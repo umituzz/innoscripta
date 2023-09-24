@@ -45,10 +45,10 @@ export const ArticleProvider = ({children}) => {
         setCurrentPage(newPage);
     };
 
-    const handleSourceFilterChange = async (newSourceFilter) => {
+    const handleItemFilterChange = async (newItemFilter) => {
         try {
             const response = await GetDataService(
-                `articles?page=${currentPage}&sourceId=${newSourceFilter}`
+                `articles?page=${currentPage}&sourceId=${newItemFilter}`
             );
             dispatch(setArticles(response?.data.data));
             setLastPage(response?.data.last_page);
@@ -81,7 +81,7 @@ export const ArticleProvider = ({children}) => {
                 toastMessage,
                 sourceFilter,
                 handlePageChange,
-                handleSourceFilterChange,
+                handleItemFilterChange,
                 handleSearch,
             }}
         >
