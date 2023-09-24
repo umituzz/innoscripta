@@ -47,24 +47,33 @@ export default function Home() {
                     <Card className="mb-4">
                         <Card.Header>Sources</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleItemFilterChange} items={sources}
-                                             title="All Sources"/>
+                            <FilterComponent
+                                onFilterChange={(itemId) => handleItemFilterChange(itemId, 'sources')}
+                                items={sources}
+                                title="All Sources"
+                            />
                         </Card.Body>
                     </Card>
 
                     <Card className="mb-4">
                         <Card.Header>Categories</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleItemFilterChange} items={categories}
-                                             title="All Categories"/>
+                            <FilterComponent
+                                onFilterChange={(itemId) => handleItemFilterChange(itemId, 'categories')}
+                                items={categories}
+                                title="All Categories"
+                            />
                         </Card.Body>
                     </Card>
 
                     <Card className="mb-4">
                         <Card.Header>Authors</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleItemFilterChange} items={authors}
-                                             title="All Authors"/>
+                            <FilterComponent
+                                onFilterChange={(itemId) => handleItemFilterChange(itemId, 'authors')}
+                                items={authors}
+                                title="All Authors"
+                            />
                         </Card.Body>
                     </Card>
                 </Col>

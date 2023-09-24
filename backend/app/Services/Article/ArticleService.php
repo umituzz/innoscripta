@@ -34,6 +34,14 @@ class ArticleService
             $searchTerm = "source_id:({$request->input('sourceId')})";
         }
 
+        if ($request->has('categoryId') ) {
+            $searchTerm = "category_id:({$request->input('categoryId')})";
+        }
+
+        if ($request->has('authorId') ) {
+            $searchTerm = "author_id:({$request->input('authorId')})";
+        }
+
         if ($request->has('searchTerm')) {
             $searchTerm =  "title:({$request->input('searchTerm')})";
         }

@@ -45,15 +45,23 @@ export const ArticleProvider = ({children}) => {
         setCurrentPage(newPage);
     };
 
-    const handleItemFilterChange = async (newItemFilter) => {
+    const handleItemFilterChange = async (itemId, filterType) => {
         try {
-            const response = await GetDataService(
-                `articles?page=${currentPage}&sourceId=${newItemFilter}`
-            );
+            let url = `articles?page=${currentPage}`;
+
+            if (filterType === 'sources') {
+                url += `&sourceId=${itemId}`;
+            } else if (filterType === 'categories') {
+                url += `&categoryId=${itemId}`;
+            } else if (filterType === 'authors') {
+                url += `&authorId=${itemId}`;
+            }
+
+            const response = await GetDataService(url);
             dispatch(setArticles(response?.data.data));
             setLastPage(response?.data.last_page);
         } catch (error) {
-            setToastMessage({message: 'Data Loading Issue', type: 'error'});
+            setToastMessage({ message: 'Data Loading Issue', type: 'error' });
         }
     };
 
