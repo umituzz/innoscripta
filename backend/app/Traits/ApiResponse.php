@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 /**
  * Trait ApiResponse
@@ -46,5 +47,15 @@ trait ApiResponse
         ];
 
         return response()->json($response, $statusCode);
+    }
+
+    /**
+     * @param array $data
+     * @param string $message
+     * @return JsonResponse
+     */
+    public function unauthorized(array $data = [], string $message = 'Unauthorized'): JsonResponse
+    {
+        return $this->error($data, __($message), Response::HTTP_UNAUTHORIZED);
     }
 }
