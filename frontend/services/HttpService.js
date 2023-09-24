@@ -4,8 +4,8 @@ import {authToken} from "../helpers/authHelper";
 export default class HttpService {
     baseUrl = 'http://localhost/api'
 
-    getData = async (url) => {
-        const requestOptions = getRequestOptions();
+    getData = async (url, token) => {
+        const requestOptions = getRequestOptions(token);
 
         return fetch(this.baseUrl + '/' + url, requestOptions)
             .then(

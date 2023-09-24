@@ -7,7 +7,7 @@ function Preference() {
     const {
         preferenceData,
         handleSubmit,
-        handleCheckAll,
+        handleCheckAll
     } = usePreferenceContext();
 
     return (
