@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Artisan;
 
 /**
  * Class GetMediaStackApiJob
@@ -33,5 +34,7 @@ class GetMediaStackApiJob implements ShouldQueue
     public function handle(MediaStackApiService $mediaStackApiService): void
     {
         $mediaStackApiService->getData($this->sourceId);
+
+        Artisan::call('sync');
     }
 }
