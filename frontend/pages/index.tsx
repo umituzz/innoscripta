@@ -45,25 +45,25 @@ export default function Home() {
                     </Card>
 
                     <Card className="mb-4">
-                        <Card.Header>News Sources</Card.Header>
+                        <Card.Header>Sources</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={sources}
+                            <FilterComponent onFilterChange={handleSourceFilterChange} items={sources}
                                              title="All Sources"/>
                         </Card.Body>
                     </Card>
 
                     <Card className="mb-4">
-                        <Card.Header>News Categories</Card.Header>
+                        <Card.Header>Categories</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={categories}
+                            <FilterComponent onFilterChange={handleSourceFilterChange} items={categories}
                                              title="All Categories"/>
                         </Card.Body>
                     </Card>
 
                     <Card className="mb-4">
-                        <Card.Header>News Authors</Card.Header>
+                        <Card.Header>Authors</Card.Header>
                         <Card.Body>
-                            <FilterComponent onFilterChange={handleSourceFilterChange} sources={authors}
+                            <FilterComponent onFilterChange={handleSourceFilterChange} items={authors}
                                              title="All Authors"/>
                         </Card.Body>
                     </Card>

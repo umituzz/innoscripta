@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Col, Form} from 'react-bootstrap';
 
-export default function FilterComponent({onFilterChange, sources, title}) {
+export default function FilterComponent({onFilterChange, items, title}) {
     const [selectedSource, setSelectedSource] = useState('');
 
-    const handleSourceChange = (e) => {
+    const handleItemChange = (e) => {
         const source = e.target.value;
         setSelectedSource(source);
         onFilterChange(source);
@@ -15,13 +15,13 @@ export default function FilterComponent({onFilterChange, sources, title}) {
             <Form.Group>
                 <Form.Control
                     as="select"
-                    onChange={handleSourceChange}
+                    onChange={handleItemChange}
                     value={selectedSource}
                 >
                     <option value="*">{title}</option>
-                    {sources.map((source) => (
-                        <option key={source.id} value={source.id}>
-                            {source.name}
+                    {items.map((item) => (
+                        <option key={item.id} value={item.id}>
+                            {item.name}
                         </option>
                     ))}
                 </Form.Control>
