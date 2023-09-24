@@ -1,7 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { GetDataService } from '../services/GetDataService';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSources, setCategories, setAuthors } from '../stores/actions/preferenceAction';
+import React, { createContext, useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 const PreferenceContext = createContext();
 
@@ -10,24 +8,7 @@ export const usePreferenceContext = () => {
 };
 
 export const PreferenceProvider = ({ children }) => {
-    const dispatch = useDispatch();
     const preferenceData = useSelector((state) => state.preferenceReducer);
-    const [toastMessage, setToastMessage] = useState(null);
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const initial = await GetDataService(`articles/preferences`);
-                dispatch(setSources(initial?.data.sources));
-                dispatch(setCategories(initial?.data.categories));
-                dispatch(setAuthors(initial?.data.authors));
-            } catch (error) {
-                setToastMessage({ message: 'Data Loading Issue', type: 'error' });
-            }
-        }
-
-        fetchData();
-    }, [dispatch]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,7 +25,6 @@ export const PreferenceProvider = ({ children }) => {
         <PreferenceContext.Provider
             value={{
                 preferenceData,
-                toastMessage,
                 handleSubmit,
                 handleCheckAll,
             }}
