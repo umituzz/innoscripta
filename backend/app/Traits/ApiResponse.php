@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Services\Response;
+namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class ResponseService
- * @package App\Services\Response
+ * Trait ApiResponse
+ * @package App\Traits
  */
-class ResponseService
+trait ApiResponse
 {
     /**
      * Return success status

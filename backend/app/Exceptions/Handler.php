@@ -2,12 +2,11 @@
 
 namespace App\Exceptions;
 
-use App\Services\Response\ResponseService;
+use App\Traits\ApiResponse;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Throwable;
-use App\Exceptions\UnauthenticatedException;
 
 /**
  * Class Handler
@@ -15,6 +14,8 @@ use App\Exceptions\UnauthenticatedException;
  */
 class Handler extends ExceptionHandler
 {
+    use ApiResponse;
+
     /**
      * The list of the inputs that are never flashed to the session on validation exceptions.
      *
@@ -39,9 +40,8 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         if ($e instanceof AuthenticationException) {
-            $responseService = new ResponseService();
 
-            return $responseService->error(
+            return $this->error(
                 [],
                 __('Unauthenticated'),
                 Response::HTTP_UNAUTHORIZED
