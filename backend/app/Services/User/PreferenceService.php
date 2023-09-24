@@ -30,7 +30,7 @@ class PreferenceService
 
     public function getUserPreferences($request)
     {
-        $user = $request->user() ?? User::find(1);
+        $user = $request->user();
         $preferences = $user->preferences;
         $sources = $preferences->where('preferenceable_type', Source::class)->pluck('preferenceable_id')->toArray();
         $categories = $preferences->where('preferenceable_type', Category::class)->pluck('preferenceable_id')->toArray();
