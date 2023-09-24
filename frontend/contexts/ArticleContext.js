@@ -1,8 +1,8 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {setArticles} from '../stores/actions/articleAction';
+import {setArticles} from '../stores/actions/ArticleActions';
 import {GetDataService} from '../services/GetDataService';
-import {setAuthors, setCategories, setSources,} from '../stores/actions/preferenceAction';
+import {setAuthors, setCategories, setSources,} from '../stores/actions/PreferenceActions';
 
 const ArticleContext = createContext();
 

@@ -2,7 +2,7 @@ import React, {createContext, useContext, useState} from 'react';
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {PostDataService} from "../services/PostDataService";
-import {login, logout} from "../stores/actions/authAction";
+import {login, logout} from "../stores/actions/AuthActions";
 
 const LoginContext = createContext();
 

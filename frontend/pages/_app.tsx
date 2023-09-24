@@ -12,7 +12,6 @@ import WebVitals from '../web-vitals';
 import RouterHandler from '../components/RouterHandler';
 import AppProvider from "../contexts/AppContext";
 
-
 function App({Component, pageProps}: AppProps) {
     return (
         <div className="main">

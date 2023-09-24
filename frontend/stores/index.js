@@ -1,8 +1,8 @@
 import thunk from "redux-thunk";
 import {createStore, combineReducers, applyMiddleware} from 'redux';
-import {authReducer} from "./reducers/authReducer";
-import {articleReducer} from "./reducers/articleReducer";
-import {preferenceReducer} from "./reducers/preferenceReducer";
+import {authReducer} from "./reducers/AuthReducer";
+import {articleReducer} from "./reducers/ArticleReducer";
+import {preferenceReducer} from "./reducers/PreferenceReducer";
 
 export const middlewares = [thunk];
 
