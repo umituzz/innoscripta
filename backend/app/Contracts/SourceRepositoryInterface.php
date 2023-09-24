@@ -3,10 +3,9 @@
 namespace App\Contracts;
 
 /**
- * Interface ResourceRepositoryInterface
+ * Interface SourceRepositoryInterface
  * @package App\Contracts
  */
 interface SourceRepositoryInterface
 {
-    public function attachRecords($sourceIds, $userId);
 }

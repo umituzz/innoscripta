@@ -2,7 +2,10 @@
 
 namespace App\Services\User;
 
-use App\Contracts\SourceRepositoryInterface;
+use App\Contracts\PreferenceRepositoryInterface;
+use App\Models\Source;
+use App\Services\Notification\NotificationService;
+use Exception;
 
 /**
  * Class PreferenceService
@@ -10,18 +13,40 @@ use App\Contracts\SourceRepositoryInterface;
  */
 class PreferenceService
 {
-    private SourceRepositoryInterface $sourceRepository;
+    private PreferenceRepositoryInterface $preferenceRepository;
+    private NotificationService $notificationService;
 
-    public function __construct(SourceRepositoryInterface $sourceRepository)
+    public function __construct(
+        NotificationService           $notificationService,
+        PreferenceRepositoryInterface $preferenceRepository
+    )
     {
-        $this->sourceRepository = $sourceRepository;
+        $this->preferenceRepository = $preferenceRepository;
+        $this->notificationService = $notificationService;
     }
 
-    public function sourcePreferences($request)
+    public function savePreferences($request, $key, $type)
     {
         $user = $request->user();
-        $sourceIds = $request->has('sourceIds') ? $request->input('sourceIds') : [];
+        $ids = $request->has($key) ? $request->input($key) : [];
 
-        $this->sourceRepository->attachRecords($sourceIds, $user->id);
+        collect($ids)->map(function ($id) use ($user, $type) {
+
+            try {
+                $this->preferenceRepository->create([
+                    'user_id' => $user->id,
+                    'preferenceable_id' => $id,
+                    'preferenceable_type' => $type
+                ]);
+            } catch (Exception $exception) {
+                $this->notificationService->error($exception);
+
+                return false;
+            }
+
+        });
+
+        return true;
+
     }
 }

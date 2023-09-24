@@ -19,10 +19,4 @@ class SourceRepository extends BaseRepository implements SourceRepositoryInterfa
 
         $this->source = $source;
     }
-
-    public function attachRecords($sourceIds, $userId)
-    {
-        //@todo
-    }
-
 }
