@@ -8,7 +8,6 @@ function Preference() {
     const {
         preferenceData,
         handleSubmit,
-        handleCheckAll,
         checkedSources,
         checkedAuthors,
         checkedCategories,
@@ -23,30 +22,27 @@ function Preference() {
                         title="Kaynak Tercihleri"
                         formId="sources"
                         items={preferenceData.sources}
-                        onSubmit={handleSubmit}
-                        onCheckAllChange={handleCheckAll('sources')}
+                        onSubmit={(e) => handleSubmit(e, 'sources')}
                         checked={checkedSources}
                     />
                 </Col>
 
                 <Col md={12} className="mb-3">
                     <PreferenceItem
-                        title="Yazar Tercihleri"
+                        title="Author Preferences"
                         formId="authors"
                         items={preferenceData.authors}
-                        onSubmit={handleSubmit}
-                        onCheckAllChange={handleCheckAll('authors')}
+                        onSubmit={(e) => handleSubmit(e, 'authors')}
                         checked={checkedAuthors}
                     />
                 </Col>
 
                 <Col md={12} className="mb-3">
                     <PreferenceItem
-                        title="Kategori Tercihleri"
+                        title="Category Preferences"
                         formId="categories"
                         items={preferenceData.categories}
-                        onSubmit={handleSubmit}
-                        onCheckAllChange={handleCheckAll('categories')}
+                        onSubmit={(e) => handleSubmit(e, 'categories')}
                         checked={checkedCategories}
                     />
                 </Col>

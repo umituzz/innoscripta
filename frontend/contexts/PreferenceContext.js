@@ -14,18 +14,6 @@ export const PreferenceProvider = ({ children }) => {
     const [checkedSources, setCheckedSources] = useState([]);
     const [checkedAuthors, setCheckedAuthors] = useState([]);
     const [checkedCategories, setCheckedCategories] = useState([]);
-    const [toastMessage, setToastMessage] = useState(null);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
-
-    const handleCheckAll = (formId) => (e) => {
-        const checkboxes = document.querySelectorAll(`#${formId} input[type="checkbox"]`);
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = e.target.checked;
-        });
-    };
 
     const token = authToken();
 
@@ -49,7 +37,6 @@ export const PreferenceProvider = ({ children }) => {
 
             } catch (error) {
                 console.log(error)
-                setToastMessage({message: 'Data Loading Issue', type: 'error'});
             }
         }
 
@@ -61,8 +48,6 @@ export const PreferenceProvider = ({ children }) => {
         <PreferenceContext.Provider
             value={{
                 preferenceData,
-                handleSubmit,
-                handleCheckAll,
                 checkedSources,
                 checkedAuthors,
                 checkedCategories,

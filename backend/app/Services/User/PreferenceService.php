@@ -6,6 +6,7 @@ use App\Contracts\PreferenceRepositoryInterface;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Source;
+use App\Models\User;
 use App\Services\Notification\NotificationService;
 use Exception;
 
@@ -29,7 +30,7 @@ class PreferenceService
 
     public function getUserPreferences($request)
     {
-        $user = $request->user();
+        $user = $request->user() ?? User::find(1);
         $preferences = $user->preferences;
         $sources = $preferences->where('preferenceable_type', Source::class)->pluck('preferenceable_id')->toArray();
         $categories = $preferences->where('preferenceable_type', Category::class)->pluck('preferenceable_id')->toArray();

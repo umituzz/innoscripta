@@ -3,7 +3,6 @@
 use App\Http\Controllers\Api\Article\ArticlesController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
-use App\Http\Controllers\Api\Home\InitialController;
 use App\Http\Controllers\Api\User\PreferencesController;
 use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -13,9 +12,7 @@ Route::group(['as' => 'api.'], function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login');
 });
 
-Route::get('/initial', [InitialController::class, 'index'])->name('index');
-
-Route::group(['prefix' => '/articles', 'as' => 'articles.',], function () {
+Route::group(['prefix' => '/articles', 'as' => 'articles.'], function () {
     Route::get('/', [ArticlesController::class, 'index'])->name('index');
     Route::get('/preferences', [PreferencesController::class, 'index'])->name('preferences.index');
 });
@@ -25,10 +22,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
-        Route::get('/preferences', [PreferencesController::class, 'userPreferences'])->name('preferences.userPreferences');
-        Route::get('/preferences/source', [PreferencesController::class, 'saveSource'])->name('preferences.saveSource');
-        Route::get('/preferences/category', [PreferencesController::class, 'saveCategory'])->name('preferences.saveCategory');
-        Route::get('/preferences/author', [PreferencesController::class, 'saveAuthor'])->name('preferences.saveAuthor');
+
+        Route::group(['prefix' => '/preferences', 'as' => 'preferences.'], function () {
+            Route::get('/', [PreferencesController::class, 'userPreferences'])->name('userPreferences');
+            Route::get('/source', [PreferencesController::class, 'saveSource'])->name('saveSource');
+            Route::get('/category', [PreferencesController::class, 'saveCategory'])->name('saveCategory');
+            Route::get('/author', [PreferencesController::class, 'saveAuthor'])->name('saveAuthor');
+        });
     });
 
 });

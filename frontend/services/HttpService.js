@@ -1,5 +1,4 @@
 import {getRequestOptions, postRequestOptions} from "./RequestOptions"
-import {authToken} from "../helpers/authHelper";
 
 export default class HttpService {
     baseUrl = 'http://localhost/api'

@@ -3,7 +3,7 @@ import { Button, Card, Form } from 'react-bootstrap';
 import styles from '../styles/PreferenceItem.module.scss';
 
 function PreferenceItem({ title, formId, items, onSubmit, checked }) {
-    const [checkedItems, setCheckedItems] = useState(checked);
+    const [checkedItems, setCheckedItems] = useState({});
 
     const handleCheckboxChange = (itemId) => {
         const updatedCheckedItems = { ...checkedItems };
@@ -13,12 +13,15 @@ function PreferenceItem({ title, formId, items, onSubmit, checked }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         onSubmit(formId, checkedItems);
     };
 
     useEffect(() => {
-        setCheckedItems(checked);
-    }, [checked, items]);
+        if (checked) {
+            setCheckedItems(checked);
+        }
+    }, [checked]);
 
     if (!items || items.length === 0) {
         return (
@@ -41,6 +44,7 @@ function PreferenceItem({ title, formId, items, onSubmit, checked }) {
                     <div className={styles['checkbox-group']}>
                         {items.map((item) => (
 
+
                             <Form.Check
                                 key={item.id}
                                 type="checkbox"
@@ -48,9 +52,20 @@ function PreferenceItem({ title, formId, items, onSubmit, checked }) {
                                 label={item.name}
                                 className={styles['form-check']}
                                 onChange={() => handleCheckboxChange(item.id)}
-                                checked={checkedItems[item.id]}
-
+                                checked={!!checkedItems[item.id]}
                             />
+
+
+                            // <Form.Check
+                            //     key={item.id}
+                            //     type="checkbox"
+                            //     id={`${formId}-${item.id}`}
+                            //     label={item.name}
+                            //     className={styles['form-check']}
+                            //     onChange={() => handleCheckboxChange(item.id)}
+                            //     checked={checkedItems[item.id]}
+                            //
+                            // />
                         ))}
                     </div>
                     <Button

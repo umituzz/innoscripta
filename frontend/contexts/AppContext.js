@@ -31,7 +31,6 @@ const AppProvider = ({children}) => {
             </LoginProvider>
         )
     }
-
 };
 
 export default AppProvider;
