@@ -29,10 +29,16 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
     {
         try {
             $url = $this->getUrl();
-            $items = $this->httpService->getResult($url)->response->results;
+            $response = $this->httpService->getResult($url);
 
-            if (!$items) {
-                return;
+            if (!$response) {
+                return __('No data received from the API.');
+            }
+
+            $items = $response->response->results;
+
+            if (empty($items)) {
+                return __('No data available in the API response.');
             }
 
             $author = $this->authorService->findBy('name', AuthorEnums::GUARDIAN_AUTHOR);
@@ -59,6 +65,8 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
             return __('Data inserted successfully');
         } catch (Exception $exception) {
             $this->logError($exception);
+
+            return __('An error occurred while processing the data.');
         }
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Services\Http;
 
+use App\Traits\Logger;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -10,10 +12,21 @@ use Illuminate\Support\Facades\Http;
  */
 class HttpService
 {
+    use Logger;
+
     public function getResult($url)
     {
-        $response = Http::get($url);
+        try {
+            $response = Http::timeout(10)->get($url);
 
-        return json_decode($response->body());
+            if ($response->successful()) {
+                return json_decode($response->body());
+            }
+
+            return null;
+        } catch (RequestException $exception) {
+            $this->logError($exception);
+            return null;
+        }
     }
 }

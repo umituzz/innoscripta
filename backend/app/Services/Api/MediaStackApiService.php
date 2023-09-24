@@ -30,7 +30,17 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
     {
         try {
             $url = $this->getUrl();
-            $items = $this->httpService->getResult($url)->data;
+            $response = $this->httpService->getResult($url);
+
+            if (!$response) {
+                return __('No data received from the API.');
+            }
+
+            $items = $response->data;
+
+            if (empty($items)) {
+                return __('No data available in the API response.');
+            }
 
             collect($items)->map(function ($item) use($sourceId){
 
@@ -59,6 +69,8 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
             return __('Data inserted successfully');
         } catch (Exception $exception) {
             $this->logError($exception);
+
+            return __('An error occurred while processing the data.');
         }
     }
 }
