@@ -2,13 +2,12 @@
 
 namespace App\Services\User;
 
-use App\Contracts\PreferenceRepositoryInterface;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Source;
-use App\Models\User;
-use App\Services\Notification\NotificationService;
+use App\Traits\Logger;
 use Exception;
+use App\Contracts\PreferenceRepositoryInterface;
 
 /**
  * Class PreferenceService
@@ -16,16 +15,13 @@ use Exception;
  */
 class PreferenceService
 {
-    private PreferenceRepositoryInterface $preferenceRepository;
-    private NotificationService $notificationService;
+    use Logger;
 
-    public function __construct(
-        NotificationService           $notificationService,
-        PreferenceRepositoryInterface $preferenceRepository
-    )
+    private PreferenceRepositoryInterface $preferenceRepository;
+
+    public function __construct(PreferenceRepositoryInterface $preferenceRepository)
     {
         $this->preferenceRepository = $preferenceRepository;
-        $this->notificationService = $notificationService;
     }
 
     public function getUserPreferences($request)
@@ -57,7 +53,7 @@ class PreferenceService
                     'preferenceable_type' => $type
                 ]);
             } catch (Exception $exception) {
-                $this->notificationService->error($exception);
+                $this->logError($exception);
 
                 return false;
             }

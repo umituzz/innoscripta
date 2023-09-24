@@ -58,7 +58,7 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
 
             return __('Data inserted successfully');
         } catch (Exception $exception) {
-            $this->notificationService->error($exception->getMessage());
+            $this->logError($exception);
         }
     }
 }
