@@ -7,6 +7,10 @@ use App\Http\Resources\UserResource;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class RegisterService
+ * @package App\Services\Auth
+ */
 class RegisterService
 {
     private UserRepositoryInterface $userRepository;
