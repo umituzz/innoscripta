@@ -3,6 +3,8 @@
 namespace App\Services\User;
 
 use App\Contracts\PreferenceRepositoryInterface;
+use App\Models\Author;
+use App\Models\Category;
 use App\Models\Source;
 use App\Services\Notification\NotificationService;
 use Exception;
@@ -23,6 +25,21 @@ class PreferenceService
     {
         $this->preferenceRepository = $preferenceRepository;
         $this->notificationService = $notificationService;
+    }
+
+    public function getUserPreferences($request)
+    {
+        $user = $request->user();
+        $preferences = $user->preferences;
+        $sources = $preferences->where('preferenceable_type', Source::class)->pluck('preferenceable_id')->toArray();
+        $categories = $preferences->where('preferenceable_type', Category::class)->pluck('preferenceable_id')->toArray();
+        $authors = $preferences->where('preferenceable_type', Author::class)->pluck('preferenceable_id')->toArray();
+
+        return [
+            'sources' => $sources,
+            'categories' => $categories,
+            'authors' => $authors,
+        ];
     }
 
     public function savePreferences($request, $key, $type)

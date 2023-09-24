@@ -40,7 +40,9 @@ class PreferencesController extends BaseController
 
     public function userPreferences(Request $request)
     {
-        dd("here", $request);
+        $preferences = $this->preferenceService->getUserPreferences($request);
+
+        return $this->ok($preferences, Response::HTTP_OK, __('User Preferences List'));
     }
 
     public function saveSource(Request $request)

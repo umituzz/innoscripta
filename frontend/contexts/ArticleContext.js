@@ -19,7 +19,6 @@ export const ArticleProvider = ({children}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
     const [toastMessage, setToastMessage] = useState(null);
-    const [sourceFilter, setSourceFilter] = useState('');
 
     useEffect(() => {
         async function fetchData() {
@@ -39,7 +38,7 @@ export const ArticleProvider = ({children}) => {
         }
 
         fetchData();
-    }, [currentPage, dispatch, sourceFilter]);
+    }, [currentPage, dispatch]);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
@@ -87,7 +86,6 @@ export const ArticleProvider = ({children}) => {
                 currentPage,
                 lastPage,
                 toastMessage,
-                sourceFilter,
                 handlePageChange,
                 handleItemFilterChange,
                 handleSearch,
