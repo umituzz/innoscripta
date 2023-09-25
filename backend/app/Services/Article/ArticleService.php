@@ -4,6 +4,7 @@ namespace App\Services\Article;
 
 use App\Contracts\ArticleRepositoryInterface;
 use App\Http\Resources\ArticleCollection;
+use App\Http\Resources\ArticleResource;
 
 /**
  * Class ArticleService
@@ -16,6 +17,19 @@ class ArticleService
     public function __construct(ArticleRepositoryInterface $articleRepository)
     {
         $this->articleRepository = $articleRepository;
+    }
+
+    public function findBy($key, $value)
+    {
+        $item = $this->articleRepository->findBy($key, $value);
+
+        if ($item) {
+            $item->load('source', 'category', 'author');
+
+            return new ArticleResource($item);
+        }
+
+        return [];
     }
 
     /**

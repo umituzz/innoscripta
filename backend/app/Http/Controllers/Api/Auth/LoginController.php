@@ -7,7 +7,6 @@ use App\Http\Requests\Api\LoginRequest;
 use App\Services\Auth\LoginService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 /**
  * Class LoginController
@@ -31,7 +30,7 @@ class LoginController extends BaseController
         $data = $this->loginService->login($request);
 
         return array_key_exists('token', $data) ?
-            $this->ok($data, Response::HTTP_OK, __('User Logged In')) :
+            $this->ok($data, __('User Logged In')) :
             $this->error($data['errors'], $data['message'], $data['statusCode']);
     }
 
@@ -43,6 +42,6 @@ class LoginController extends BaseController
     {
         $result = $this->loginService->logout($request);
 
-        $this->ok($result, Response::HTTP_OK, __('Logout successful'));
+        $this->ok($result, __('Logout successful'));
     }
 }

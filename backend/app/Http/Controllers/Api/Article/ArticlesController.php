@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Article;
 use App\Http\Controllers\Api\BaseController;
 use App\Services\Article\ArticleService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 /**
  * Class ArticlesController
@@ -24,6 +23,13 @@ class ArticlesController extends BaseController
     {
         $items = $this->articleService->getAllElasticData($request);
 
-        return $this->ok($items, Response::HTTP_OK, __('Article List'));
+        return $this->ok($items,  __('Article List'));
+    }
+
+    public function detail($slug)
+    {
+        $item = $this->articleService->findBy('slug', $slug);
+
+        return $this->ok($item,  __('Article List'));
     }
 }

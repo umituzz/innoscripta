@@ -19,7 +19,7 @@ trait ApiResponse
      * @param $message
      * @return JsonResponse
      */
-    public function ok($data, $statusCode, $message): JsonResponse
+    public function success($data, $statusCode, $message): JsonResponse
     {
         $response = [
             'statusCode' => $statusCode,
@@ -47,6 +47,16 @@ trait ApiResponse
         ];
 
         return response()->json($response, $statusCode);
+    }
+
+    /**
+     * @param $data
+     * @param $message
+     * @return JsonResponse
+     */
+    public function ok($data,  $message): JsonResponse
+    {
+        return $this->success($data, Response::HTTP_OK, __($message));
     }
 
     /**

@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Services\Auth\RegisterService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 
 /**
  * Class RegisterController
@@ -32,6 +31,6 @@ class RegisterController extends BaseController
     {
         $user = $this->registerService->createUser($request);
 
-        return $this->ok($user, Response::HTTP_OK, __('User Created'));
+        return $this->ok($user, __('User Created'));
     }
 }
