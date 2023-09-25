@@ -17,4 +17,4 @@ COPY .env.example .env
 
 EXPOSE 8000
 
-CMD bash -c "composer install && php artisan serve --host 0.0.0.0"
+CMD bash -c "composer install && php artisan key:generate && php artisan serve --host 0.0.0.0"
