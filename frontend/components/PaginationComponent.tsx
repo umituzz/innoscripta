@@ -6,6 +6,10 @@ function PaginationComponent({ currentPage, lastPage, onPageChange }) {
 
     const pageNumbers = calculatePageNumbers(currentPage, lastPage);
 
+    if (pageNumbers.length < 1) {
+        return null;
+    }
+
     return (
         <nav aria-label="Pagination">
             <hr className="my-0"/>
