@@ -1,0 +1,79 @@
+version: '3.9'
+
+services:
+  backend:
+    container_name: 'backend'
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: mysql
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: password
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app/backend
+    depends_on:
+      - mysql
+    networks:
+      - app
+  frontend:
+    container_name: 'frontend'
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    command: npm start
+    networks:
+      - app
+  mysql:
+    container_name: 'mysql'
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 8889:3306
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    networks:
+      - app
+  redis:
+    container_name: 'redis'
+    image: 'redis:alpine'
+    ports:
+      - '${FORWARD_REDIS_PORT:-6379}:6379'
+    volumes:
+      - ./redisdata:/data
+    networks:
+      - app
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      retries: 3
+      timeout: 5s
+  elasticsearch:
+    container_name: 'elasticsearch'
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:7.15.0'
+    environment:
+      - discovery.type=single-node
+    ports:
+      - '9200:9200'
+    networks:
+      - app
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  app:
+    driver: local

@@ -1,7 +1,7 @@
 import {getRequestOptions, postRequestOptions} from "./RequestOptions"
 
 export default class HttpService {
-    baseUrl = 'http://localhost/api'
+    baseUrl = 'http://localhost:8000/api'
 
     getData = async (url, token) => {
         const requestOptions = getRequestOptions(token);

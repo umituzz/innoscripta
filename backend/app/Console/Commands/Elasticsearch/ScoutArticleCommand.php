@@ -16,7 +16,7 @@ class ScoutArticleCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'elasticsearch:scout-articles';
+    protected $signature = 'elasticsearch:sync-articles';
 
     /**
      * The console command description.
@@ -28,7 +28,7 @@ class ScoutArticleCommand extends Command
     public function handle()
     {
         Artisan::call('scout:flush "App\\\Models\\\Article"');
-        Artisan::call('scout:import App\\\Models\\\Article');
+        Artisan::call('scout:import "App\\\Models\\\Article"');
     }
 
 }

@@ -11,16 +11,16 @@ const AppProvider = ({children}) => {
     if (token) {
         return (
             <LoginProvider>
-                <RegisterProvider>
-                    <ArticleProvider>
-                        <PreferenceProvider>
-                            {children}
-                        </PreferenceProvider>
-                    </ArticleProvider>
-                </RegisterProvider>
-            </LoginProvider>
-        )
-    } else {
+                 <RegisterProvider>
+                     <ArticleProvider>
+                         <PreferenceProvider>
+                             {children}
+                         </PreferenceProvider>
+                     </ArticleProvider>
+                 </RegisterProvider>
+             </LoginProvider>
+         )
+     } else {
         return (
             <LoginProvider>
                 <RegisterProvider>
@@ -30,7 +30,7 @@ const AppProvider = ({children}) => {
                 </RegisterProvider>
             </LoginProvider>
         )
-    }
+     }
 };
 
 export default AppProvider;

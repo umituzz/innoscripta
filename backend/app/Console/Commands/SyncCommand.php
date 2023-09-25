@@ -22,5 +22,6 @@ class SyncCommand extends Command
         Artisan::call('redis:sync-authors');
         Artisan::call('redis:sync-categories');
         Artisan::call('elasticsearch:sync-articles');
+
     }
 }

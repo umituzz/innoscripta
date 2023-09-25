@@ -39,6 +39,29 @@
 				},
 				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"token\", jsonData.data.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -91,7 +114,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "1|4zFwGntwmWNgTtcDUIlXjNxnluXHM7KTrCrqMlc30f7274c3",
+									"value": "13|nv3pOLzmWFJIm2wyqO1esidceyTA4bwdjVAteWJ60891268d",
 									"type": "string"
 								}
 							]
@@ -100,7 +123,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"searchTerm\": \"Russia\"\r\n}",
+							"raw": "{\r\n    //\"searchTerm\": \"Russia\"\r\n    //\"sourceId\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -133,7 +156,7 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "Settings",
+					"name": "User",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -143,7 +166,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "1|kHmiPCuptvHdn16oobTAQfeS1sKW939o0PzQChBqf4fcafd3",
+									"value": "1|P3WL0tvtd1TEzKC03SqAyylYVyXbsm0WdIHlQdPM75a98ee7",
 									"type": "string"
 								}
 							]
@@ -152,7 +175,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Ümit UZ\",\r\n    \"email\": \"umituz998@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"password_confirmation\": \"123456789\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -160,15 +183,231 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/users/settings",
+							"raw": "http://localhost/api/user",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
 								"api",
-								"users",
-								"settings"
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Preferences",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|008Vqqx7FLJbVlrHoiB9TEIqDhu3uCaiBasgKoGPfae99c7d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sources\": [1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/user/preferences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"preferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Source Preferences",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6|oEXTOBzEGxNChZzoZJ1J1JF7e861vhpudATJROF41ebb42f3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sourceIds\": [1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/user/preferences/source",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"preferences",
+								"source"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category Preferences",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6|oEXTOBzEGxNChZzoZJ1J1JF7e861vhpudATJROF41ebb42f3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryIds\": [1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/user/preferences/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"preferences",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Author Preferences",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6|oEXTOBzEGxNChZzoZJ1J1JF7e861vhpudATJROF41ebb42f3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"authorIds\": [1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/user/preferences/author",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"user",
+								"preferences",
+								"author"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Preference",
+			"item": [
+				{
+					"name": "Preferences",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|tGOU9LQ5oipebIBlDW8V8fUpIPeWauxuSdbQCECcef22d11b",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sources\": [1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/preferences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"preferences"
 							]
 						}
 					},
@@ -520,6 +759,11 @@
 		{
 			"key": "elasticsearch_url",
 			"value": "http://localhost:9200",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
 			"type": "string"
 		}
 	]
