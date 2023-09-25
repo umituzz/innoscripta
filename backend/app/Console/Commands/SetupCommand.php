@@ -26,5 +26,7 @@ class SetupCommand extends Command
         Artisan::call('api:mediaStack');
 
         Artisan::call('redis:set-total-users');
+
+        Artisan::call('scout:import "App\\\Models\\\Article"');
     }
 }
