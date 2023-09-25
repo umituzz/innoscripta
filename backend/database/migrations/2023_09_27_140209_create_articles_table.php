@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('author_id')->nullable()->constrained();
             $table->foreignId('category_id')->nullable()->constrained();
             $table->string("title");
+            $table->string("slug");
             $table->mediumText('description')->nullable();
             $table->string("url");
             $table->mediumText("image");

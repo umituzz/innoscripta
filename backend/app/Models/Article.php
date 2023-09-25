@@ -20,6 +20,7 @@ class Article extends BaseModel
         'author_id',
         'category_id',
         'title',
+        'slug',
         'description',
         'url',
         'image',

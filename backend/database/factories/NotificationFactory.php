@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Notification;
 use App\Models\User;
-use App\Notifications\InformErrorNotification;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +20,7 @@ class NotificationFactory extends Factory
     {
         return [
             'id' => '72859427-8e42-47e9-a20d-16709bbb49aa',
-            'type' => InformErrorNotification::class,
+            'type' => NULL,
             'notifiable_type' => User::class,
             'notifiable_id' => 1,
             'data' => json_encode(['message' => $this->faker->sentence]),

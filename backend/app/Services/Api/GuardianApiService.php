@@ -6,6 +6,7 @@ use App\Contracts\ApiServiceInterface;
 use App\Enums\AuthorEnums;
 use App\Enums\SourceEnums;
 use Exception;
+use Illuminate\Support\Str;
 
 /**
  * Class GuardianApiService
@@ -21,10 +22,6 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
         return env('GUARDIAN_API_URL') . '/search?api-key=' . env('GUARDIAN_API_KEY');
     }
 
-    /**
-     * @param $sourceId
-     * @return string[]|void
-     */
     public function getData($sourceId)
     {
         try {
@@ -55,6 +52,7 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
                     'category_id' => $category->id,
                     'author_id' => $author->id,
                     'title' => $item->webTitle,
+                    'slug' => Str::slug($item->webTitle),
                     'description' => NULL, // no description field in api
                     'url' => $item->webUrl,
                     'image' => SourceEnums::DEFAULT_IMAGE,
@@ -64,6 +62,9 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
 
             return __('Data inserted successfully');
         } catch (Exception $exception) {
+
+            dd("here", $exception->getMessage());
+
             $this->logError($exception);
 
             return __('An error occurred while processing the data.');

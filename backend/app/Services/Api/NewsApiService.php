@@ -61,6 +61,7 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
                     'author_id' => $author->id,
                     'category_id' => $category->id,
                     'title' => $item->title,
+                    'slug' => Str::slug($item->title),
                     'description' => $item->description,
                     'url' => $item->url,
                     'image' => $item->urlToImage ?? SourceEnums::DEFAULT_IMAGE,
