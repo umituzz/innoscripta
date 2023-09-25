@@ -2,11 +2,11 @@ import React from 'react';
 import { Pagination } from 'react-bootstrap';
 import { calculatePageNumbers } from '../helpers/paginationHelper';
 
-function PaginationComponent({ currentPage, lastPage, onPageChange }) {
+function PaginationComponent({ currentPage, lastPage, onPageChange, total }) {
 
     const pageNumbers = calculatePageNumbers(currentPage, lastPage);
 
-    if (pageNumbers.length < 1) {
+    if (total == 0) {
         return null;
     }
 

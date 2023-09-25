@@ -30,8 +30,12 @@ export default function Home() {
                     </Row>
                     <Row>
                         <Col md={12} className="text-center mt-3">
-                            <PaginationComponent currentPage={currentPage} lastPage={lastPage}
-                                                 onPageChange={handlePageChange}/>
+                            <PaginationComponent
+                                currentPage={currentPage}
+                                lastPage={lastPage}
+                                onPageChange={handlePageChange}
+                                total={articles.length}
+                            />
                         </Col>
                     </Row>
                 </Col>
