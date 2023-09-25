@@ -15,6 +15,9 @@ WORKDIR /app/backend
 COPY .env.example .env
 COPY . .
 
+RUN composer install
+RUN php artisan key:generate
+
 EXPOSE 8000
 
-CMD bash -c "composer install && php artisan key:generate && php artisan serve --host 0.0.0.0"
+CMD bash -c "php artisan serve --host 0.0.0.0"
