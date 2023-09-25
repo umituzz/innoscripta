@@ -7,12 +7,12 @@ COPY package.json ./
 RUN npm install --production
 
 # Builder Stage
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY --from=deps /app/. .
-COPY --from=deps /app/node_modules ./node_modules
-ENV NEXT_TELEMETRY_DISABLED 1
-RUN npm run build
+#FROM node:18-alpine AS builder
+#WORKDIR /app
+#COPY --from=deps /app/. .
+#COPY --from=deps /app/node_modules ./node_modules
+#ENV NEXT_TELEMETRY_DISABLED 1
+#RUN npm run build
 
 # Runner Stage
 FROM node:18-alpine AS runner
