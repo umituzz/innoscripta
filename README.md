@@ -94,3 +94,6 @@ You can run tests and view coverage reports using the following command:
 ``php artisan test --coverage-html=coverage``
 
 This command will generate an HTML coverage report in the "coverage" directory, where you can see all coverage statistics.
+
+## Postman Documentation Link
+https://documenter.getpostman.com/view/4271692/2s9YJXZkTA#47977498-8c5e-4039-a64f-ec9c025bd8a6

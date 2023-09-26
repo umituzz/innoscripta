@@ -53,7 +53,7 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
                     'author_id' => $author->id,
                     'title' => $item->webTitle,
                     'slug' => Str::slug($item->webTitle),
-                    'description' => NULL, // no description field in api
+                    'description' => $this->getDescription(), // no description field in api, that's why default description added
                     'url' => $item->webUrl,
                     'image' => SourceEnums::DEFAULT_IMAGE,
                     'published_at' => $item->webPublicationDate,
@@ -62,12 +62,14 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
 
             return __('Data inserted successfully');
         } catch (Exception $exception) {
-
-            dd("here", $exception->getMessage());
-
             $this->logError($exception);
 
             return __('An error occurred while processing the data.');
         }
+    }
+
+    private function getDescription()
+    {
+        return "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum";
     }
 }

@@ -121,7 +121,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    //\"searchTerm\": \"Test\"\r\n    //\"sourceId\": [1]\r\n}",
+							"raw": "{\r\n    //\"searchTerm\": \"Test\"\r\n    //\"sourceId\": 1,\r\n    //\"categoryId\": 1,\r\n    //\"authorId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -161,7 +161,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    //\"searchTerm\": \"Test\"\r\n    //\"sourceId\": [1]\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -202,7 +202,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    //\"searchTerm\": \"Russia\"\r\n    //\"sourceId\": \"\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
