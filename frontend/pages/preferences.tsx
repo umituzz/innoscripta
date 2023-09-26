@@ -3,17 +3,23 @@ import { Container, Col, Row } from 'react-bootstrap';
 import HeadComponent from '../components/HeadComponent';
 import PreferenceItem from '../components/PreferenceItem';
 import { usePreferenceContext } from "../contexts/PreferenceContext";
-import ToastMessage from "../components/ToastMessage";
-import toastMessage from "../components/ToastMessage";
+import withAuth from "../utils/withAuth";
 
 function Preference() {
+
+    const preferenceContext = usePreferenceContext();
+
+    if (!preferenceContext) {
+        return <div>Loading...</div>;
+    }
+
     const {
-        preferenceData,
         handleSubmit,
         checkedSources,
         checkedAuthors,
         checkedCategories,
-    } = usePreferenceContext();
+    } = preferenceContext;
+
 
     return (
         <Container>
@@ -46,10 +52,9 @@ function Preference() {
                         checked={checkedCategories}
                     />
                 </Col>
-                <ToastMessage message={toastMessage?.message} type={toastMessage?.type}/>
             </Row>
         </Container>
     );
 }
 
-export default Preference;
+export default withAuth(Preference);

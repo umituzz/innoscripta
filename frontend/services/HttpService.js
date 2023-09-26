@@ -12,7 +12,7 @@ export default class HttpService {
             )
     }
 
-    postData = async (url, data, token) => {
+    postData = async (url, data, token = null) => {
         const requestOptions = postRequestOptions(data, token);
 
         return fetch(this.baseUrl + "/" + url, requestOptions)
