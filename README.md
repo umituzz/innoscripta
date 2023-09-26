@@ -26,23 +26,12 @@ To interact with the Laravel container and perform database-related tasks, you c
 
 ``docker exec -it backend bash``
 
-You can reset the database and populate Redis with data using the following command:
+You can reset the database and populate Redis with data using the following command. And also don't forget to execute jobs.
 
-``php artisan setup``
-
-Inside the container, you can create tables with:
-
-``php artisan migrate``
-
-And then populate them with pre-prepared data using:
-
-``php artisan db:seed``
-
-Alternatively, you can reset the database and add data in one step using the following shortcut command:
-
-``php artisan migrate:fresh --seed``
-
-Afterward, you can establish a connection to the database by configuring the database interface. Set the server to "localhost," port to "3306," and use the database name and other credentials previously configured.
+```
+php artisan setup
+php artisan queue:work
+```
 
 Make sure the relevant keys in the .env file are set to use Redis:
 

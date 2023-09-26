@@ -1,9 +1,9 @@
 import HttpService from "./HttpService"
 
-export const PostDataService = async (url, data, token = null) => {
+export const PostDataService = async (url, data) => {
     const http = new HttpService();
 
-    return http.postData(url, data, token = null).then(data => {
+    return http.postData(url, data).then(data => {
 
         return data;
     }).catch((error) => {

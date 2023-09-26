@@ -30,6 +30,8 @@ export const LoginProvider = ({children}) => {
         try {
             const response = await PostDataService('login', formData);
 
+            console.log(response)
+
             if (response.statusCode === 422) {
                 setErrors(response.errors);
             } else {

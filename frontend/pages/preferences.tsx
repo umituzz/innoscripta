@@ -14,12 +14,12 @@ function Preference() {
     }
 
     const {
+        preferenceData,
         handleSubmit,
         checkedSources,
         checkedAuthors,
         checkedCategories,
     } = preferenceContext;
-
 
     return (
         <Container>

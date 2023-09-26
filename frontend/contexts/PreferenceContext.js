@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { GetDataService } from "../services/GetDataService";
-import { authToken } from "../helpers/authHelper";
-import { PostDataService } from "../services/PostDataService";
+import React, {createContext, useContext, useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
+import {GetDataService} from "../services/GetDataService";
+import {authToken} from "../helpers/authHelper";
+import {PostDataService} from "../services/PostDataService";
 
 const PreferenceContext = createContext();
 
@@ -10,7 +10,7 @@ export const usePreferenceContext = () => {
     return useContext(PreferenceContext);
 };
 
-export const PreferenceProvider = ({ children }) => {
+export const PreferenceProvider = ({children}) => {
     const preferenceData = useSelector((state) => state.preferenceReducer);
     const [checkedSources, setCheckedSources] = useState([]);
     const [checkedAuthors, setCheckedAuthors] = useState([]);
@@ -22,18 +22,21 @@ export const PreferenceProvider = ({ children }) => {
             try {
                 const response = await GetDataService(`user/preferences`);
 
-                if (response.data.sources) {
-                    setCheckedSources(response.data.sources);
-                }
+                if (response.ok) {
+                    if (response.data.sources) {
+                        setCheckedSources(response.data.sources);
+                    }
 
-                if (response.data.authors) {
-                    setCheckedAuthors(response.data.authors);
-                }
+                    if (response.data.authors) {
+                        setCheckedAuthors(response.data.authors);
+                    }
 
-                if (response.data.categories) {
-                    setCheckedCategories(response.data.categories);
+                    if (response.data.categories) {
+                        setCheckedCategories(response.data.categories);
+                    }
+                } else {
+                    console.log(error)
                 }
-
             } catch (error) {
                 console.log(error)
             }
@@ -58,12 +61,12 @@ export const PreferenceProvider = ({ children }) => {
             const response = await PostDataService(`user/preferences/${formId}`, data, token)
 
             if (response.ok) {
-                setToastMessage({ message: 'Preferences Saved Successfully!', type: 'success' });
+                setToastMessage({message: 'Preferences Saved Successfully!', type: 'success'});
             } else {
-                setToastMessage({ message: 'Preferences Could not Saved!', type: 'error' });
+                setToastMessage({message: 'Preferences Could not Saved!', type: 'error'});
             }
         } catch (error) {
-            setToastMessage({ message: 'There is something wrong. Try again later!', type: 'error' });
+            setToastMessage({message: 'There is something wrong. Try again later!', type: 'error'});
         }
     };
 
