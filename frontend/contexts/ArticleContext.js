@@ -19,6 +19,7 @@ export const ArticleProvider = ({children}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
     const [toastMessage, setToastMessage] = useState(null);
+    const token = useSelector((state) => state.authReducer.token)
 
     useEffect(() => {
         async function fetchData() {
@@ -27,7 +28,7 @@ export const ArticleProvider = ({children}) => {
                     `articles?page=${currentPage}`
                 );
                 dispatch(setArticles(response?.data.data));
-                const initial = await GetDataService(`articles/preferences`);
+                const initial = await GetDataService(`articles/preferences`, token);
                 dispatch(setSources(initial?.data.sources));
                 dispatch(setCategories(initial?.data.categories));
                 dispatch(setAuthors(initial?.data.authors));

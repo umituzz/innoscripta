@@ -9,7 +9,6 @@ import {store} from "../stores";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import WebVitals from '../web-vitals';
-import RouterHandler from '../components/RouterHandler';
 import AppProvider from "../contexts/AppContext";
 
 function App({Component, pageProps}: AppProps) {
@@ -22,7 +21,6 @@ function App({Component, pageProps}: AppProps) {
                     <Component {...pageProps} />
                     <Footer/>
                     <WebVitals/>
-                    <RouterHandler/>
                 </AppProvider>
             </Provider>
         </div>

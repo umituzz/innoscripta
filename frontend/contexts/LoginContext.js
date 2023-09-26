@@ -51,7 +51,7 @@ export const LoginProvider = ({children}) => {
 
     const handleLogout = async () => {
         try {
-            await PostDataService('logout');
+            await PostDataService('logout', {});
             dispatch(logout());
             setToastMessage({message: 'Logout Successfully', type: 'success'});
             await router.push('/login');

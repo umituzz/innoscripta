@@ -10,17 +10,19 @@ export const usePreferenceContext = () => {
 };
 
 export const PreferenceProvider = ({children}) => {
-    const token = useSelector((state) => state.authReducer.token)
+
     const preferenceData = useSelector((state) => state.preferenceReducer);
     const [checkedSources, setCheckedSources] = useState([]);
     const [checkedAuthors, setCheckedAuthors] = useState([]);
     const [checkedCategories, setCheckedCategories] = useState([]);
     const [toastMessage, setToastMessage] = useState(null);
+    const token = useSelector((state) => state.authReducer.token)
 
     useEffect(() => {
+
         async function fetchPreferenceData() {
             try {
-                const response = await GetDataService(`user/preferences`);
+                const response = await GetDataService(`user/preferences`, token);
 
                 if (response.statusCode === 200) {
                     if (response.data.sources) {
@@ -43,7 +45,7 @@ export const PreferenceProvider = ({children}) => {
         if (token) {
             fetchPreferenceData();
         }
-    }, []);
+    }, [token]);
 
     const handleSubmit = async (formId, checkedItems) => {
 
@@ -58,14 +60,14 @@ export const PreferenceProvider = ({children}) => {
                 data.categoryIds = checkedItems;
             }
 
-            const response = await PostDataService(`user/preferences/${formId}`, data)
+            const endpoint = `user/preferences/${formId}`;
+            const response = await PostDataService(endpoint, data, token)
 
             if (response.statusCode === 200) {
                 setToastMessage({message: 'Preferences Saved Successfully!', type: 'success'});
             } else {
                 setToastMessage({message: 'Preferences Could not Saved!', type: 'error'});
             }
-
         } catch (error) {
             setToastMessage({message: 'There is something wrong. Try again later!', type: 'error'});
 

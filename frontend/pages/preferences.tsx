@@ -3,11 +3,10 @@ import { Container, Col, Row } from 'react-bootstrap';
 import HeadComponent from '../components/HeadComponent';
 import PreferenceItem from '../components/PreferenceItem';
 import { usePreferenceContext } from "../contexts/PreferenceContext";
-import withAuth from "../utils/withAuth";
 import ToastMessage from "../components/ToastMessage";
+// import withAuth from "../utils/withAuth";
 
 function Preference() {
-
     const preferenceContext = usePreferenceContext();
 
     useEffect(() => {
@@ -63,4 +62,5 @@ function Preference() {
     );
 }
 
-export default withAuth(Preference);
+export default Preference;
+// export default withAuth(Preference);

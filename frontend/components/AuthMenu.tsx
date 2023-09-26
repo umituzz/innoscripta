@@ -20,11 +20,11 @@ const AuthMenu = () => {
                 </>
             ) : (
                 <>
-                    <Link href="/register" className="nav-link">
-                        Register
-                    </Link>
                     <Link href="/login" className="nav-link">
                         Login
+                    </Link>
+                    <Link href="/register" className="nav-link">
+                        Register
                     </Link>
                 </>
             )}

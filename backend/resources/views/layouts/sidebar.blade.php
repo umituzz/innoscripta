@@ -24,11 +24,11 @@
 {{--    @endcan--}}
 
 {{--    @can('Notification Management')--}}
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('notifications.index') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>{{ __('Notifications') }}</span></a>
-        </li>
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link" href="{{ route('notifications.index') }}">--}}
+{{--                <i class="fas fa-fw fa-tachometer-alt"></i>--}}
+{{--                <span>{{ __('Notifications') }}</span></a>--}}
+{{--        </li>--}}
 {{--    @endcan--}}
 
     <hr class="sidebar-divider">

@@ -6,8 +6,6 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Source;
-use App\Models\User;
-use App\Services\Redis\RedisService;
 use App\Services\User\PreferenceService;
 use Illuminate\Http\Request;
 
@@ -17,15 +15,10 @@ use Illuminate\Http\Request;
  */
 class PreferencesController extends BaseController
 {
-    private RedisService $redisService;
     private PreferenceService $preferenceService;
 
-    public function __construct(
-        RedisService $redisService,
-        PreferenceService $preferenceService
-    )
+    public function __construct(PreferenceService $preferenceService)
     {
-        $this->redisService = $redisService;
         $this->preferenceService = $preferenceService;
     }
 
@@ -36,9 +29,9 @@ class PreferencesController extends BaseController
         return $this->ok($data, __('Preferences List'));
     }
 
-    public function userPreferences(Request $request)
+    public function userPreferences()
     {
-        $preferences = $this->preferenceService->getUserPreferences($request);
+        $preferences = $this->preferenceService->getUserPreferences();
 
         return $this->ok($preferences, __('User Preferences List'));
     }
@@ -52,15 +45,15 @@ class PreferencesController extends BaseController
 
     public function saveCategory(Request $request)
     {
-        $this->preferenceService->savePreferences($request, 'categoryIds', Category::class);
+        $result = $this->preferenceService->savePreferences($request, 'categoryIds', Category::class);
 
-        return $this->ok([], __('Category Preferences Saved'));
+        return $this->ok($result, __('Category Preferences Saved'));
     }
 
     public function saveAuthor(Request $request)
     {
-        $this->preferenceService->savePreferences($request, 'authorIds', Author::class);
+        $result = $this->preferenceService->savePreferences($request, 'authorIds', Author::class);
 
-        return $this->ok([], __('Author Preferences Saved'));
+        return $this->ok($result, __('Author Preferences Saved'));
     }
 }

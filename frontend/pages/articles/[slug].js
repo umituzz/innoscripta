@@ -14,9 +14,7 @@ function ArticleDetail() {
             try {
                 const response = await GetDataService(`articles/${slug}`);
 
-                if (response.ok) {
-                    setArticle(response.data);
-                }
+                setArticle(response.data);
             } catch (error) {
                 console.log(error);
             }

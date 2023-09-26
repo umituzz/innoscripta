@@ -3,7 +3,7 @@ import {getRequestOptions, postRequestOptions} from "./RequestOptions"
 export default class HttpService {
     baseUrl = 'http://localhost:8000/api'
 
-    getData = async (url, token) => {
+    getData = async (url, token = null) => {
         const requestOptions = getRequestOptions(token);
 
         return fetch(this.baseUrl + '/' + url, requestOptions)
@@ -12,8 +12,8 @@ export default class HttpService {
             )
     }
 
-    postData = async (url, data) => {
-        const requestOptions = postRequestOptions(data);
+    postData = async (url, data, token = null) => {
+        const requestOptions = postRequestOptions(data, token);
 
         return fetch(this.baseUrl + "/" + url, requestOptions)
             .then(

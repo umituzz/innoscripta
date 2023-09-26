@@ -38,7 +38,7 @@ class PreferenceService
         return  $user->preferences->groupBy('preferenceable_type') ?? [];
     }
 
-    public function getUserPreferences(Request $request)
+    public function getUserPreferences()
     {
        $preferences = $this->findUserPreferences();
 
