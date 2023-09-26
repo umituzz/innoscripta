@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Card, Col} from 'react-bootstrap';
 import { ArticleCardProps } from '../interfaces/ArticleCardProps';
+import Link from "next/link";
 
 function ArticleCard({article}: ArticleCardProps) {
     if (article) {
@@ -12,10 +13,9 @@ function ArticleCard({article}: ArticleCardProps) {
                         <small className="text-muted">{article.published_at}</small>
                         <h2 className="card-title h4">{article.title}</h2>
                         <p className="card-text">{article.description}</p>
-                        <Button variant="primary" href={`/articles/${article.slug}`}>
-                            Read more →
-                        </Button>
-
+                        <Link href={`/articles/${article.slug}`}>
+                            <Button variant="primary">Read more →</Button>
+                        </Link>
                     </Card.Body>
                 </Card>
             </Col>

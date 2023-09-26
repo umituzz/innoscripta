@@ -11,9 +11,6 @@ const AuthMenu = () => {
         return (
             <>
                 <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-                    <Link className="nav-link" href="/">
-                        Home
-                    </Link>
                     <Link className="nav-link" href="/preferences">
                         Preferences
                     </Link>

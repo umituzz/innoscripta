@@ -42,7 +42,7 @@ export const RegisterProvider = ({ children }) => {
                     password_confirmation: '',
                 });
                 setToastMessage({ message: 'User Created Successfully!', type: 'success' });
-                await router.push('/login');
+                await router.push('login');
             }
         } catch (error) {
             setToastMessage({ message: 'An error occurred while creating the user.', type: 'error' });
