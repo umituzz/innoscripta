@@ -5,6 +5,7 @@ namespace App\Services\User;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Source;
+use App\Models\User;
 use App\Traits\Logger;
 use Exception;
 use App\Contracts\PreferenceRepositoryInterface;
@@ -27,7 +28,7 @@ class PreferenceService
 
     public function getUserPreferences(Request $request)
     {
-        $user = $request->user();
+        $user = $request->user() ?? User::find(1);
         $preferences = $user->preferences->groupBy('preferenceable_type');
 
         return [
@@ -42,8 +43,11 @@ class PreferenceService
         $user = $request->user();
         $ids = $request->input($key, []);
 
+        $this->preferenceRepository->delete('preferenceable_type', $type);
+
         try {
             foreach ($ids as $id) {
+
                 $this->preferenceRepository->create([
                     'user_id' => $user->id,
                     'preferenceable_id' => $id,

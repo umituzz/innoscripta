@@ -19,7 +19,7 @@ export default function FilterComponent({onFilterChange, items, title}) {
                     value={selectedSource}
                 >
                     <option value="*">{title}</option>
-                    {items.map((item) => (
+                    {items?.map((item) => (
                         <option key={item.id} value={item.id}>
                             {item.name}
                         </option>

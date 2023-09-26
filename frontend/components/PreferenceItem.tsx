@@ -1,27 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import styles from '../styles/PreferenceItem.module.scss';
 
 function PreferenceItem({ title, formId, items, onSubmit, checked }) {
-    const [checkedItems, setCheckedItems] = useState({});
+    const [checkedItems, setCheckedItems] = useState({ sourceIds: [] });
 
     const handleCheckboxChange = (itemId) => {
-        const updatedCheckedItems = { ...checkedItems };
-        updatedCheckedItems[itemId] = !updatedCheckedItems[itemId];
-        setCheckedItems(updatedCheckedItems);
-    };
+        const updatedSourceIds = [...checkedItems.sourceIds];
+        if (updatedSourceIds.includes(itemId)) {
+            updatedSourceIds.splice(updatedSourceIds.indexOf(itemId), 1);
+        } else {
+            updatedSourceIds.push(itemId);
+        }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        onSubmit(formId, checkedItems);
+        setCheckedItems({ sourceIds: updatedSourceIds });
     };
 
     useEffect(() => {
         if (checked) {
-            setCheckedItems(checked);
+            setCheckedItems({ sourceIds: checked });
         }
     }, [checked]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSubmit(formId, checkedItems.sourceIds);
+    };
 
     if (!items || items.length === 0) {
         return (
@@ -40,11 +44,8 @@ function PreferenceItem({ title, formId, items, onSubmit, checked }) {
             </Card.Header>
             <Card.Body>
                 <Form id={formId} onSubmit={handleSubmit}>
-
                     <div className={styles['checkbox-group']}>
                         {items.map((item) => (
-
-
                             <Form.Check
                                 key={item.id}
                                 type="checkbox"
@@ -52,20 +53,8 @@ function PreferenceItem({ title, formId, items, onSubmit, checked }) {
                                 label={item.name}
                                 className={styles['form-check']}
                                 onChange={() => handleCheckboxChange(item.id)}
-                                checked={!!checkedItems[item.id]}
+                                checked={checkedItems.sourceIds.includes(item.id)}
                             />
-
-
-                            // <Form.Check
-                            //     key={item.id}
-                            //     type="checkbox"
-                            //     id={`${formId}-${item.id}`}
-                            //     label={item.name}
-                            //     className={styles['form-check']}
-                            //     onChange={() => handleCheckboxChange(item.id)}
-                            //     checked={checkedItems[item.id]}
-                            //
-                            // />
                         ))}
                     </div>
                     <Button

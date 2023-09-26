@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, Card, Col} from 'react-bootstrap';
 import { ArticleCardProps } from '../interfaces/ArticleCardProps';
-import Link from "next/link";
 
 function ArticleCard({article}: ArticleCardProps) {
     if (article) {

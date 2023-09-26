@@ -12,8 +12,8 @@ export default class HttpService {
             )
     }
 
-    postData = async (url, item) => {
-        const requestOptions = postRequestOptions(item);
+    postData = async (url, data, token) => {
+        const requestOptions = postRequestOptions(data, token);
 
         return fetch(this.baseUrl + "/" + url, requestOptions)
             .then(

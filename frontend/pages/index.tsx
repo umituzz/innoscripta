@@ -26,7 +26,7 @@ export default function Home() {
             <Row>
                 <Col lg={8}>
                     <Row>
-                        {articles.map((article) => (<ArticleCard key={article.id} article={article}/>))}
+                        {articles?.map((article) => (<ArticleCard key={article.id} article={article}/>))}
                     </Row>
                     <Row>
                         <Col md={12} className="text-center mt-3">

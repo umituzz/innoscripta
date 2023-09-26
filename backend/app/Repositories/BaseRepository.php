@@ -92,18 +92,15 @@ class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-     * @param $id
+     * @param $key
+     * @param $value
      * @return mixed
      */
-    public function delete($id)
+    public function delete($key, $value)
     {
         try {
-//            DB::beginTransaction();
-
-            return $this->model->where('id', $id)->delete();
+            return $this->model->where($key, $value)->delete();
         } catch (Exception $e) {
-//            DB::rollBack();
-
             return $e->getMessage();
         }
     }

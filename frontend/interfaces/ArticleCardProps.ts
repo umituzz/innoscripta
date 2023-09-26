@@ -4,6 +4,7 @@ export interface ArticleCardProps {
         image: string;
         published_at: string;
         title: string;
+        slug: string;
         description: string;
     } | null;
 }

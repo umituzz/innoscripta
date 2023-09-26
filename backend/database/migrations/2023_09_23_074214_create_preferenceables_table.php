@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->unsignedBigInteger('preferenceable_id');
             $table->string('preferenceable_type');
-            $table->softDeletes();
             $table->timestamps();
 
             $table->unique(['user_id', 'preferenceable_id', 'preferenceable_type'], 'user_preference_unique');

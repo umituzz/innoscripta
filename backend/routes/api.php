@@ -26,9 +26,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::group(['prefix' => '/preferences', 'as' => 'preferences.'], function () {
             Route::get('/', [PreferencesController::class, 'userPreferences'])->name('userPreferences');
-            Route::get('/source', [PreferencesController::class, 'saveSource'])->name('saveSource');
-            Route::get('/category', [PreferencesController::class, 'saveCategory'])->name('saveCategory');
-            Route::get('/author', [PreferencesController::class, 'saveAuthor'])->name('saveAuthor');
+            Route::post('/sources', [PreferencesController::class, 'saveSource'])->name('saveSource');
+            Route::post('/categories', [PreferencesController::class, 'saveCategory'])->name('saveCategory');
+            Route::post('/authors', [PreferencesController::class, 'saveAuthor'])->name('saveAuthor');
         });
     });
 

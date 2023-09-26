@@ -46,9 +46,9 @@ class PreferencesController extends BaseController
 
     public function saveSource(Request $request)
     {
-        $this->preferenceService->savePreferences($request, 'sourceIds', Source::class);
+        $result = $this->preferenceService->savePreferences($request, 'sourceIds', Source::class);
 
-        return $this->ok([], __('Source Preferences Saved'));
+        return $this->ok($result, __('Source Preferences Saved'));
     }
 
     public function saveCategory(Request $request)
