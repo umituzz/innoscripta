@@ -14,8 +14,8 @@ Route::group(['as' => 'api.'], function () {
 
 Route::group(['prefix' => '/articles', 'as' => 'articles.'], function () {
     Route::get('/', [ArticlesController::class, 'index'])->name('index');
-    Route::get('/{slug}', [ArticlesController::class, 'detail'])->name('detail');
     Route::get('/preferences', [PreferencesController::class, 'index'])->name('preferences.index');
+    Route::get('/{slug}', [ArticlesController::class, 'detail'])->name('detail');
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

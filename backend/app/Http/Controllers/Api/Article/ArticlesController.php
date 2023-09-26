@@ -30,6 +30,6 @@ class ArticlesController extends BaseController
     {
         $item = $this->articleService->findBy('slug', $slug);
 
-        return $this->ok($item,  __('Article List'));
+        return $this->ok($item,  __('Article Detail'));
     }
 }
