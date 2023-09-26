@@ -34,4 +34,13 @@ class RedisService
     {
         return Redis::keys($keys);
     }
+
+    public function getByIds($key, $ids, $redisColumn = 'id')
+    {
+        $data = $this->get($key);
+
+        $data = collect($data)->whereIn($redisColumn, $ids);
+
+        return array_values($data->toArray());
+    }
 }

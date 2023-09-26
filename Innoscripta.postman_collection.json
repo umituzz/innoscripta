@@ -24,10 +24,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/register",
-							"protocol": "http",
+							"raw": "{{apiUrl}}/api/register",
 							"host": [
-								"localhost"
+								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
@@ -68,7 +67,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "1|PUiULd2PBspHnyHUlbWFZq0hBSFaPOeRa41TFlWy707ce696",
+									"value": "",
 									"type": "string"
 								}
 							]
@@ -85,10 +84,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/login",
-							"protocol": "http",
+							"raw": "{{apiUrl}}/api/login",
 							"host": [
-								"localhost"
+								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
@@ -114,7 +112,88 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "13|nv3pOLzmWFJIm2wyqO1esidceyTA4bwdjVAteWJ60891268d",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    //\"searchTerm\": \"Test\"\r\n    //\"sourceId\": [1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/articles",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Preferences",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|TramNlNQuU4wCCXmuxb2LKCymJXcSluQPiQRnrLz84b21488",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    //\"searchTerm\": \"Test\"\r\n    //\"sourceId\": [1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/articles/preferences",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"articles",
+								"preferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Article Detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|9zOUp16qDv3vmsA1mCUcIOU8Wy5pnI6i3M8nBNkxeb0b8080",
 									"type": "string"
 								}
 							]
@@ -131,20 +210,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/articles?searchTerm=Russia",
-							"protocol": "http",
+							"raw": "{{apiUrl}}/api/articles/scientists-hail-pioneering-software-in-hunt-for-alien-life",
 							"host": [
-								"localhost"
+								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
-								"articles"
-							],
-							"query": [
-								{
-									"key": "searchTerm",
-									"value": "Russia"
-								}
+								"articles",
+								"scientists-hail-pioneering-software-in-hunt-for-alien-life"
 							]
 						}
 					},
@@ -183,10 +256,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/user",
-							"protocol": "http",
+							"raw": "{{apiUrl}}/api/user",
 							"host": [
-								"localhost"
+								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
@@ -207,7 +279,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "1|008Vqqx7FLJbVlrHoiB9TEIqDhu3uCaiBasgKoGPfae99c7d",
+									"value": "6|662i5Cb5zwDcIpcX3CoTnyKAUTSPf4p9rY2mPOrAd5ac159c",
 									"type": "string"
 								}
 							]
@@ -224,10 +296,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/user/preferences",
-							"protocol": "http",
+							"raw": "{{apiUrl}}/api/user/preferences",
 							"host": [
-								"localhost"
+								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
@@ -240,21 +311,18 @@
 				},
 				{
 					"name": "Source Preferences",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "6|oEXTOBzEGxNChZzoZJ1J1JF7e861vhpudATJROF41ebb42f3",
+									"value": "6|Z4BHGUm13u6CmehwbcueBt1G3F4IWNwd0Gi59URA9f1ca546",
 									"type": "string"
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -266,16 +334,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/user/preferences/source",
-							"protocol": "http",
+							"raw": "{{apiUrl}}/api/user/preferences/sources",
 							"host": [
-								"localhost"
+								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
 								"user",
 								"preferences",
-								"source"
+								"sources"
 							]
 						}
 					},
@@ -283,9 +350,6 @@
 				},
 				{
 					"name": "Category Preferences",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -297,7 +361,7 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -309,16 +373,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/user/preferences/category",
-							"protocol": "http",
+							"raw": "{{apiUrl}}/api/user/preferences/categories",
 							"host": [
-								"localhost"
+								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
 								"user",
 								"preferences",
-								"category"
+								"categories"
 							]
 						}
 					},
@@ -326,9 +389,6 @@
 				},
 				{
 					"name": "Author Preferences",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -340,7 +400,7 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -352,16 +412,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/user/preferences/author",
-							"protocol": "http",
+							"raw": "{{apiUrl}}/api/user/preferences/authors",
 							"host": [
-								"localhost"
+								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
 								"user",
 								"preferences",
-								"author"
+								"authors"
 							]
 						}
 					},
@@ -383,7 +442,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "4|tGOU9LQ5oipebIBlDW8V8fUpIPeWauxuSdbQCECcef22d11b",
+									"value": "3|0BoF9My0cVV2gHhs5CAEhq3icgda3DXwXLfL6NTh4ed1b37d",
 									"type": "string"
 								}
 							]
@@ -400,13 +459,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost/api/preferences",
-							"protocol": "http",
+							"raw": "{{apiUrl}}/api/articles/preferences",
 							"host": [
-								"localhost"
+								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
+								"articles",
 								"preferences"
 							]
 						}
@@ -764,6 +823,11 @@
 		{
 			"key": "token",
 			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "apiUrl",
+			"value": "http://localhost:8000",
 			"type": "string"
 		}
 	]

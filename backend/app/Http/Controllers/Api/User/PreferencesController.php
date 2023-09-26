@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Source;
+use App\Models\User;
 use App\Services\Redis\RedisService;
 use App\Services\User\PreferenceService;
 use Illuminate\Http\Request;
@@ -30,9 +31,7 @@ class PreferencesController extends BaseController
 
     public function index()
     {
-        $data['sources'] = $this->redisService->get('sources');
-        $data['authors'] = $this->redisService->get('authors');
-        $data['categories'] = $this->redisService->get('categories');
+        $data = $this->preferenceService->checkUserPreferences();
 
         return $this->ok($data, __('Preferences List'));
     }

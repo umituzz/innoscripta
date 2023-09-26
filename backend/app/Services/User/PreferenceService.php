@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Source;
 use App\Models\User;
+use App\Services\Redis\RedisService;
 use App\Traits\Logger;
 use Exception;
 use App\Contracts\PreferenceRepositoryInterface;
@@ -20,16 +21,27 @@ class PreferenceService
     use Logger;
 
     private PreferenceRepositoryInterface $preferenceRepository;
+    private RedisService $redisService;
 
-    public function __construct(PreferenceRepositoryInterface $preferenceRepository)
+    public function __construct(
+        PreferenceRepositoryInterface $preferenceRepository,
+        RedisService $redisService
+    )
     {
         $this->preferenceRepository = $preferenceRepository;
+        $this->redisService = $redisService;
+    }
+
+    public function findUserPreferences()
+    {
+        $user = request()->user();
+
+        return  $user->preferences->groupBy('preferenceable_type');
     }
 
     public function getUserPreferences(Request $request)
     {
-        $user = $request->user() ?? User::find(1);
-        $preferences = $user->preferences->groupBy('preferenceable_type');
+       $preferences = $this->findUserPreferences();
 
         return [
             'sources' => $this->getPreferenceIds($preferences, Source::class),
@@ -72,5 +84,29 @@ class PreferenceService
         }
 
         return [];
+    }
+
+    public function checkUserPreferences()
+    {
+        if (auth()->check()) {
+            $preferences = $this->findUserPreferences();
+
+            $data = [
+                'sources' => $this->getPreferenceIds($preferences, Source::class),
+                'categories' => $this->getPreferenceIds($preferences, Category::class),
+                'authors' => $this->getPreferenceIds($preferences, Author::class),
+            ];
+
+            $data['sources'] = $this->redisService->getByIds('sources', $data['sources']);
+            $data['categories'] = $this->redisService->getByIds('categories', $data['categories']);
+            $data['authors'] = $this->redisService->getByIds('authors', $data['authors']);
+
+        } else {
+            $data['sources'] = $this->redisService->get('sources');
+            $data['authors'] = $this->redisService->get('authors');
+            $data['categories'] = $this->redisService->get('categories');
+        }
+
+        return $data;
     }
 }
