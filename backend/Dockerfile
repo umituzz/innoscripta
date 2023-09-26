@@ -10,7 +10,7 @@ RUN docker-php-ext-install mysqli pdo_mysql pcntl
 
 RUN docker-php-ext-configure pcntl --enable-pcntl
 
-WORKDIR /app/backend
+WORKDIR /app
 
 COPY .env.example .env
 COPY . .
