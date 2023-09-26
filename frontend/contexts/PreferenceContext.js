@@ -1,7 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {GetDataService} from "../services/GetDataService";
-import {authToken} from "../helpers/authHelper";
 import {PostDataService} from "../services/PostDataService";
 
 const PreferenceContext = createContext();
@@ -23,7 +22,7 @@ export const PreferenceProvider = ({children}) => {
             try {
                 const response = await GetDataService(`user/preferences`);
 
-                if (response.ok) {
+                if (response.statusCode === 200) {
                     if (response.data.sources) {
                         setCheckedSources(response.data.sources);
                     }
@@ -35,11 +34,9 @@ export const PreferenceProvider = ({children}) => {
                     if (response.data.categories) {
                         setCheckedCategories(response.data.categories);
                     }
-                } else {
-                    console.log(error)
                 }
             } catch (error) {
-                console.log(error)
+                setToastMessage({message: 'An error occurred while fetching data', type: 'error'});
             }
         }
 
@@ -49,9 +46,9 @@ export const PreferenceProvider = ({children}) => {
     }, []);
 
     const handleSubmit = async (formId, checkedItems) => {
+
         try {
             const data = {};
-            const token = authToken();
 
             if (formId === 'sources') {
                 data.sourceIds = checkedItems;
@@ -61,15 +58,18 @@ export const PreferenceProvider = ({children}) => {
                 data.categoryIds = checkedItems;
             }
 
-            const response = await PostDataService(`user/preferences/${formId}`, data, token)
+            const response = await PostDataService(`user/preferences/${formId}`, data)
 
-            if (response.ok) {
+            if (response.statusCode === 200) {
                 setToastMessage({message: 'Preferences Saved Successfully!', type: 'success'});
             } else {
                 setToastMessage({message: 'Preferences Could not Saved!', type: 'error'});
             }
+
         } catch (error) {
             setToastMessage({message: 'There is something wrong. Try again later!', type: 'error'});
+
+            console.log(error)
         }
     };
 
@@ -77,10 +77,10 @@ export const PreferenceProvider = ({children}) => {
         <PreferenceContext.Provider
             value={{
                 preferenceData,
+                toastMessage,
                 checkedSources,
                 checkedAuthors,
                 checkedCategories,
-                toastMessage,
                 handleSubmit
             }}
         >

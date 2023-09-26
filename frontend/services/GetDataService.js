@@ -6,8 +6,6 @@ export const GetDataService = (url, token = null) => {
     return http.getData(url, token).then(data => {
         return data;
     }).catch((error) => {
-        console.log(error);
-
         return error;
     });
 }

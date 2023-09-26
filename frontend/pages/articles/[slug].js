@@ -12,10 +12,11 @@ function ArticleDetail() {
     useEffect(() => {
         async function fetchData() {
             try {
-
                 const response = await GetDataService(`articles/${slug}`);
 
-                setArticle(response.data);
+                if (response.ok) {
+                    setArticle(response.data);
+                }
             } catch (error) {
                 console.log(error);
             }

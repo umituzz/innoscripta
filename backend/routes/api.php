@@ -18,7 +18,7 @@ Route::group(['prefix' => '/articles', 'as' => 'articles.'], function () {
     Route::get('/{slug}', [ArticlesController::class, 'detail'])->name('detail');
 });
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+//Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
@@ -31,5 +31,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::post('/authors', [PreferencesController::class, 'saveAuthor'])->name('saveAuthor');
         });
     });
-
-});
+//});

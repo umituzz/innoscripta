@@ -5,7 +5,6 @@ namespace App\Services\User;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Source;
-use App\Models\User;
 use App\Services\Redis\RedisService;
 use App\Traits\Logger;
 use Exception;
@@ -36,7 +35,7 @@ class PreferenceService
     {
         $user = request()->user();
 
-        return  $user->preferences->groupBy('preferenceable_type');
+        return  $user->preferences->groupBy('preferenceable_type') ?? [];
     }
 
     public function getUserPreferences(Request $request)

@@ -1,25 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import HeadComponent from '../components/HeadComponent';
 import PreferenceItem from '../components/PreferenceItem';
 import { usePreferenceContext } from "../contexts/PreferenceContext";
 import withAuth from "../utils/withAuth";
+import ToastMessage from "../components/ToastMessage";
 
 function Preference() {
 
     const preferenceContext = usePreferenceContext();
 
-    if (!preferenceContext) {
-        return <div>Loading...</div>;
-    }
+    useEffect(() => {
+        if (!preferenceContext.preferenceData) {
+            preferenceContext.fetchPreferenceData();
+        }
+    }, []);
 
     const {
         preferenceData,
         handleSubmit,
+        toastMessage,
         checkedSources,
         checkedAuthors,
         checkedCategories,
     } = preferenceContext;
+
 
     return (
         <Container>
@@ -53,6 +58,7 @@ function Preference() {
                     />
                 </Col>
             </Row>
+            <ToastMessage message={toastMessage?.message} type={toastMessage?.type}/>
         </Container>
     );
 }
