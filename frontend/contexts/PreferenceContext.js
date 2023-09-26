@@ -11,6 +11,7 @@ export const usePreferenceContext = () => {
 };
 
 export const PreferenceProvider = ({children}) => {
+    const token = useSelector((state) => state.authReducer.token)
     const preferenceData = useSelector((state) => state.preferenceReducer);
     const [checkedSources, setCheckedSources] = useState([]);
     const [checkedAuthors, setCheckedAuthors] = useState([]);
@@ -42,7 +43,9 @@ export const PreferenceProvider = ({children}) => {
             }
         }
 
-        fetchPreferenceData();
+        if (token) {
+            fetchPreferenceData();
+        }
     }, []);
 
     const handleSubmit = async (formId, checkedItems) => {
