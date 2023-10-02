@@ -30,6 +30,15 @@
 {{--                <span>{{ __('Notifications') }}</span></a>--}}
 {{--        </li>--}}
 {{--    @endcan--}}
+{{--    @endcan--}}
+
+{{--    @can('Log Management')--}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('log-viewer') }}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>{{ __('Logs') }}</span></a>
+        </li>
+{{--    @endcan--}}
 
     <hr class="sidebar-divider">
 
