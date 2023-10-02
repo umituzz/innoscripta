@@ -25,7 +25,7 @@ jobs:
           cd backend
           docker build -t backend-app -f Dockerfile .
           docker run -d -p 8000:8000 --name backend-app backend-app
-        working-directory: ./backend
+        working-directory: ./
 
       - name: Wait for the container to start
         run: sleep 10
