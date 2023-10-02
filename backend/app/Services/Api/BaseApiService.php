@@ -10,7 +10,7 @@ use App\Traits\Logger;
 
 /**
  * Class BaseService
- * @package App\Services
+ * @package App\Services\Api
  */
 class BaseApiService
 {

@@ -10,8 +10,24 @@ use Illuminate\Support\Facades\Log;
  */
 trait Logger
 {
-    public function logError($error)
+    /**
+     * @param $exception
+     * @return void
+     */
+    public function logError($exception): void
     {
-        Log::error('Message: ' . $error->getMessage());
+        Log::error(__('Error Message: ') . $exception->getMessage());
+        Log::error(__('Error Code: ') . $exception->getCode());
+        Log::error(__('Error File: ') . $exception->getFile());
+        Log::error(__('Error Line: ') . $exception->getLine());
+    }
+
+    /**
+     * @param $message
+     * @return void
+     */
+    public function logInfo($message): void
+    {
+        Log::info(__('Info Message: ') . $message);
     }
 }

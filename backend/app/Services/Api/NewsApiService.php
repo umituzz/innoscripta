@@ -21,10 +21,6 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
         return config('services.newsApi.api_url') . '/top-headlines?country=us&apiKey=' . config('services.newsApi.api_key');
     }
 
-    /**
-     * @param $sourceId
-     * @return string[]|void
-     */
     public function getData($sourceId)
     {
         try {
@@ -32,13 +28,17 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
             $response = $this->httpService->getResult($url);
 
             if (!$response) {
-                return __('No data received from the API.');
+                $this->logInfo(__('No data received from the API'));
+
+                return false;
             }
 
             $items = $response->articles;
 
             if (empty($items)) {
-                return __('No data available in the API response.');
+                $this->logInfo(__('No data available in the API response'));
+
+                return false;
             }
 
             collect($items)->map(function ($item) use ($sourceId) {
@@ -69,11 +69,13 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
 
             });
 
-            return __('Data inserted successfully');
+            $this->logInfo(__('News API data inserted successfully!'));
+
+            return true;
         } catch (Exception $exception) {
             $this->logError($exception);
 
-            return __('An error occurred while processing the data.');
+            return false;
         }
     }
 

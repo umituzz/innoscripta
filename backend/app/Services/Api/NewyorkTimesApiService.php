@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 /**
  * Class NewyorkTimesApiService
- * @package App\Services
+ * @package App\Services\Api
  */
 class NewyorkTimesApiService extends BaseApiService implements ApiServiceInterface
 {
@@ -20,10 +20,6 @@ class NewyorkTimesApiService extends BaseApiService implements ApiServiceInterfa
         return config('services.newyorkTimesApi.api_url') . '/1.json?api-key=' . config('services.newyorkTimesApi.api_key');
     }
 
-    /**
-     * @param $sourceId
-     * @return string[]|void
-     */
     public function getData($sourceId)
     {
         try {
@@ -31,13 +27,17 @@ class NewyorkTimesApiService extends BaseApiService implements ApiServiceInterfa
             $response = $this->httpService->getResult($url);
 
             if (!$response) {
-                return __('No data received from the API.');
+                $this->logInfo(__('No data received from the API'));
+
+                return false;
             }
 
             $items = $response->results;
 
             if (empty($items)) {
-                return __('No data available in the API response.');
+                $this->logInfo(__('No data available in the API response'));
+
+                return false;
             }
 
             collect($items)->map(function ($item) use ($sourceId) {
@@ -64,11 +64,13 @@ class NewyorkTimesApiService extends BaseApiService implements ApiServiceInterfa
 
             });
 
-            return __('Data inserted successfully');
+            $this->logInfo(__('Newyork Times API data inserted successfully!'));
+
+            return true;
         } catch (Exception $exception) {
             $this->logError($exception);
 
-            return __('An error occurred while processing the data.');
+            return false;
         }
     }
 
