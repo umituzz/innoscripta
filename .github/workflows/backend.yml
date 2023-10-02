@@ -1,9 +1,10 @@
-name: PHP Docker Build and Deploy
+name: TheProject
 
 on:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   build-and-deploy:
@@ -21,7 +22,7 @@ jobs:
 
       - name: Build and deploy Docker container
         run: |
-          cd backend # Backend projesinin bulunduğu klasöre gidin.
+          cd backend 
           docker build -t your-php-app .
           docker run -d -p 8000:8000 your-php-app
         working-directory: ./
