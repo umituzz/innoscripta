@@ -1,4 +1,4 @@
-name: TheBackendProject
+name: TheFrontendProject
 
 on:
   push:
@@ -7,28 +7,27 @@ on:
     branches: ["master"]
 
 jobs:
-  backend:
+  frontend:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker Compose
+      - name: Set up Docker
         run: |
           sudo apt-get update
-          sudo apt-get install -y docker-compose
+          sudo apt-get install -y docker.io
         working-directory: ./
 
       - name: Build and deploy Docker container
         run: |
-          cd backend 
-          docker build -t backend-app .
-          docker run -d -p 8000:8000 backend-app
+          docker build -t frontend-app .
+          docker run -d -p 3000:3000 frontend-app
         working-directory: ./
 
       - name: Wait for the container to start
         run: sleep 10
 
       - name: Test the application
-        run: curl http://localhost:8000
+        run: curl http://localhost:3000 
