@@ -14,10 +14,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker
+      - name: Update apt packages
         run: |
           sudo apt-get update
+          sudo apt-get upgrade -y
+        working-directory: ./
+
+      - name: Clean apt cache
+        run: sudo apt-get clean
+        working-directory: ./
+
+      - name: Remove containerd.io
+        run: sudo apt-get remove containerd.io
+        working-directory: ./
+
+      - name: Reinstall Docker
+        run: |
           sudo apt-get install -y docker.io
+          sudo systemctl start docker
         working-directory: ./
 
       - name: Build and deploy Docker container
@@ -30,4 +44,4 @@ jobs:
         run: sleep 10
 
       - name: Test the application
-        run: curl http://localhost:3000 
+        run: curl http://localhost:3000
