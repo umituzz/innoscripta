@@ -18,14 +18,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y docker-compose
-        working-directory: ./
+        working-directory: ./backend
 
       - name: Build and deploy Docker container
         run: |
           cd backend 
           docker build -t backend-app .
           docker run -d -p 8000:8000 backend-app
-        working-directory: ./
+        working-directory: ./backend
 
       - name: Wait for the container to start
         run: sleep 10
