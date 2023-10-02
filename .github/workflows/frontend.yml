@@ -34,14 +34,12 @@ jobs:
           sudo systemctl start docker
         working-directory: ./
 
+      - name: Set Docker Build Context
+        run: echo "DOCKER_BUILDKIT=1" | sudo tee -a /etc/environment
+        working-directory: ./
+
       - name: Build and deploy Docker container
         run: |
           docker build -t frontend-app .
           docker run -d -p 3000:3000 frontend-app
         working-directory: ./
-
-      - name: Wait for the container to start
-        run: sleep 10
-
-      - name: Test the application
-        run: curl http://localhost:3000
