@@ -1,0 +1,33 @@
+name: PHP Docker Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+        working-directory: ./
+
+      - name: Build and deploy Docker container
+        run: |
+          cd backend # Backend projesinin bulunduğu klasöre gidin.
+          docker build -t your-php-app .
+          docker run -d -p 8000:8000 your-php-app
+        working-directory: ./
+
+      - name: Wait for the container to start
+        run: sleep 10
+
+      - name: Test the application
+        run: curl http://localhost:8000
