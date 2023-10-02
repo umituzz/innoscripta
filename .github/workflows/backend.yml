@@ -22,13 +22,23 @@ jobs:
 
       - name: Build and deploy Docker container
         run: |
-          cd backend 
+          cd backend
           docker build -t backend-app .
           docker run -d -p 8000:8000 backend-app
         working-directory: ./
 
       - name: Wait for the container to start
         run: sleep 10
+
+      - name: Install Composer and Dependencies
+        run: |
+          docker exec -it backend-app bash -c "apt-get update -y && apt-get install -y openssl zip unzip git curl libonig-dev libzip-dev"
+          docker exec -it backend-app bash -c "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer"
+          docker exec -it backend-app bash -c "docker-php-ext-install mysqli pdo_mysql pcntl"
+          docker exec -it backend-app bash -c "docker-php-ext-configure pcntl --enable-pcntl"
+          docker exec -it backend-app bash -c "composer install"
+          docker exec -it backend-app bash -c "php artisan key:generate"
+        working-directory: ./
 
       - name: Test the application
         run: curl http://localhost:8000
