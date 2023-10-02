@@ -2,19 +2,18 @@
 
 namespace App\Jobs\Api;
 
-use App\Services\Api\NewsApiService;
+use App\Services\Api\NewyorkTimesApiService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Artisan;
 
 /**
- * Class GetNewsApiJob
+ * Class GetNewyorkTimesApiJob
  * @package App\Jobs\Api
  */
-class GetNewsApiJob implements ShouldQueue
+class GetNewyorkTimesApiJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -31,8 +30,8 @@ class GetNewsApiJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(NewsApiService $newsApiService): void
+    public function handle(NewyorkTimesApiService $newyorkTimesApiService): void
     {
-        $newsApiService->getData($this->sourceId);
+        $newyorkTimesApiService->getData($this->sourceId);
     }
 }

@@ -8,5 +8,5 @@ namespace App\Enums;
  */
 enum ArticleEnums
 {
-    const DEFAULT_PAGINATION = 6;
+    const DEFAULT_PAGINATION = 2;
 }

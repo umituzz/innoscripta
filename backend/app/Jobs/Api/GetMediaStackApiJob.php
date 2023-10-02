@@ -34,7 +34,5 @@ class GetMediaStackApiJob implements ShouldQueue
     public function handle(MediaStackApiService $mediaStackApiService): void
     {
         $mediaStackApiService->getData($this->sourceId);
-
-        Artisan::call('sync');
     }
 }

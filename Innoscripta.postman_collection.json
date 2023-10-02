@@ -95,6 +95,66 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"token\", jsonData.data.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "32|xH87aBlcZVUEJpVxoKI9HmCXkxkFSOeC4i4z4NHAf329a5e7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"umituz9999@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/logout",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -112,7 +172,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "",
+									"value": "1|jbzYa3BtLjrMNV2d145ce1YtZ2a5vvFBnrVcwshS687eadff",
 									"type": "string"
 								}
 							]
@@ -279,7 +339,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "6|662i5Cb5zwDcIpcX3CoTnyKAUTSPf4p9rY2mPOrAd5ac159c",
+									"value": "1|fsR5WD4Jsa9TcungLHXIUlwC2Jra3AkojKvMSlxz803fad25",
 									"type": "string"
 								}
 							]
@@ -554,6 +614,36 @@
 								{
 									"key": "access_key",
 									"value": "6490528b65c9d28894748cf10c6d0a52"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Newyork Times API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=LqRN1w7XrZYdVTTo5aYSwLlVtJXBEcRS",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nytimes",
+								"com"
+							],
+							"path": [
+								"svc",
+								"mostpopular",
+								"v2",
+								"viewed",
+								"1.json"
+							],
+							"query": [
+								{
+									"key": "api-key",
+									"value": "LqRN1w7XrZYdVTTo5aYSwLlVtJXBEcRS"
 								}
 							]
 						}

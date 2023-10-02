@@ -24,6 +24,7 @@ class SetupCommand extends Command
         Artisan::call('api:guardian');
         Artisan::call('api:news');
         Artisan::call('api:mediaStack');
+        Artisan::call('api:newyorkTimes');
 
         Artisan::call('redis:set-total-users');
 

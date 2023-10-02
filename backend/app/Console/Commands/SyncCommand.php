@@ -13,7 +13,7 @@ class SyncCommand extends Command
 {
     protected $signature = 'sync';
 
-    protected $description = 'Setup data for project';
+    protected $description = 'Sync data with redis and elasticsearch via database';
 
     public function handle()
     {

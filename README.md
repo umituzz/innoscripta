@@ -13,7 +13,11 @@ Then navigate to the project directory:
 
 ```cd innoscripta```
 
-Docker Setup
+## Docker Setup
+Build docker images
+
+``docker-compose up -d --build``
+
 Check if there are any issues with your running containers using the following command:
 
 ``docker ps``
@@ -31,6 +35,7 @@ You can reset the database and populate Redis with data using the following comm
 ```
 php artisan setup
 php artisan queue:work
+php artisan sync
 ```
 
 Make sure the relevant keys in the .env file are set to use Redis:

@@ -26,6 +26,7 @@ class HttpService
             return null;
         } catch (RequestException $exception) {
             $this->logError($exception);
+
             return null;
         }
     }

@@ -36,12 +36,12 @@ class LoginController extends BaseController
 
     /**
      * @param Request $request
-     * @return void
+     * @return JsonResponse
      */
     public function logout(Request $request)
     {
         $result = $this->loginService->logout($request);
 
-        $this->ok($result, __('Logout successful'));
+        return $this->ok($result, __('Logout successful'));
     }
 }

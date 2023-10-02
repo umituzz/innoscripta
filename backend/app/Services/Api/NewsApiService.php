@@ -4,7 +4,6 @@ namespace App\Services\Api;
 
 use App\Contracts\ApiServiceInterface;
 use App\Enums\AuthorEnums;
-use App\Enums\SourceEnums;
 use Exception;
 use Illuminate\Support\Str;
 
@@ -19,7 +18,7 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
      */
     public function getUrl(): string
     {
-        return env('NEWS_API_URL') . '/top-headlines?country=us&apiKey=' . env('NEWS_API_KEY');
+        return config('services.newsApi.api_url') . '/top-headlines?country=us&apiKey=' . config('services.newsApi.api_key');
     }
 
     /**
@@ -64,7 +63,7 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
                     'slug' => Str::slug($item->title),
                     'description' => $item->description,
                     'url' => $item->url,
-                    'image' => $item->urlToImage ?? SourceEnums::DEFAULT_IMAGE,
+                    'image' => $item->urlToImage ?? $this->defaultImage(),
                     'published_at' => $item->publishedAt,
                 ]);
 

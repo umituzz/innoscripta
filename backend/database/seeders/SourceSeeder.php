@@ -21,5 +21,6 @@ class SourceSeeder extends Seeder
         Source::create(['name' => 'Guardian API']);
         Source::create(['name' => 'News API']);
         Source::create(['name' => 'Media Stack API']);
+        Source::create(['name' => 'Newyork Times API']);
     }
 }

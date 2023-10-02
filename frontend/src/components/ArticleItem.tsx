@@ -1,35 +1,49 @@
 import React from 'react';
 import Link from "next/link";
 import {Button, Card, Col} from 'react-bootstrap';
-import { ArticleItemInterface } from '@/interfaces/ArticleItemInterface';
-import { Calendar, Folder, Person, Globe } from 'react-bootstrap-icons';
+import {ArticleItemInterface} from '@/interfaces/ArticleItemInterface';
+import {Calendar, Folder, Globe, Person} from 'react-bootstrap-icons';
+import {FacebookShareButton, LinkedinShareButton, TwitterShareButton} from "react-share";
+import { Facebook, Linkedin, Twitter } from 'react-bootstrap-icons';
 
 function ArticleItem({article, hasLink}: ArticleItemInterface) {
     if (article) {
         return (
             <Col lg={12} key={article.id}>
                 <Card className="mb-4">
-                    <Card.Img src={article.image} alt={article.title}  />
+                    <Card.Img src={article.image} alt={article.title}/>
                     <Card.Body>
                         <h2 className="card-title h4">{article.title}</h2>
                         <p className="card-text">{article.description}</p>
                         <div className="mt-3">
                             <p>
-                                <Calendar size={16} className="mr-1" />
+                                <Calendar size={16} className="mr-1"/>
                                 <strong> Published At:</strong> {article.published_at}
                             </p>
                             <p>
-                                <Folder size={16} className="mr-1" />
+                                <Folder size={16} className="mr-1"/>
                                 <strong> Category:</strong> {article.category?.name}
                             </p>
                             <p>
-                                <Person size={16} className="mr-1" />
+                                <Person size={16} className="mr-1"/>
                                 <strong> Author:</strong> {article.author?.name}
                             </p>
                             <p>
-                                <Globe size={16} className="mr-1" />
+                                <Globe size={16} className="mr-1"/>
                                 <strong> Source:</strong> {article.source?.name}
                             </p>
+                            <div>
+                                <p>Share on Social Media Platforms</p>
+                                <FacebookShareButton title={article.title} url={article.url}>
+                                    <Facebook size={30} className="mr-1" />
+                                </FacebookShareButton>
+                                <LinkedinShareButton title={article.title} url={article.url}>
+                                    <Linkedin size={30} className="mr-1" />
+                                </LinkedinShareButton>
+                                <TwitterShareButton title={article.title} url={article.url}>
+                                    <Twitter size={30} className="mr-1" />
+                                </TwitterShareButton>
+                            </div>
                         </div>
                         {hasLink && (
                             <Link href={`/articles/${article.slug}`}>

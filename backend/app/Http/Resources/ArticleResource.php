@@ -29,7 +29,7 @@ class ArticleResource extends JsonResource
             'description' => $this->description,
             'url' => $this->url,
             'image' => $this->image,
-            'published_at' => Carbon::parse($this->published_at)->format('Y-m-d H:i'),
+            'published_at' => Carbon::parse($this->published_at)->translatedFormat('d F Y'),
         ];
     }
 }

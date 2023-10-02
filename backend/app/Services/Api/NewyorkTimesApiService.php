@@ -3,22 +3,21 @@
 namespace App\Services\Api;
 
 use App\Contracts\ApiServiceInterface;
-use App\Enums\AuthorEnums;
 use Exception;
 use Illuminate\Support\Str;
 
 /**
- * Class MediaStackApiService
+ * Class NewyorkTimesApiService
  * @package App\Services
  */
-class MediaStackApiService extends BaseApiService implements ApiServiceInterface
+class NewyorkTimesApiService extends BaseApiService implements ApiServiceInterface
 {
     /**
      * @return string
      */
     public function getUrl(): string
     {
-        return config('services.mediaStackApi.api_url') . '/news?access_key=' . config('services.mediaStackApi.api_key');
+        return config('services.newyorkTimesApi.api_url') . '/1.json?api-key=' . config('services.newyorkTimesApi.api_key');
     }
 
     /**
@@ -35,33 +34,32 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
                 return __('No data received from the API.');
             }
 
-            $items = $response->data;
+            $items = $response->results;
 
             if (empty($items)) {
                 return __('No data available in the API response.');
             }
 
-            collect($items)->map(function ($item) use($sourceId){
-
+            collect($items)->map(function ($item) use ($sourceId) {
                 $author = $this->authorService->firstOrCreate('name', [
-                    'name' => $item->author ?? AuthorEnums::MEDIA_STACK_AUTHOR,
+                    'name' => $item->byline,
                 ]);
 
                 $category = $this->categoryService->firstOrCreate('name', [
-                    'name' => ucfirst($item->category),
-                    'slug' => Str::slug($item->category),
+                    'name' => $item->section,
+                    'slug' => Str::slug($item->section),
                 ]);
 
                 $this->articleService->firstOrCreate('title', [
                     'source_id' => $sourceId,
-                    'category_id' => $category->id,
                     'author_id' => $author->id,
+                    'category_id' => $category->id,
                     'title' => $item->title,
                     'slug' => Str::slug($item->title),
-                    'description' => $item->description,
+                    'description' => $this->defaultDescription(),
                     'url' => $item->url,
-                    'image' => $item->image ?? $this->defaultImage(),
-                    'published_at' => $item->published_at,
+                    'image' => $this->defaultImage(),
+                    'published_at' => $item->published_date,
                 ]);
 
             });
@@ -73,4 +71,5 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
             return __('An error occurred while processing the data.');
         }
     }
+
 }

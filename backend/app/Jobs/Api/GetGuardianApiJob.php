@@ -34,7 +34,5 @@ class GetGuardianApiJob implements ShouldQueue
     public function handle(GuardianApiService $guardianApiService): void
     {
         $guardianApiService->getData($this->sourceId);
-
-        Artisan::call('sync');
     }
 }
