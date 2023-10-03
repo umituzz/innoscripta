@@ -31,4 +31,9 @@ jobs:
         run: sleep 10
 
       - name: Test the application
+        run: |
+          docker exec -it backend-app bash
+          php artisan test
+
+      - name: Check the application url
         run: curl http://localhost:8000

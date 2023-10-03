@@ -3,18 +3,17 @@
 namespace Tests\Feature\Http\Controllers\Api\Auth;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use Tests\Feature\IntegrationBaseTestCase;
 
 /**
  * Class RegisterControllerTest
  * @package Tests\Feature\Http\Controllers\Api\Auth
  * @coversDefaultClass \App\Http\Controllers\Api\Auth\RegisterController
  */
-class RegisterControllerTest extends TestCase
+class RegisterControllerTest extends IntegrationBaseTestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     public function test_register()
     {
