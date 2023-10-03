@@ -32,8 +32,7 @@ jobs:
 
       - name: Test the application
         run: |
-          docker exec -it backend-app bash
-          php artisan test
+          docker exec backend-app bash -c "php artisan test"
 
       - name: Check the application url
         run: curl http://localhost:8000
