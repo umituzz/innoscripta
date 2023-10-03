@@ -32,12 +32,14 @@ jobs:
 
       - name: Test the application inside the Docker container
         run: |
-          docker exec backend-app bash -c 
-          "cp .env.example .env.testing &&
-          sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env.testing && sed -i 's/DB_HOST=127.0.0.1/DB_HOST=:memory:/g' .env.testing &&
-          php artisan key:generate &&
-          php artisan migrate:fresh --seed --env=testing &&
-          php artisan test"
+          docker exec backend-app bash -c "
+            cp .env.example .env.testing &&
+            sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env.testing &&
+            sed -i 's/DB_HOST=127.0.0.1/DB_HOST=:memory:/g' .env.testing &&
+            php artisan key:generate &&
+            php artisan migrate:fresh --seed --env=testing &&
+            php artisan test
+          "
 
       - name: Check the application url
         run: curl http://localhost:8000
