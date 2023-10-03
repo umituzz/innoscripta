@@ -4,6 +4,8 @@ namespace App\Services\Auth;
 
 use App\Contracts\UserRepositoryInterface;
 use App\Http\Resources\UserResource;
+use App\Traits\Logger;
+use Exception;
 use Illuminate\Http\Response;
 
 /**
@@ -12,6 +14,8 @@ use Illuminate\Http\Response;
  */
 class LoginService
 {
+    use Logger;
+
     private UserRepositoryInterface $userRepository;
 
     public function __construct(UserRepositoryInterface $userRepository)
@@ -48,10 +52,18 @@ class LoginService
 
     /**
      * @param $request
-     * @return mixed
+     * @return bool
      */
-    public function logout($request)
+    public function logout($request): bool
     {
-        return $request->user()->currentAccessToken()->delete();
+        try {
+            $request->user()->currentAccessToken()->delete();
+
+            return true;
+        } catch (Exception $exception) {
+            $this->logError($exception);
+
+            return false;
+        }
     }
 }

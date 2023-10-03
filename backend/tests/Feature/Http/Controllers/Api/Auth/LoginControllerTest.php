@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\Api\Auth;
 
 use App\Models\User;
+use Laravel\Sanctum\Sanctum;
 use Tests\Feature\IntegrationBaseTestCase;
 
 /**
@@ -81,6 +82,22 @@ class LoginControllerTest extends IntegrationBaseTestCase
                 'statusCode' => 422,
                 'errors' => ['email' => [__('The selected email is invalid.')]],
                 'message' => __('Form Validation Failed'),
+            ]);
+    }
+
+    public function test_user_can_logout()
+    {
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $response = $this->postJson('/api/logout');
+
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'statusCode' => 200,
+                'message' => __('Logout successful'),
+                'data' => true,
             ]);
     }
 }
