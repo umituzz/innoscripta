@@ -3,37 +3,35 @@
 namespace Tests\Feature\Http\Controllers\Api\Auth;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Tests\Feature\IntegrationBaseTestCase;
 
 /**
  * Class LoginControllerTest
  * @package Tests\Feature\Http\Controllers\Api\Auth
  * @coversDefaultClass \App\Http\Controllers\Api\Auth\LoginController
  */
-class LoginControllerTest extends TestCase
+class LoginControllerTest extends IntegrationBaseTestCase
 {
-    use RefreshDatabase;
+    public function test_login()
+    {
+        $user = User::factory()->create([
+            'password' => bcrypt(123456789)
+        ]);
 
-//    public function test_login()
-//    {
-//        $user = User::factory()->create([
-//            'password' => bcrypt(123456789)
-//        ]);
-//
-//        $userData = [
-//            'email' => $user->email,
-//            'password' => '123456789',
-//        ];
-//
-//        $response = $this->json('POST', '/api/login', $userData);
-//
-//        $response->assertStatus(200)
-//            ->assertJsonStructure([
-//                'statusCode',
-//                'data'
-//            ]);
-//    }
+        $userData = [
+            'email' => $user->email,
+            'password' => '123456789',
+        ];
+
+        $response = $this->json('POST', '/api/login', $userData);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'statusCode',
+                'message',
+                'data',
+            ]);
+    }
 
     public function test_login_with_invalid_password()
     {
@@ -47,8 +45,8 @@ class LoginControllerTest extends TestCase
         $response->assertStatus(422)
             ->assertJson([
                 'statusCode' => 422,
-                'errors' => ['email' => __('The provided credentials are incorrect!')],
-                'message' => __('Login Failed'),
+                'errors' => ['email' => [__('The selected email is invalid.')]],
+                'message' => __('Form Validation Failed'),
             ]);
     }
 
@@ -64,8 +62,8 @@ class LoginControllerTest extends TestCase
         $response->assertStatus(422)
             ->assertJson([
                 'statusCode' => 422,
-                'errors' => ['email' => __('The provided credentials are incorrect!')],
-                'message' => __('Login Failed'),
+                'errors' => ['email' => [__('The selected email is invalid.')]],
+                'message' => __('Form Validation Failed'),
             ]);
     }
 
@@ -81,8 +79,8 @@ class LoginControllerTest extends TestCase
         $response->assertStatus(422)
             ->assertJson([
                 'statusCode' => 422,
-                'errors' => ['email' => __('The provided credentials are incorrect!')],
-                'message' => __('Login Failed'),
+                'errors' => ['email' => [__('The selected email is invalid.')]],
+                'message' => __('Form Validation Failed'),
             ]);
     }
 }

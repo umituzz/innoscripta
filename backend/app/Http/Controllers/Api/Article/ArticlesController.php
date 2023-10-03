@@ -30,6 +30,10 @@ class ArticlesController extends BaseController
     {
         $item = $this->articleService->findBy('slug', $slug);
 
+        if (!$item) {
+            return $this->notFound();
+        }
+
         return $this->ok($item,  __('Article Detail'));
     }
 }

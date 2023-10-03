@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Article;
+use App\Models\Author;
+use App\Models\Category;
 use App\Models\Source;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -23,9 +25,10 @@ class ArticleFactory extends Factory
 
         return [
             'source_id' => Source::factory(),
+            'author_id' => Author::factory(),
+            'category_id' => Category::factory(),
             'title' => $title,
             'slug' => Str::slug($title),
-            'category' => 'UK news',
             'url' => 'https://www.theguardian.com/uk-news/live/2023/sep/09/daniel-khalife-escaped-terror-suspect-caught-in-london-chiswick-wandsworth-prison',
             'image' => 'https://birn.eu.com/wp-content/uploads/2018/11/guardian-300x201.png',
             'published_at' => now(),

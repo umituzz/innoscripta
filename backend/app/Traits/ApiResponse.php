@@ -68,4 +68,14 @@ trait ApiResponse
     {
         return $this->error($data, __($message), Response::HTTP_UNAUTHORIZED);
     }
+
+    /**
+     * @param array $data
+     * @param string $message
+     * @return JsonResponse
+     */
+    public function notFound(array $data = [], string $message = 'Not Found'): JsonResponse
+    {
+        return $this->error($data, __($message), Response::HTTP_NOT_FOUND);
+    }
 }

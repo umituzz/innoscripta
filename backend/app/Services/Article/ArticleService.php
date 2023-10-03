@@ -29,7 +29,7 @@ class ArticleService
             return new ArticleResource($item);
         }
 
-        return [];
+        return NULL;
     }
 
     /**
