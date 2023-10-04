@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Row, Col, Image } from 'react-bootstrap';
 import Link from 'next/link';
-import Layout from "@/components/Layout";
+import MainLayout from "@/layouts/MainLayout";
 
 const NotFound = () => {
     return (
-        <Layout title={"Not Found"} description={"Not Found Description"}>
+        <MainLayout title={"Not Found"} description={"Not Found Description"}>
             <Container className="mt-5 text-center">
                 <Row>
                     <Col md={12}>
@@ -28,7 +28,7 @@ const NotFound = () => {
                     </Col>
                 </Row>
             </Container>
-        </Layout>
+        </MainLayout>
     );
 };
 

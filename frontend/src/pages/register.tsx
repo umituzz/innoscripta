@@ -7,7 +7,7 @@ import InputComponent from "@/components/InputComponent";
 import ButtonComponent from "@/components/ButtonComponent";
 import {useRegisterContext} from "@/contexts/RegisterContext";
 import Loading from "@/components/Loading";
-import Layout from "@/components/Layout";
+import MainLayout from "@/layouts/MainLayout";
 
 export default function Register() {
     const {
@@ -20,7 +20,7 @@ export default function Register() {
     } = useRegisterContext();
 
     return (
-        <Layout title={"Register"} description={"Register Description"}>
+        <MainLayout title={"Register"} description={"Register Description"}>
             <Container>
                 <Row className="mt-5">
                     <Col md={6}>
@@ -97,6 +97,6 @@ export default function Register() {
                     </Col>
                 </Row>
             </Container>
-        </Layout>
+        </MainLayout>
     );
 }

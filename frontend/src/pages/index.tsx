@@ -5,7 +5,7 @@ import ArticleItem from "@/components/ArticleItem";
 import PaginationComponent from "@/components/PaginationComponent";
 import SearchBar from "@/components/SearchBar";
 import FilterComponent from "@/components/FilterComponent";
-import Layout from "@/components/Layout";
+import MainLayout from "@/layouts/MainLayout";
 
 export default function Home() {
     const {
@@ -21,7 +21,7 @@ export default function Home() {
     } = useArticleContext();
 
     return (
-        <Layout title={"Homepage"} description={"Homepage Description"}>
+        <MainLayout title={"Homepage"} description={"Homepage Description"}>
             <Container className="mt-2 minHeight pb-5">
                 <Row>
                     <Col lg={8}>
@@ -85,6 +85,6 @@ export default function Home() {
                     </Col>
                 </Row>
             </Container>
-        </Layout>
+        </MainLayout>
     );
 }

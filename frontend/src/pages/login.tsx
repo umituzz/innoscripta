@@ -7,7 +7,7 @@ import ButtonComponent from "@/components/ButtonComponent";
 import {useLoginContext} from "@/contexts/LoginContext";
 import Loading from "@/components/Loading";
 import React from "react";
-import Layout from "@/components/Layout";
+import MainLayout from "@/layouts/MainLayout";
 
 export default function Login() {
     const {
@@ -20,7 +20,7 @@ export default function Login() {
     } = useLoginContext();
 
     return (
-        <Layout title={"Login"} description={"Login Description"} >
+        <MainLayout title={"Login"} description={"Login Description"} >
             <Container>
             <Row className="mt-5">
                 <Col md={6}>
@@ -80,6 +80,6 @@ export default function Login() {
                 </Col>
             </Row>
             </Container>
-        </Layout>
+        </MainLayout>
     );
 }

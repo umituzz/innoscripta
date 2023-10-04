@@ -3,7 +3,7 @@ import {Col, Container, Row} from 'react-bootstrap';
 import PreferenceItem from '@/components/PreferenceItem';
 import {usePreferenceContext} from "@/contexts/PreferenceContext";
 import ToastMessage from "@/components/ToastMessage";
-import Layout from "@/components/Layout";
+import MainLayout from "@/layouts/MainLayout";
 import withAuth from "@/utils/withAuth";
 
 function Preference() {
@@ -26,7 +26,7 @@ function Preference() {
 
 
     return (
-        <Layout title={"Preferences"} description={"Preferences Description"}>
+        <MainLayout title={"Preferences"} description={"Preferences Description"}>
             <Container>
                 <Row className="mt-3">
                     <Col md={12} className="mb-3">
@@ -59,7 +59,7 @@ function Preference() {
                 </Row>
                 <ToastMessage message={toastMessage?.message} type={toastMessage?.type}/>
             </Container>
-        </Layout>
+        </MainLayout>
     );
 }
 
