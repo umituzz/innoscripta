@@ -1,27 +1,11 @@
 import React from 'react';
-import {Container} from 'react-bootstrap';
-import ArticleItem from '@/components/ArticleItem';
 import {GetMethodService} from '@/services/GetMethodService';
-import MainLayout from "@/layouts/MainLayout";
+import ArticleDetailTemplate from "@/atomic-design/templates/ArticleDetailTemplate";
 
 export default function ArticleDetail({article}) {
-    if (!article) {
-        return (
-            <MainLayout title="Article Not Found">
-                <Container className="mt-2 minHeight pb-5">
-                    <h2>Article Not Found</h2>
-                </Container>
-            </MainLayout>
-        );
-    }
-
     return (
-        <MainLayout title={article.title} description={article.description}>
-            <Container className="mt-2 minHeight pb-5">
-                <ArticleItem key={article.id} article={article} hasLink={false}/>
-            </Container>
-        </MainLayout>
-    );
+        <ArticleDetailTemplate article={article}/>
+    )
 }
 
 export async function getServerSideProps(context) {
@@ -42,6 +26,7 @@ export async function getServerSideProps(context) {
         };
     } catch (error) {
         console.error(error);
+
         return {
             notFound: true,
         };

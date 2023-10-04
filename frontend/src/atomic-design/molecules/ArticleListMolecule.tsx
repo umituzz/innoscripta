@@ -1,12 +1,12 @@
-import ArticleItem from "@/components/ArticleItem";
-import {Row} from "react-bootstrap";
 import React from "react";
+import {Row} from "react-bootstrap";
+import ArticleItemMolecule from "@/atomic-design/molecules/ArticleItemMolecule";
 
 const ArticleListMolecule = ({ articles }) => {
     return (
         <Row>
             {articles?.map((article) => (
-                <ArticleItem key={article.id} article={article} hasLink={true}/>
+                <ArticleItemMolecule key={article.id} article={article} hasLink={true}/>
             ))}
         </Row>
     )

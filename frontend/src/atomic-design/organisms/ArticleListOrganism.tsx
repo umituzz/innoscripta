@@ -1,6 +1,6 @@
+import React from "react";
 import {Col, Row} from "react-bootstrap";
 import PaginationComponent from "@/components/PaginationComponent";
-import React from "react";
 import {useArticleContext} from "@/contexts/ArticleContext";
 import ArticleListMolecule from "@/atomic-design/molecules/ArticleListMolecule";
 import FilterMolecule from "@/atomic-design/molecules/FilterMolecule";
