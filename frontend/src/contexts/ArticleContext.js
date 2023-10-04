@@ -39,7 +39,7 @@ export const ArticleProvider = ({children}) => {
         }
 
         fetchData();
-    }, [currentPage, dispatch]);
+    }, [currentPage, dispatch, token]);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
