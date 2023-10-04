@@ -13,7 +13,7 @@ function Preference() {
         if (!preferenceContext.preferenceData) {
             preferenceContext.fetchPreferenceData();
         }
-    }, []);
+    }, [preferenceContext]);
 
     const {
         preferenceData,
