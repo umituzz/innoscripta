@@ -15,6 +15,7 @@ function ArticleItem({article, hasLink}: ArticleItemInterface) {
                     <Card.Body>
                         <h2 className="card-title h4">{article.title}</h2>
                         <p className="card-text">{article.description}</p>
+                        {!hasLink && (
                         <div className="mt-3">
                             <p>
                                 <Calendar size={16} className="mr-1"/>
@@ -45,6 +46,7 @@ function ArticleItem({article, hasLink}: ArticleItemInterface) {
                                 </TwitterShareButton>
                             </div>
                         </div>
+                        )}
                         {hasLink && (
                             <Link href={`/articles/${article.slug}`}>
                                 <Button variant="primary">Read more →</Button>
