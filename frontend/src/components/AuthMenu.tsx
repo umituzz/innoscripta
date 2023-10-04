@@ -16,7 +16,7 @@ const AuthMenu = () => {
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="user-dropdown-menu">
                         <Dropdown.Item>
-                            <Link href="/preferences" className="nav-link">Preferences</Link>
+                            <Link href="/user/preferences" className="nav-link">Preferences</Link>
                         </Dropdown.Item>
                     </Dropdown.Menu>
                     <Button variant="link" onClick={handleLogout} className="logout-button">

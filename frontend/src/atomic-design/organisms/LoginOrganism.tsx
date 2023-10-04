@@ -13,6 +13,7 @@ const LoginOrganism = () => {
                     className="img-fluid"
                     width={500}
                     height={500}
+                    priority={true}
                 />
             </Col>
             <Col md={6} className="container">
