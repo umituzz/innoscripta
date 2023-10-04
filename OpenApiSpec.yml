@@ -5,11 +5,6 @@ info:
   contact: {}
 servers:
   - url: http://localhost:8000
-  - url: https://content.guardianapis.com
-  - url: https://newsapi.org
-  - url: https://api.mediastack.com
-  - url: https://api.nytimes.com
-  - url: http://localhost:9200
 paths:
   /api/register:
     post:
@@ -46,6 +41,7 @@ paths:
       responses:
         '200':
           description: ''
+
   /api/login:
     post:
       tags:
@@ -73,6 +69,7 @@ paths:
       responses:
         '200':
           description: ''
+
   /api/logout:
     post:
       tags:
@@ -100,86 +97,7 @@ paths:
       responses:
         '200':
           description: ''
-  /api/articles:
-    get:
-      tags:
-        - Article
-      summary: Articles
-      description: Articles
-      operationId: articles
-      requestBody:
-        content:
-          application/json:
-            examples:
-              Articles:
-                value: "{\r\n    //\"searchTerm\": \"Test\"\r\n    //\"sourceId\": 1,\r\n    //\"categoryId\": 1,\r\n    //\"authorId\": 1\r\n}"
-      responses:
-        '200':
-          description: ''
-  /api/articles/preferences:
-    get:
-      tags:
-        - Preference
-      summary: Preferences
-      description: Preferences
-      operationId: preferences
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                sources:
-                  type: array
-                  items:
-                    type: number
-                    example: 1
-                  example:
-                    - 1
-                    - 2
-                    - 3
-            examples:
-              Preferences:
-                value:
-                  sources:
-                    - 1
-                    - 2
-                    - 3
-      responses:
-        '200':
-          description: ''
-  /api/articles/scientists-hail-pioneering-software-in-hunt-for-alien-life:
-    get:
-      tags:
-        - Article
-      summary: Article Detail
-      description: Article Detail
-      operationId: articleDetail
-      requestBody:
-        content:
-          application/json:
-            examples:
-              Article Detail:
-                value: ''
-      responses:
-        '200':
-          description: ''
-  /api/user:
-    get:
-      tags:
-        - User
-      summary: User
-      description: User
-      operationId: user
-      requestBody:
-        content:
-          application/json:
-            examples:
-              User:
-                value: ''
-      responses:
-        '200':
-          description: ''
+
   /api/user/preferences:
     get:
       tags:
@@ -212,6 +130,7 @@ paths:
       responses:
         '200':
           description: ''
+
   /api/user/preferences/sources:
     post:
       tags:
@@ -244,6 +163,7 @@ paths:
       responses:
         '200':
           description: ''
+
   /api/user/preferences/categories:
     post:
       tags:
@@ -276,6 +196,7 @@ paths:
       responses:
         '200':
           description: ''
+
   /api/user/preferences/authors:
     post:
       tags:
@@ -308,220 +229,75 @@ paths:
       responses:
         '200':
           description: ''
-  /search:
+
+  /api/user:
     get:
       tags:
-        - API
-      summary: Guardian API
-      description: Guardian API
-      operationId: guardianApi
-      parameters:
-        - name: api-key
-          in: query
-          schema:
-            type: string
-            example: test
+        - User
+      summary: User
+      description: User
+      operationId: user
       responses:
         '200':
           description: ''
-  /v2/top-headlines:
+
+  /api/articles/preferences:
     get:
       tags:
-        - API
-      summary: News API
-      description: News API
-      operationId: newsApi
-      parameters:
-        - name: country
-          in: query
-          schema:
-            type: string
-            example: us
-        - name: apiKey
-          in: query
-          schema:
-            type: string
-            example: c95ec738abe74b708871b99d6673cc85
-      responses:
-        '200':
-          description: ''
-  /v1/news:
-    get:
-      tags:
-        - API
-      summary: Media Stack API
-      description: Media Stack API
-      operationId: mediaStackApi
-      parameters:
-        - name: access_key
-          in: query
-          schema:
-            type: string
-            example: 6490528b65c9d28894748cf10c6d0a52
-      responses:
-        '200':
-          description: ''
-  /svc/mostpopular/v2/viewed/1.json:
-    get:
-      tags:
-        - API
-      summary: Newyork Times API
-      description: Newyork Times API
-      operationId: newyorkTimesApi
-      parameters:
-        - name: api-key
-          in: query
-          schema:
-            type: string
-            example: LqRN1w7XrZYdVTTo5aYSwLlVtJXBEcRS
-      responses:
-        '200':
-          description: ''
-  /_cat/nodes:
-    get:
-      tags:
-        - Elasticsearch
-      summary: Nodes Info
-      description: Nodes Info
-      operationId: nodesInfo
-      parameters:
-        - name: v
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-  /_all:
-    delete:
-      tags:
-        - Elasticsearch
-      summary: Delete All Indexes
-      description: Delete All Indexes
-      operationId: deleteAllIndexes
-      responses:
-        '200':
-          description: ''
-  /_cluster/health:
-    get:
-      tags:
-        - Elasticsearch
-      summary: Cluster Health
-      description: Cluster Health
-      operationId: clusterHealth
-      responses:
-        '200':
-          description: ''
-  /_cat/indices:
-    get:
-      tags:
-        - Elasticsearch
-      summary: indices
-      description: indices
-      operationId: indices
-      parameters:
-        - name: v
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-  /_cluster/settings:
-    put:
-      tags:
-        - Elasticsearch
-      summary: Cluster Settings Destructive Requires Name
-      description: Cluster Settings Destructive Requires Name
-      operationId: clusterSettingsDestructiveRequiresName
+        - Preference
+      summary: Preferences
+      description: Preferences
+      operationId: preferences
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                transient:
-                  type: object
-                  properties:
-                    action.destructive_requires_name:
-                      type: boolean
-                      example: false
+                sources:
+                  type: array
+                  items:
+                    type: number
+                    example: 1
+                  example:
+                    - 1
+                    - 2
+                    - 3
             examples:
-              Cluster Settings Destructive Requires Name:
+              Preferences:
                 value:
-                  transient:
-                    action.destructive_requires_name: false
+                  sources:
+                    - 1
+                    - 2
+                    - 3
       responses:
         '200':
           description: ''
-  /_all/_count:
+
+  /api/articles:
     get:
       tags:
-        - Elasticsearch
-      summary: Get All Count
-      description: Get All Count
-      operationId: getAllCount
+        - Article
+      summary: Articles
+      description: Articles
+      operationId: articles
       responses:
         '200':
           description: ''
-  /:
+
+  /api/articles/scientists-hail-pioneering-software-in-hunt-for-alien-life:
     get:
       tags:
-        - Elasticsearch
-      summary: Info
-      description: Info
-      operationId: info
+        - Article
+      summary: Article Detail
+      description: Article Detail
+      operationId: articleDetail
       responses:
         '200':
           description: ''
-  /{table}/_search:
-    get:
-      tags:
-        - Elasticsearch
-      summary: Search
-      description: Search
-      operationId: search
-      responses:
-        '200':
-          description: ''
-    parameters:
-      - name: table
-        in: path
-        required: true
-        schema:
-          type: string
-          example: articles
-  /{table}/_mapping:
-    get:
-      tags:
-        - Elasticsearch
-      summary: Mapping
-      description: Mapping
-      operationId: mapping
-      responses:
-        '200':
-          description: ''
-    parameters:
-      - name: table
-        in: path
-        required: true
-        schema:
-          type: string
-          example: articles
-  /_all/_search:
-    get:
-      tags:
-        - Elasticsearch
-      summary: All Search
-      description: All Search
-      operationId: allSearch
-      responses:
-        '200':
-          description: ''
+
 tags:
   - name: Auth
   - name: Article
   - name: User
   - name: Preference
-  - name: API
-  - name: Elasticsearch
