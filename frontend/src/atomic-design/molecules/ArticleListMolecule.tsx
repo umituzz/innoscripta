@@ -4,11 +4,11 @@ import React from "react";
 
 const ArticleListMolecule = ({ articles }) => {
     return (
-            <Row>
-                {articles?.map((article) => (
-                    <ArticleItem key={article.id} article={article} hasLink={true}/>
-                ))}
-            </Row>
+        <Row>
+            {articles?.map((article) => (
+                <ArticleItem key={article.id} article={article} hasLink={true}/>
+            ))}
+        </Row>
     )
 }
 

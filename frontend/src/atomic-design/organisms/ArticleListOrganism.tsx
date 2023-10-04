@@ -1,10 +1,10 @@
-import {Card, Col, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import PaginationComponent from "@/components/PaginationComponent";
-import SearchBar from "@/components/SearchBar";
 import React from "react";
 import {useArticleContext} from "@/contexts/ArticleContext";
 import ArticleListMolecule from "@/atomic-design/molecules/ArticleListMolecule";
 import FilterMolecule from "@/atomic-design/molecules/FilterMolecule";
+import SearchMolecule from "@/atomic-design/molecules/SearchMolecule";
 
 const ArticleListOrganism = () => {
     const {
@@ -36,12 +36,7 @@ const ArticleListOrganism = () => {
             </Col>
 
             <Col lg={4}>
-                <Card className="mb-4">
-                    <Card.Header>Search</Card.Header>
-                    <Card.Body>
-                        <SearchBar onSearch={handleSearch}/>
-                    </Card.Body>
-                </Card>
+                <SearchMolecule handleSearch={handleSearch} />
 
                 <FilterMolecule
                     title="Sources"
