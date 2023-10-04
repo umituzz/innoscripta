@@ -1,20 +1,21 @@
 import React from "react";
+import Link from "next/link";
+import {Form} from "react-bootstrap";
+import Loading from "@/components/Loading";
+import {useRegisterContext} from "@/contexts/RegisterContext";
 import InputComponent from "@/atomic-design/atoms/InputComponent";
 import ButtonComponent from "@/atomic-design/atoms/ButtonComponent";
 import ToastMessageComponent from "@/atomic-design/atoms/ToastMessageComponent";
-import {useLoginContext} from "@/contexts/LoginContext";
-import Loading from "@/components/Loading";
-import Link from "next/link";
 
-const LoginMolecule = () => {
+const RegisterMolecule = () => {
     const {
         formData,
         errors,
         toastMessage,
         handleChange,
-        handleLogin,
+        handleSubmit,
         isLoading
-    } = useLoginContext();
+    } = useRegisterContext();
 
     return (
         <>
@@ -22,7 +23,17 @@ const LoginMolecule = () => {
                 <Loading/>
             ) : (
                 <>
-                    <form onSubmit={handleLogin}>
+                    <Form onSubmit={handleSubmit}>
+                        <InputComponent
+                            label="Name"
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Enter Name"
+                            required
+                            error={errors.name}
+                        />
                         <InputComponent
                             label="Email"
                             type="email"
@@ -43,26 +54,31 @@ const LoginMolecule = () => {
                             required
                             error={errors.password}
                         />
-
+                        <InputComponent
+                            label="Confirm Password"
+                            type="password"
+                            name="password_confirmation"
+                            value={formData.password_confirmation}
+                            onChange={handleChange}
+                            placeholder="Confirm Password"
+                            required
+                            error={errors.password}
+                        />
                         <ButtonComponent variant="outline-primary" type="submit">
-                            Login
-                        </ButtonComponent>
-                    </form>
-
-                    <ToastMessageComponent message={toastMessage?.message} type={toastMessage?.type}/>
-
-                    <p className="mt-3">
-                        {`Don't have an account? `}
-                        <Link href={'/register'}
-                              className={'text-primary fw-bold text-decoration-none'}>
                             Register
+                        </ButtonComponent>
+                    </Form>
+                    <ToastMessageComponent message={toastMessage?.message} type={toastMessage?.type}/>
+                    <p className="mt-3">
+                        {`Already have an account? `}
+                        <Link href={'/login'} className={'text-primary fw-bold text-decoration-none'}>
+                            Login
                         </Link>
                     </p>
                 </>
             )}
-
         </>
-    );
-};
+    )
+}
 
-export default LoginMolecule;
+export default RegisterMolecule;

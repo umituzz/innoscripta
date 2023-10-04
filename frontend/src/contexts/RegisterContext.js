@@ -36,7 +36,10 @@ export const RegisterProvider = ({ children }) => {
 
             if (response.statusCode === 422) {
                 setErrors(response.errors);
+                setIsLoading(false);
             } else {
+                setIsLoading(false);
+                setErrors([])
                 setFormData({
                     name: '',
                     email: '',
@@ -44,9 +47,10 @@ export const RegisterProvider = ({ children }) => {
                     password_confirmation: '',
                 });
                 setToastMessage({ message: 'User Created Successfully!', type: 'success' });
-                setIsLoading(false);
                 await router.push('login');
             }
+
+
         } catch (error) {
             setToastMessage({ message: 'An error occurred while creating the user.', type: 'error' });
             setIsLoading(false);
