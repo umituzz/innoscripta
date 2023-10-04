@@ -1,31 +1,31 @@
 import React from 'react';
-import { Container, Row, Button } from 'react-bootstrap';
-import Layout from '@/components/Layout';
+import {Container} from 'react-bootstrap';
 import ArticleItem from '@/components/ArticleItem';
-import { GetMethodService } from '@/services/GetMethodService';
+import {GetMethodService} from '@/services/GetMethodService';
+import MainLayout from "@/layouts/MainLayout";
 
-export default function ArticleDetail({ article }) {
+export default function ArticleDetail({article}) {
     if (!article) {
         return (
-            <Layout title="Article Not Found">
+            <MainLayout title="Article Not Found">
                 <Container className="mt-2 minHeight pb-5">
                     <h2>Article Not Found</h2>
                 </Container>
-            </Layout>
+            </MainLayout>
         );
     }
 
     return (
-        <Layout title={article.title} description={article.description}>
+        <MainLayout title={article.title} description={article.description}>
             <Container className="mt-2 minHeight pb-5">
-                <ArticleItem key={article.id} article={article} hasLink={false} />
+                <ArticleItem key={article.id} article={article} hasLink={false}/>
             </Container>
-        </Layout>
+        </MainLayout>
     );
 }
 
 export async function getServerSideProps(context) {
-    const { slug } = context.query;
+    const {slug} = context.query;
 
     try {
         const response = await GetMethodService(`articles/${slug}`);
