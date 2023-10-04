@@ -9,16 +9,12 @@ use Illuminate\Support\Str;
 
 /**
  * Class GuardianApiService
- * @package App\Services\Api
  */
 class GuardianApiService extends BaseApiService implements ApiServiceInterface
 {
-    /**
-     * @return string
-     */
     public function getUrl(): string
     {
-        return config('services.guardianApi.api_url') . '/search?api-key=' . config('services.guardianApi.api_key');
+        return config('services.guardianApi.api_url').'/search?api-key='.config('services.guardianApi.api_key');
     }
 
     public function getData($sourceId)
@@ -27,7 +23,7 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
             $url = $this->getUrl();
             $response = $this->httpService->getResult($url);
 
-            if (!$response) {
+            if (! $response) {
                 $this->logInfo(__('No data received from the API'));
 
                 return false;
@@ -72,6 +68,4 @@ class GuardianApiService extends BaseApiService implements ApiServiceInterface
             return false;
         }
     }
-
-
 }

@@ -2,31 +2,30 @@
 
 namespace App\Services\User;
 
+use App\Contracts\PreferenceRepositoryInterface;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Source;
 use App\Services\Redis\RedisService;
 use App\Traits\Logger;
 use Exception;
-use App\Contracts\PreferenceRepositoryInterface;
 use Illuminate\Http\Request;
 
 /**
  * Class PreferenceService
- * @package App\Services\User
  */
 class PreferenceService
 {
     use Logger;
 
     private PreferenceRepositoryInterface $preferenceRepository;
+
     private RedisService $redisService;
 
     public function __construct(
         PreferenceRepositoryInterface $preferenceRepository,
         RedisService $redisService
-    )
-    {
+    ) {
         $this->preferenceRepository = $preferenceRepository;
         $this->redisService = $redisService;
     }
@@ -35,12 +34,12 @@ class PreferenceService
     {
         $user = request()->user();
 
-        return  $user->preferences->groupBy('preferenceable_type') ?? [];
+        return $user->preferences->groupBy('preferenceable_type') ?? [];
     }
 
     public function getUserPreferences()
     {
-       $preferences = $this->findUserPreferences();
+        $preferences = $this->findUserPreferences();
 
         return [
             'sources' => $this->getPreferenceIds($preferences, Source::class),
@@ -62,7 +61,7 @@ class PreferenceService
                 $this->preferenceRepository->create([
                     'user_id' => $user->id,
                     'preferenceable_id' => $id,
-                    'preferenceable_type' => $type
+                    'preferenceable_type' => $type,
                 ]);
             }
 

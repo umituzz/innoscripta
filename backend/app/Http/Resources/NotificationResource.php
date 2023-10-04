@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class NotificationResource
+ *
  * @parent App\Http\Resources
  */
 class NotificationResource extends JsonResource
@@ -20,9 +21,9 @@ class NotificationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'message' => $this->data['message'] ?? NULL,
+            'message' => $this->data['message'] ?? null,
             'read_at' => $this->read_at,
-            'created_at' => $this->created_at->format('y-m-D H:i')
+            'created_at' => $this->created_at->format('y-m-D H:i'),
         ];
     }
 }

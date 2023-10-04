@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
  * Class ArticleCollection
+ *
  * @parent App\Http\Resources
  */
 class ArticleCollection extends ResourceCollection

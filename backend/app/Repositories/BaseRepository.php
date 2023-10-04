@@ -8,15 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BaseRepository
- * @package App\Repositories
  */
 class BaseRepository implements BaseRepositoryInterface
 {
     protected Model $model;
 
-    /**
-     * @param Model $model
-     */
     public function __construct(Model $model)
     {
         $this->model = $model;
@@ -35,8 +31,6 @@ class BaseRepository implements BaseRepositoryInterface
     /**
      * Find related record by value
      *
-     * @param $key
-     * @param $value
      * @return mixed
      */
     public function findBy($key, $value)
@@ -56,17 +50,17 @@ class BaseRepository implements BaseRepositoryInterface
 
     /**
      * Insert a new record
-     * @param $data
+     *
      * @return mixed
      */
     public function create($data)
     {
         try {
-//            DB::beginTransaction();
+            //            DB::beginTransaction();
 
             return $this->model->firstOrCreate($data);
         } catch (Exception $e) {
-//            DB::rollBack();
+            //            DB::rollBack();
 
             return $e->getMessage();
         }
@@ -74,26 +68,22 @@ class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-     * @param $id
-     * @param $data
      * @return mixed
      */
     public function update($id, $data)
     {
         try {
-//            DB::beginTransaction();
+            //            DB::beginTransaction();
 
             return $this->model->where('id', $id)->update($data);
         } catch (Exception $e) {
-//            DB::rollBack();
+            //            DB::rollBack();
 
             return $e->getMessage();
         }
     }
 
     /**
-     * @param $key
-     * @param $value
      * @return mixed
      */
     public function delete($key, $value)

@@ -9,16 +9,12 @@ use Illuminate\Support\Str;
 
 /**
  * Class MediaStackApiService
- * @package App\Services
  */
 class MediaStackApiService extends BaseApiService implements ApiServiceInterface
 {
-    /**
-     * @return string
-     */
     public function getUrl(): string
     {
-        return config('services.mediaStackApi.api_url') . '/news?access_key=' . config('services.mediaStackApi.api_key');
+        return config('services.mediaStackApi.api_url').'/news?access_key='.config('services.mediaStackApi.api_key');
     }
 
     public function getData($sourceId)
@@ -27,7 +23,7 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
             $url = $this->getUrl();
             $response = $this->httpService->getResult($url);
 
-            if (!$response) {
+            if (! $response) {
                 $this->logInfo(__('No data received from the API'));
 
                 return false;
@@ -41,7 +37,7 @@ class MediaStackApiService extends BaseApiService implements ApiServiceInterface
                 return false;
             }
 
-            collect($items)->map(function ($item) use($sourceId){
+            collect($items)->map(function ($item) use ($sourceId) {
 
                 $author = $this->authorService->firstOrCreate('name', [
                     'name' => $item->author ?? AuthorEnums::MEDIA_STACK_AUTHOR,

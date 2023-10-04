@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 
 /**
  * Class RoleSeeder
- * @package Database\Seeders
  */
 class RoleSeeder extends Seeder
 {

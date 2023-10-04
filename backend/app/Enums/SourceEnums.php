@@ -4,7 +4,6 @@ namespace App\Enums;
 
 /**
  * Enum SourceEnums
- * @package App\Enums
  */
 enum SourceEnums
 {
@@ -15,5 +14,4 @@ enum SourceEnums
     const MEDIA_STACK = 'Media Stack API';
 
     const NEWYORK_TIMES = 'Newyork Times API';
-
 }

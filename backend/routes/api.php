@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\Article\ArticlesController;
-use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\User\PreferencesController;
 use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Support\Facades\Route;

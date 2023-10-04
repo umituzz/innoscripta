@@ -16,12 +16,12 @@ return new class extends Migration
             $table->foreignId('source_id')->constrained();
             $table->foreignId('author_id')->nullable()->constrained();
             $table->foreignId('category_id')->nullable()->constrained();
-            $table->string("title");
-            $table->string("slug");
+            $table->string('title');
+            $table->string('slug');
             $table->mediumText('description')->nullable();
-            $table->string("url");
-            $table->mediumText("image");
-            $table->string("published_at");
+            $table->string('url');
+            $table->mediumText('image');
+            $table->string('published_at');
             $table->softDeletes();
             $table->timestamps();
         });

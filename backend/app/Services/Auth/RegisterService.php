@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * Class RegisterService
- * @package App\Services\Auth
  */
 class RegisterService
 {
@@ -21,7 +20,6 @@ class RegisterService
     }
 
     /**
-     * @param $request
      * @return mixed
      */
     public function createUser($request)
@@ -29,7 +27,7 @@ class RegisterService
         $user = $this->userRepository->create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'))
+            'password' => bcrypt($request->input('password')),
         ]);
 
         return new UserResource($user);
@@ -40,7 +38,7 @@ class RegisterService
         $user = $this->userRepository->create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password'))
+            'password' => bcrypt($request->input('password')),
         ]);
 
         event(new Registered($user));

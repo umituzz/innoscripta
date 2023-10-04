@@ -4,7 +4,6 @@ namespace App\Contracts;
 
 /**
  * Interface NotificationRepositoryInterface
- * @package App\Contracts
  */
 interface NotificationRepositoryInterface
 {
@@ -13,5 +12,4 @@ interface NotificationRepositoryInterface
     public function delete($id);
 
     public function find($id);
-
 }

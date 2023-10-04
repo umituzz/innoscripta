@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 
 /**
  * Class ArticleSeeder
- * @package Database\Seeders
  */
 class ArticleSeeder extends Seeder
 {
@@ -16,6 +15,6 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-//        Article::factory()->count(1)->create();
+        //        Article::factory()->count(1)->create();
     }
 }

@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Redis;
 
 /**
  * Class RedisService
- * @package App\Services
  */
 class RedisService
 {

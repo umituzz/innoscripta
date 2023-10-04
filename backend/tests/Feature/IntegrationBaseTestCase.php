@@ -7,7 +7,6 @@ use Tests\TestCase;
 
 /**
  * Class IntegrationBaseTestCase
- * @package Tests\Feature
  */
 class IntegrationBaseTestCase extends TestCase
 {

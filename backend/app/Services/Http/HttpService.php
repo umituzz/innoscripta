@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Http;
 
 /**
  * Class HttpService
- * @package App\Services\Http
  */
 class HttpService
 {

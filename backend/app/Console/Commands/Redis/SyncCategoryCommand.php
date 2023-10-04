@@ -3,14 +3,13 @@
 namespace App\Console\Commands\Redis;
 
 use App\Http\Resources\CategoryResource;
-use Exception;
 use App\Services\Article\CategoryService;
 use App\Services\Redis\RedisService;
+use Exception;
 use Illuminate\Console\Command;
 
 /**
  * Class SyncCategoryCommand
- * @package App\Console\Commands\Redis
  */
 class SyncCategoryCommand extends Command
 {
@@ -22,12 +21,10 @@ class SyncCategoryCommand extends Command
 
     private CategoryService $categoryService;
 
-
     public function __construct(
         RedisService $redisService,
         CategoryService $categoryService
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->redisService = $redisService;

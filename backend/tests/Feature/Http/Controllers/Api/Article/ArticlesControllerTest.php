@@ -9,7 +9,7 @@ use Tests\Feature\IntegrationBaseTestCase;
 
 /**
  * Class ArticlesControllerTest
- * @package Tests\Feature\Http\Controllers\Api\Article
+ *
  * @coversDefaultClass \App\Http\Controllers\Api\Article\ArticlesController
  */
 class ArticlesControllerTest extends IntegrationBaseTestCase
@@ -40,7 +40,7 @@ class ArticlesControllerTest extends IntegrationBaseTestCase
             ->with('slug', $slug)
             ->andReturn($article);
 
-        $response = $this->get('/api/articles/' . $slug);
+        $response = $this->get('/api/articles/'.$slug);
 
         $response
             ->assertStatus(200)
@@ -62,5 +62,4 @@ class ArticlesControllerTest extends IntegrationBaseTestCase
             ->assertStatus(404)
             ->assertJson(['message' => 'Not Found']);
     }
-
 }

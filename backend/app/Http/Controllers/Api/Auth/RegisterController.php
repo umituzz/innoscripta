@@ -9,22 +9,17 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class RegisterController
- * @package App\Http\Controllers\Api\Auth
  */
 class RegisterController extends BaseController
 {
     private RegisterService $registerService;
 
-    /**
-     * @param RegisterService $registerService
-     */
     public function __construct(RegisterService $registerService)
     {
         $this->registerService = $registerService;
     }
 
     /**
-     * @param RegisterRequest $request
      * @return JsonResponse
      */
     public function register(RegisterRequest $request)

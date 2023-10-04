@@ -8,7 +8,6 @@ use App\Http\Resources\ArticleResource;
 
 /**
  * Class ArticleService
- * @package App\Services\Article
  */
 class ArticleService
 {
@@ -29,12 +28,9 @@ class ArticleService
             return new ArticleResource($item);
         }
 
-        return NULL;
+        return null;
     }
 
-    /**
-     * @return ArticleCollection
-     */
     public function getList(): ArticleCollection
     {
         $items = $this->articleRepository->getWith();
@@ -42,28 +38,24 @@ class ArticleService
         return new ArticleCollection($items);
     }
 
-    /**
-     * @param $request
-     * @return ArticleCollection
-     */
     public function getAllElasticData($request): ArticleCollection
     {
         $searchTerm = '*';
 
-        if ($request->has('sourceId') ) {
+        if ($request->has('sourceId')) {
             $searchTerm = "source_id:({$request->input('sourceId')})";
         }
 
-        if ($request->has('categoryId') ) {
+        if ($request->has('categoryId')) {
             $searchTerm = "category_id:({$request->input('categoryId')})";
         }
 
-        if ($request->has('authorId') ) {
+        if ($request->has('authorId')) {
             $searchTerm = "author_id:({$request->input('authorId')})";
         }
 
         if ($request->has('searchTerm')) {
-            $searchTerm =  "title:({$request->input('searchTerm')})";
+            $searchTerm = "title:({$request->input('searchTerm')})";
         }
 
         $items = $this->articleRepository->getElasticsearchData($searchTerm);
@@ -72,8 +64,6 @@ class ArticleService
     }
 
     /**
-     * @param $key
-     * @param $data
      * @return mixed
      */
     public function firstOrCreate($key, $data)

@@ -7,7 +7,6 @@ use App\Http\Resources\AuthorResource;
 
 /**
  * Class AuthorService
- * @package App\Services\Article
  */
 class AuthorService
 {

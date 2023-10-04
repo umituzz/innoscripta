@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Artisan;
 
 /**
  * Class ScoutArticleCommand
- * @package App\Console\Commands\Elasticsearch
  */
 class ScoutArticleCommand extends Command
 {
@@ -30,5 +29,4 @@ class ScoutArticleCommand extends Command
         Artisan::call('scout:flush "App\\\Models\\\Article"');
         Artisan::call('scout:import "App\\\Models\\\Article"');
     }
-
 }

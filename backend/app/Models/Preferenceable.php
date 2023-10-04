@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * Class Preferenceable
- * @package App\Models
  */
 class Preferenceable extends Model
 {
@@ -17,12 +16,9 @@ class Preferenceable extends Model
     protected $fillable = [
         'user_id',
         'preferenceable_type',
-        'preferenceable_id'
+        'preferenceable_id',
     ];
 
-    /**
-     * @return MorphTo
-     */
     public function preferenceable(): MorphTo
     {
         return $this->morphTo();

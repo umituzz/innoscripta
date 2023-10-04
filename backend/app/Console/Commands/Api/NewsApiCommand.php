@@ -9,7 +9,6 @@ use Illuminate\Console\Command;
 
 /**
  * Class NewsApiCommand
- * @package App\Console\Commands\Api
  */
 class NewsApiCommand extends Command
 {

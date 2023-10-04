@@ -4,7 +4,6 @@ namespace App\Enums;
 
 /**
  * Enum SourceEnums
- * @package App\Enums
  */
 enum AuthorEnums
 {
@@ -13,5 +12,4 @@ enum AuthorEnums
     const NEWS_AUTHOR = 'News Author';
 
     const MEDIA_STACK_AUTHOR = 'Media Stack Author';
-
 }

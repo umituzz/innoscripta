@@ -6,20 +6,16 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * Class Author
- * @package App\Models
  */
 class Author extends BaseModel
 {
     protected $fillable = [
         'source_id',
-        'name'
+        'name',
     ];
 
-    /**
-     * @return MorphToMany
-     */
     public function users(): MorphToMany
     {
-        return $this->morphToMany(  User::class, 'preferenceable');
+        return $this->morphToMany(User::class, 'preferenceable');
     }
 }

@@ -9,13 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class BaseApiRequest
- * @package App\Http\Requests\Api
  */
 class BaseApiRequest extends FormRequest
 {
-    /**
-     * @param Validator $validator
-     */
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

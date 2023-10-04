@@ -7,7 +7,6 @@ use App\Http\Resources\SourceResource;
 
 /**
  * Class SourceService
- * @package App\Services\Article
  */
 class SourceService
 {
@@ -26,8 +25,6 @@ class SourceService
     }
 
     /**
-     * @param $key
-     * @param $value
      * @return mixed
      */
     public function findBy($key, $value)

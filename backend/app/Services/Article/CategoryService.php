@@ -7,7 +7,6 @@ use App\Http\Resources\CategoryResource;
 
 /**
  * Class CategoryService
- * @package App\Services\Article
  */
 class CategoryService
 {

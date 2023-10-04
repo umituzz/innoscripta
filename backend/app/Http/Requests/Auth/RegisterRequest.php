@@ -7,7 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class RegisterRequest
- * @package App\Http\Requests\Api
  */
 class RegisterRequest extends FormRequest
 {

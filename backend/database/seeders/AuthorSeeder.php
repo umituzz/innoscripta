@@ -8,7 +8,6 @@ use Illuminate\Database\Seeder;
 
 /**
  * Class AuthorSeeder
- * @package Database\Seeders
  */
 class AuthorSeeder extends Seeder
 {
@@ -17,7 +16,7 @@ class AuthorSeeder extends Seeder
      */
     public function run(): void
     {
-//        Author::factory()->create();
+        //        Author::factory()->create();
 
         Author::create(['name' => AuthorEnums::GUARDIAN_AUTHOR]);
         Author::create(['name' => AuthorEnums::NEWS_AUTHOR]);

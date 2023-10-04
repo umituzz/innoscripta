@@ -7,7 +7,6 @@ use App\Models\User;
 
 /**
  * Class UserRepository
- * @package App\Repositories
  */
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -24,6 +23,4 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return auth()->user();
     }
-
-
 }

@@ -3,14 +3,12 @@
 namespace App\Console\Commands\Api;
 
 use App\Enums\SourceEnums;
-use App\Jobs\Api\GetGuardianApiJob;
 use App\Jobs\Api\GetNewyorkTimesApiJob;
 use App\Services\Article\SourceService;
 use Illuminate\Console\Command;
 
 /**
  * Class NewyorkTimesApiCommand
- * @package App\Console\Commands\Api
  */
 class NewyorkTimesApiCommand extends Command
 {
@@ -36,7 +34,6 @@ class NewyorkTimesApiCommand extends Command
 
         $this->sourceService = $sourceService;
     }
-
 
     /**
      * Execute the console command.

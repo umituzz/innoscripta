@@ -12,7 +12,6 @@ use Illuminate\Validation\ValidationException;
 
 /**
  * Class LoginRequest
- * @package App\Http\Requests\Api
  */
 class LoginRequest extends FormRequest
 {
@@ -40,7 +39,7 @@ class LoginRequest extends FormRequest
 
         $attempt = Auth::attempt($this->only('email', 'password'));
 
-        if (!$attempt) {
+        if (! $attempt) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

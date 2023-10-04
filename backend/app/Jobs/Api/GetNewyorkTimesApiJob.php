@@ -11,7 +11,6 @@ use Illuminate\Queue\SerializesModels;
 
 /**
  * Class GetNewyorkTimesApiJob
- * @package App\Jobs\Api
  */
 class GetNewyorkTimesApiJob implements ShouldQueue
 {

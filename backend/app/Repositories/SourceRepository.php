@@ -7,7 +7,6 @@ use App\Models\Source;
 
 /**
  * Class SourceRepository
- * @package App\Repositories
  */
 class SourceRepository extends BaseRepository implements SourceRepositoryInterface
 {

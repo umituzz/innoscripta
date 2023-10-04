@@ -7,7 +7,6 @@ use Illuminate\Validation\Rules;
 
 /**
  * Class RegisterRequest
- * @package App\Http\Requests\Api
  */
 class RegisterRequest extends BaseApiRequest
 {

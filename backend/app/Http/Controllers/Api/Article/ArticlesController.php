@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class ArticlesController
- * @package App\Http\Controllers\Api\Article
  */
 class ArticlesController extends BaseController
 {
@@ -23,17 +22,17 @@ class ArticlesController extends BaseController
     {
         $items = $this->articleService->getAllElasticData($request);
 
-        return $this->ok($items,  __('Article List'));
+        return $this->ok($items, __('Article List'));
     }
 
     public function detail($slug)
     {
         $item = $this->articleService->findBy('slug', $slug);
 
-        if (!$item) {
+        if (! $item) {
             return $this->notFound();
         }
 
-        return $this->ok($item,  __('Article Detail'));
+        return $this->ok($item, __('Article Detail'));
     }
 }

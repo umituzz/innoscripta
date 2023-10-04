@@ -8,14 +8,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class AlwaysAcceptJson
- * @package App\Http\Middleware
  */
 class AlwaysAcceptJson
 {
     /**
      * Handle an incoming request.
      *
-     * @param Closure(Request): (Response) $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {

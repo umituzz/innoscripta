@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class LoginController
- * @package App\Http\Controllers\Api\Auth
  */
 class LoginController extends BaseController
 {
@@ -22,7 +21,6 @@ class LoginController extends BaseController
     }
 
     /**
-     * @param LoginRequest $request
      * @return JsonResponse
      */
     public function login(LoginRequest $request)
@@ -35,7 +33,6 @@ class LoginController extends BaseController
     }
 
     /**
-     * @param Request $request
      * @return JsonResponse
      */
     public function logout(Request $request)

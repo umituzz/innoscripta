@@ -8,7 +8,6 @@ use App\Models\Article;
 
 /**
  * Class ArticleRepository
- * @package App\Repositories
  */
 class ArticleRepository extends BaseRepository implements ArticleRepositoryInterface
 {
@@ -30,7 +29,7 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
     {
         return $this->article
             ->search($searchTerm)
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate(ArticleEnums::DEFAULT_PAGINATION);
     }
 }

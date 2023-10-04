@@ -7,7 +7,6 @@ use Laravel\Scout\Searchable;
 
 /**
  * Class Article
- * @package App\Models
  */
 class Article extends BaseModel
 {
@@ -24,7 +23,7 @@ class Article extends BaseModel
         'description',
         'url',
         'image',
-        'published_at'
+        'published_at',
     ];
 
     public function searchableAs(): string
@@ -43,25 +42,16 @@ class Article extends BaseModel
         return $this->toArray();
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

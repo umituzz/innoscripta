@@ -8,16 +8,12 @@ use Illuminate\Support\Str;
 
 /**
  * Class NewyorkTimesApiService
- * @package App\Services\Api
  */
 class NewyorkTimesApiService extends BaseApiService implements ApiServiceInterface
 {
-    /**
-     * @return string
-     */
     public function getUrl(): string
     {
-        return config('services.newyorkTimesApi.api_url') . '/1.json?api-key=' . config('services.newyorkTimesApi.api_key');
+        return config('services.newyorkTimesApi.api_url').'/1.json?api-key='.config('services.newyorkTimesApi.api_key');
     }
 
     public function getData($sourceId)
@@ -26,7 +22,7 @@ class NewyorkTimesApiService extends BaseApiService implements ApiServiceInterfa
             $url = $this->getUrl();
             $response = $this->httpService->getResult($url);
 
-            if (!$response) {
+            if (! $response) {
                 $this->logInfo(__('No data received from the API'));
 
                 return false;
@@ -73,5 +69,4 @@ class NewyorkTimesApiService extends BaseApiService implements ApiServiceInterfa
             return false;
         }
     }
-
 }

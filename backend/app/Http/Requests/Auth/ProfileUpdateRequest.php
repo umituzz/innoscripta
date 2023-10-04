@@ -8,7 +8,6 @@ use Illuminate\Validation\Rule;
 
 /**
  * Class ProfileUpdateRequest
- * @package App\Http\Requests\Auth
  */
 class ProfileUpdateRequest extends FormRequest
 {

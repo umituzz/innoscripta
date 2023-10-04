@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 
 /**
  * Class SourceSeeder
- * @package Database\Seeders
  */
 class SourceSeeder extends Seeder
 {
@@ -16,7 +15,7 @@ class SourceSeeder extends Seeder
      */
     public function run(): void
     {
-//        Source::factory()->create();
+        //        Source::factory()->create();
 
         Source::create(['name' => 'Guardian API']);
         Source::create(['name' => 'News API']);

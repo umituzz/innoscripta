@@ -4,7 +4,6 @@ namespace App\Contracts;
 
 /**
  * Interface BaseApiServiceInterface
- * @package App\Contracts
  */
 interface ApiServiceInterface
 {
@@ -13,8 +12,5 @@ interface ApiServiceInterface
      */
     public function getData($sourceId);
 
-    /**
-     * @return string
-     */
     public function getUrl(): string;
 }

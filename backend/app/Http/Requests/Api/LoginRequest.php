@@ -11,7 +11,6 @@ use Illuminate\Validation\ValidationException;
 
 /**
  * Class LoginRequest
- * @package App\Http\Requests\Api
  */
 class LoginRequest extends BaseApiRequest
 {
@@ -28,8 +27,6 @@ class LoginRequest extends BaseApiRequest
         ];
     }
 
-
-
     /**
      * Attempt to authenticate the request's credentials.
      *
@@ -41,7 +38,7 @@ class LoginRequest extends BaseApiRequest
 
         $attempt = Auth::attempt($this->only('email', 'password'));
 
-        if (!$attempt) {
+        if (! $attempt) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

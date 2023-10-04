@@ -7,7 +7,6 @@ use App\Models\Preferenceable;
 
 /**
  * Class PreferenceRepository
- * @package App\Repositories
  */
 class PreferenceRepository extends BaseRepository implements PreferenceRepositoryInterface
 {

@@ -9,16 +9,12 @@ use Illuminate\Support\Str;
 
 /**
  * Class NewsApiService
- * @package App\Services
  */
 class NewsApiService extends BaseApiService implements ApiServiceInterface
 {
-    /**
-     * @return string
-     */
     public function getUrl(): string
     {
-        return config('services.newsApi.api_url') . '/top-headlines?country=us&apiKey=' . config('services.newsApi.api_key');
+        return config('services.newsApi.api_url').'/top-headlines?country=us&apiKey='.config('services.newsApi.api_key');
     }
 
     public function getData($sourceId)
@@ -27,7 +23,7 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
             $url = $this->getUrl();
             $response = $this->httpService->getResult($url);
 
-            if (!$response) {
+            if (! $response) {
                 $this->logInfo(__('No data received from the API'));
 
                 return false;
@@ -78,5 +74,4 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
             return false;
         }
     }
-
 }

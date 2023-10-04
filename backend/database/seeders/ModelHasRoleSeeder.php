@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Class ModelHasRoleSeeder
- * @package Database\Seeders
  */
 class ModelHasRoleSeeder extends Seeder
 {
@@ -18,13 +17,13 @@ class ModelHasRoleSeeder extends Seeder
             [
                 'role_id' => 1,
                 'model_type' => User::class,
-                'model_id' => 1
+                'model_id' => 1,
             ],
             [
                 'role_id' => 2,
                 'model_type' => User::class,
-                'model_id' => 2
-            ]
+                'model_id' => 2,
+            ],
         ]);
     }
 }

@@ -8,7 +8,7 @@ use Tests\Feature\IntegrationBaseTestCase;
 
 /**
  * Class LoginControllerTest
- * @package Tests\Feature\Http\Controllers\Api\Auth
+ *
  * @coversDefaultClass \App\Http\Controllers\Api\Auth\LoginController
  */
 class LoginControllerTest extends IntegrationBaseTestCase
@@ -16,7 +16,7 @@ class LoginControllerTest extends IntegrationBaseTestCase
     public function test_login()
     {
         $user = User::factory()->create([
-            'password' => bcrypt(123456789)
+            'password' => bcrypt(123456789),
         ]);
 
         $userData = [

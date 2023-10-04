@@ -7,7 +7,6 @@ use App\Services\Redis\RedisService;
 
 /**
  * Class HomepageController
- * @package App\Http\Controllers\Dashboard
  */
 class HomepageController extends Controller
 {

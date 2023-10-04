@@ -8,19 +8,18 @@ use Illuminate\Console\Command;
 
 /**
  * Class SetTotalArticleCommand
- * @package App\Console\Commands\Redis
  */
 class SetTotalArticleCommand extends Command
 {
     protected $signature = 'redis:set-total-articles';
 
     protected $description = 'Set total articles count to redis';
+
     private ArticleRepositoryInterface $articleRepository;
 
     public function __construct(
         ArticleRepositoryInterface $articleRepository
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->articleRepository = $articleRepository;

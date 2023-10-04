@@ -7,7 +7,6 @@ use App\Services\Article\ArticleService;
 
 /**
  * Class ArticlesController
- * @package App\Http\Controllers\Article
  */
 class ArticlesController extends Controller
 {

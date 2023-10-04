@@ -8,7 +8,7 @@ use Tests\Feature\IntegrationBaseTestCase;
 
 /**
  * Class RegisterControllerTest
- * @package Tests\Feature\Http\Controllers\Api\Auth
+ *
  * @coversDefaultClass \App\Http\Controllers\Api\Auth\RegisterController
  */
 class RegisterControllerTest extends IntegrationBaseTestCase

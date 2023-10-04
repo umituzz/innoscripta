@@ -9,7 +9,6 @@ use Illuminate\Console\Command;
 
 /**
  * Class GuardianApiCommand
- * @package App\Console\Commands\Api
  */
 class GuardianApiCommand extends Command
 {
@@ -35,7 +34,6 @@ class GuardianApiCommand extends Command
 
         $this->sourceService = $sourceService;
     }
-
 
     /**
      * Execute the console command.

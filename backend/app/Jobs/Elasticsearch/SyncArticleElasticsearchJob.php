@@ -11,7 +11,6 @@ use Illuminate\Queue\SerializesModels;
 
 /**
  * Class SyncArticleElasticsearchJob
- * @package App\Jobs\Elasticsearch
  */
 class SyncArticleElasticsearchJob implements ShouldQueue
 {
@@ -41,9 +40,9 @@ class SyncArticleElasticsearchJob implements ShouldQueue
                 'timeout' => '5s',
                 'client' => [
                     'timeout' => 6,
-                    'connect_timeout' => 1
+                    'connect_timeout' => 1,
                 ],
-                'body' => $item->getAttributes()
+                'body' => $item->getAttributes(),
             ];
 
             $client->index($params);

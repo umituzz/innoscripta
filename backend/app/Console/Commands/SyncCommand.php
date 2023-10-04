@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Artisan;
 
 /**
  * Class SyncCommand
- * @package App\Console\Commands
  */
 class SyncCommand extends Command
 {

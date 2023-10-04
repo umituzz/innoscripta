@@ -20,7 +20,7 @@ class NotificationFactory extends Factory
     {
         return [
             'id' => '72859427-8e42-47e9-a20d-16709bbb49aa',
-            'type' => NULL,
+            'type' => null,
             'notifiable_type' => User::class,
             'notifiable_id' => 1,
             'data' => json_encode(['message' => $this->faker->sentence]),

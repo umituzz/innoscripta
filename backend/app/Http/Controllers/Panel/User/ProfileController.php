@@ -12,15 +12,11 @@ use Illuminate\Http\RedirectResponse;
 
 /**
  * Class ProfileController
- * @package App\Http\Controllers\User
  */
 class ProfileController extends Controller
 {
     private UserService $userService;
 
-    /**
-     * @param UserService $userService
-     */
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
@@ -32,12 +28,11 @@ class ProfileController extends Controller
     public function profile()
     {
         return view('user.profile', [
-            'user' => auth()->user()
+            'user' => auth()->user(),
         ]);
     }
 
     /**
-     * @param ProfileUpdateRequest $request
      * @return RedirectResponse
      */
     public function update(ProfileUpdateRequest $request)

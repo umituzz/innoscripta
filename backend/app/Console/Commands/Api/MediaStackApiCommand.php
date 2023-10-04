@@ -9,7 +9,6 @@ use Illuminate\Console\Command;
 
 /**
  * Class MediaStackApiCommand
- * @package App\Console\Commands\Api
  */
 class MediaStackApiCommand extends Command
 {

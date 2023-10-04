@@ -7,13 +7,12 @@ use App\Services\User\UserService;
 
 /**
  * Class UserController
- * @package App\Http\Controllers\User
  */
 class UserController extends BaseController
 {
     private UserService $userService;
 
-    public function __construct(UserService $userService,)
+    public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }

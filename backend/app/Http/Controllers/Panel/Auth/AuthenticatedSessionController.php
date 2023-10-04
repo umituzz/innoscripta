@@ -12,7 +12,6 @@ use Illuminate\View\View;
 
 /**
  * Class AuthenticatedSessionController
- * @package App\Http\Controllers\Auth
  */
 class AuthenticatedSessionController extends Controller
 {

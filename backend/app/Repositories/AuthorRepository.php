@@ -7,7 +7,6 @@ use App\Models\Author;
 
 /**
  * Class AuthorRepository
- * @package App\Repositories
  */
 class AuthorRepository extends BaseRepository implements AuthorRepositoryInterface
 {

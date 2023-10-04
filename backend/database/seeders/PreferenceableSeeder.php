@@ -10,7 +10,6 @@ use Illuminate\Database\Seeder;
 
 /**
  * Class PreferenceableSeeder
- * @package Database\Seeders
  */
 class PreferenceableSeeder extends Seeder
 {

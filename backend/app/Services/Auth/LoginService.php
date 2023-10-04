@@ -10,7 +10,6 @@ use Illuminate\Http\Response;
 
 /**
  * Class LoginService
- * @package App\Services\Auth
  */
 class LoginService
 {
@@ -24,16 +23,15 @@ class LoginService
     }
 
     /**
-     * @param $request
      * @return array
      */
     public function login($request)
     {
-        if (!auth()->attempt($request->only('email', 'password'))) {
+        if (! auth()->attempt($request->only('email', 'password'))) {
             return [
                 'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
                 'errors' => [
-                    'email' => __('The provided credentials are incorrect!')
+                    'email' => __('The provided credentials are incorrect!'),
                 ],
                 'message' => __('Login Failed'),
             ];
@@ -46,14 +44,10 @@ class LoginService
 
         return [
             'user' => $item,
-            'token' => $token
+            'token' => $token,
         ];
     }
 
-    /**
-     * @param $request
-     * @return bool
-     */
     public function logout($request): bool
     {
         try {

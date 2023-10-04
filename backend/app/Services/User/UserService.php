@@ -7,7 +7,6 @@ use App\Http\Resources\UserResource;
 
 /**
  * Class UserService
- * @package App\Services\User
  */
 class UserService
 {

@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 
 /**
  * Class CategorySeeder
- * @package Database\Seeders
  */
 class CategorySeeder extends Seeder
 {
@@ -16,6 +15,6 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-//        Category::factory()->create();
+        //        Category::factory()->create();
     }
 }

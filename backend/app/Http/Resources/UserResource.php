@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class UserResource
+ *
  * @parent App\Http\Resources
  */
 class UserResource extends JsonResource

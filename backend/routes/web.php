@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('auth/twitter', [TwitterAuthController::class, 'redirectToTwitter']);
 Route::get('auth/twitter/callback', [TwitterAuthController::class, 'handleTwitterCallback']);
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomepageController::class, 'index'])->name('homepage');

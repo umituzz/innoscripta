@@ -9,7 +9,6 @@ use Throwable;
 
 /**
  * Class Handler
- * @package App\Exceptions
  */
 class Handler extends ExceptionHandler
 {
@@ -44,5 +43,4 @@ class Handler extends ExceptionHandler
 
         return parent::render($request, $e);
     }
-
 }

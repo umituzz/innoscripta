@@ -2,15 +2,14 @@
 
 namespace App\Console\Commands\Redis;
 
-use Exception;
 use App\Http\Resources\SourceResource;
 use App\Services\Article\SourceService;
 use App\Services\Redis\RedisService;
+use Exception;
 use Illuminate\Console\Command;
 
 /**
  * Class SyncSourceCommand
- * @package App\Console\Commands\Redis
  */
 class SyncSourceCommand extends Command
 {
@@ -25,8 +24,7 @@ class SyncSourceCommand extends Command
     public function __construct(
         RedisService $redisService,
         SourceService $sourceService
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->redisService = $redisService;

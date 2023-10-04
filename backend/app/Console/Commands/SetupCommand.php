@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Artisan;
 
 /**
  * Class SetupCommand
- * @package App\Console\Commands
  */
 class SetupCommand extends Command
 {

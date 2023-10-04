@@ -11,7 +11,6 @@ use Illuminate\View\View;
 
 /**
  * Class RegisteredUserController
- * @package App\Http\Controllers\Auth
  */
 class RegisteredUserController extends Controller
 {
@@ -32,9 +31,6 @@ class RegisteredUserController extends Controller
 
     /**
      * Handle an incoming registration request.
-     *
-     * @param RegisterRequest $request
-     * @return RedirectResponse
      */
     public function store(RegisterRequest $request): RedirectResponse
     {

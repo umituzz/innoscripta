@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class PreferencesController
- * @package App\Http\Controllers\User
  */
 class PreferencesController extends BaseController
 {

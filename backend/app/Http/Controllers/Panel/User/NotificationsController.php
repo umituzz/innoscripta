@@ -8,7 +8,6 @@ use App\Http\Resources\NotificationResource;
 
 /**
  * Class NotificationsController
- * @package App\Http\Controllers\User
  */
 class NotificationsController extends Controller
 {
@@ -24,7 +23,7 @@ class NotificationsController extends Controller
         $notifications = $this->notificationRepository->getNotifications();
 
         return view('notification.index', [
-            'notifications' => $notifications
+            'notifications' => $notifications,
         ]);
     }
 
@@ -36,7 +35,7 @@ class NotificationsController extends Controller
         $notification = (new NotificationResource($notification))->toArray(request());
 
         return view('notification.show', [
-            'notification' => $notification
+            'notification' => $notification,
         ]);
     }
 
