@@ -37,6 +37,7 @@ export const LoginProvider = ({children}) => {
 
             if (response.statusCode === 422) {
                 setErrors(response.errors);
+                setIsLoading(false);
             } else {
                 const authData = {
                     token: response.data.token,
@@ -45,14 +46,16 @@ export const LoginProvider = ({children}) => {
 
                 if (authData.token) {
                     dispatch(login(authData));
-                    setFormData({email: '', password: ''});
                     setToastMessage({message: 'Login Successfully', type: 'success'});
                     setIsLoading(false);
                     await router.push('/');
                 } else {
-                    setIsLoading(false);
                     setToastMessage({message: 'Undefined Token', type: 'error'});
+                    setIsLoading(false);
                 }
+
+                setFormData({email: '', password: ''});
+                setErrors([])
             }
         } catch (error) {
             setToastMessage({message: 'An error occurred while logging in', type: 'error'});
