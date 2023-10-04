@@ -2,30 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {Button, Card, Form, Col} from 'react-bootstrap';
 import styles from '@/styles/PreferenceItem.module.scss';
 import {PreferenceItemInterface} from "@/interfaces/PreferenceItemInterface";
+import {usePreferenceContext} from "@/contexts/PreferenceContext";
 
 function PreferenceItemMolecule({title, formId, items, onSubmit, checked}: PreferenceItemInterface) {
-    const [checkedItems, setCheckedItems] = useState({sourceIds: []});
-
-    const handleCheckboxChange = (itemId) => {
-        const updatedSourceIds = [...checkedItems.sourceIds];
-        if (updatedSourceIds.includes(itemId)) {
-            updatedSourceIds.splice(updatedSourceIds.indexOf(itemId), 1);
-        } else {
-            updatedSourceIds.push(itemId);
-        }
-
-        setCheckedItems({sourceIds: updatedSourceIds});
-    };
+    const { handleCheckboxChange } = usePreferenceContext();
+    const [checkedItems, setCheckedItems] = useState({itemIds: []});
 
     useEffect(() => {
         if (checked) {
-            setCheckedItems({sourceIds: checked});
+            setCheckedItems({itemIds: checked});
         }
     }, [checked]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(formId, checkedItems.sourceIds);
+        onSubmit(formId, checkedItems.itemIds);
     };
 
     if (!items || items.length === 0) {
@@ -57,7 +48,7 @@ function PreferenceItemMolecule({title, formId, items, onSubmit, checked}: Prefe
                                     label={item.name}
                                     className={styles['form-check']}
                                     onChange={() => handleCheckboxChange(item.id)}
-                                    checked={checkedItems.sourceIds.includes(item.id)}
+                                    checked={checkedItems.itemIds.includes(item.id)}
                                 />
                             ))}
                         </div>
