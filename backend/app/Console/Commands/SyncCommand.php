@@ -16,6 +16,7 @@ class SyncCommand extends Command
 
     public function handle()
     {
+        Artisan::call('redis:set-total-users');
         Artisan::call('redis:set-total-articles');
         Artisan::call('redis:sync-sources');
         Artisan::call('redis:sync-authors');

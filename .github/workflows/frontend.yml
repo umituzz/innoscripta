@@ -7,9 +7,31 @@ on:
     branches: ["master"]
 
 jobs:
-  frontend:
+  eslint:
+    name: ESLint
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
+      - name: Install Node.js
+        run: |
+          curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+        working-directory: ./frontend
+
+      - name: Install ESLint
+        run: npm install eslint --save-dev
+        working-directory: ./frontend
+
+      - name: Run ESLint
+        run: npx eslint .
+        working-directory: ./frontend
+  frontend:
+    name: NextSetup
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
