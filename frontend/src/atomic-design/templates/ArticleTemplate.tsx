@@ -1,10 +1,10 @@
-import MainLayout from "@/layouts/MainLayout";
+import React from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
+import MainLayout from "@/layouts/MainLayout";
 import ArticleItem from "@/components/ArticleItem";
 import PaginationComponent from "@/components/PaginationComponent";
 import SearchBar from "@/components/SearchBar";
 import FilterComponent from "@/components/FilterComponent";
-import React from "react";
 import {useArticleContext} from "@/contexts/ArticleContext";
 
 const ArticleTemplate = () => {

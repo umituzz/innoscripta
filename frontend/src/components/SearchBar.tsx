@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Card, Form, Button} from 'react-bootstrap';
+import {Form, Button} from 'react-bootstrap';
 import {SearchBarInterface} from "@/interfaces/SearchBarInterface";
 
 export default function SearchBar({onSearch}: SearchBarInterface) {

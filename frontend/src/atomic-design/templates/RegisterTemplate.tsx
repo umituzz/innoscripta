@@ -4,7 +4,6 @@ import React from "react";
 import RegisterOrganism from "@/atomic-design/organisms/RegisterOrganism";
 
 const RegisterTemplate = () => {
-
     return (
         <MainLayout title={"Register"} description={"Register Description"}>
             <Container>
