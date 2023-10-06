@@ -1,5 +1,5 @@
 services:
-    laravel:
+    laravel.test:
         container_name: 'sail_laravel'
         build:
             context: ./vendor/laravel/sail/runtimes/8.2
@@ -26,6 +26,7 @@ services:
             - mysql
             - redis
             - elasticsearch
+            - mongodb
     mysql:
         container_name: 'sail_mysql'
         image: 'mysql/mysql-server:8.0'
@@ -88,7 +89,7 @@ services:
             PGADMIN_DEFAULT_EMAIL: 'laravel@gmail.com'
             PGADMIN_DEFAULT_PASSWORD: 'password'
         ports:
-            - 8081:80
+            - 8083:80
         depends_on:
             - postgresql
         networks:
@@ -118,6 +119,46 @@ services:
             - '9200:9200'
         networks:
             - sail
+    nodejs:
+        container_name: 'sail_nodejs'
+        build:
+            context: ../microservices/nodejs
+            dockerfile: Dockerfile
+        ports:
+            - "4000:4000"
+        networks:
+            - sail
+        depends_on:
+            - mongodb
+    mongodb:
+        container_name: 'sail_mongodb'
+        image: mongo:4.4
+        environment:
+            MONGO_INITDB_DATABASE: mongodb
+        ports:
+            - "27017:27017"
+        volumes:
+            - 'sail-mongodb:/data/db'
+        networks:
+            - sail
+        healthcheck:
+            test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+            interval: 10s
+            timeout: 5s
+            retries: 3
+
+    mongodb-ui:
+        container_name: 'sail_mongodb-ui'
+        image: mongo-express
+        environment:
+            ME_CONFIG_MONGODB_SERVER: mongodb
+            ME_CONFIG_MONGODB_PORT: 27017
+            ME_CONFIG_BASICAUTH_USERNAME: laravel
+            ME_CONFIG_BASICAUTH_PASSWORD: password
+        ports:
+            - 8081:8081
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
@@ -127,4 +168,6 @@ volumes:
     sail-redis:
         driver: local
     sail-postgresql:
+        driver: local
+    sail-mongodb:
         driver: local

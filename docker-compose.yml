@@ -120,6 +120,8 @@ services:
       - "4000:4000"
     networks:
       - app
+    depends_on:
+      - mongodb
 
   golang:
     container_name: 'golang'
@@ -152,6 +154,11 @@ services:
       - ./docker/volumes/mongodb:/data/db
     networks:
       - app
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   mongodb-ui:
     container_name: 'mongodb-ui'

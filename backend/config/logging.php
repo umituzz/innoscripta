@@ -126,6 +126,17 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'host' => env('MONGO_DB_HOST', 'mongodb'),
+            'port' => env('MONGO_DB_PORT', 27017),
+            'database' => env('MONGO_DB_DATABASE', 'laravel'),
+            'collection' => 'logs',
+            'username' => env('MONGO_DB_USERNAME', ''),
+            'password' => env('MONGO_DB_PASSWORD', ''),
+            'options' => [],
+        ],
     ],
 
 ];
