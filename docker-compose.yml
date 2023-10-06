@@ -50,17 +50,17 @@ services:
 
   postgresql:
     container_name: 'postgresql'
-    image: 'postgres:13'
+    image: postgres:13
     ports:
-      - '${FORWARD_DB_PORT:-5432}:5432'
+      - 5432:5432
     environment:
-      POSTGRES_USER: '${DB_USERNAME}'
-      POSTGRES_PASSWORD: '${DB_PASSWORD}'
-      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_DB: laravel
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: password
     volumes:
-      - ./docker/volumes/postgresql:/var/lib/postgresql/data
+      - ./docker/volumes/postgresql:/var/lib/postgresql
     networks:
-      - sail
+      - app
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME}" ]
       retries: 3
