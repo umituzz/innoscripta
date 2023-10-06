@@ -13,8 +13,6 @@ services:
       DB_PASSWORD: password
     ports:
       - 8000:8000
-    volumes:
-      - ./backend:/app/backend
     depends_on:
       - mysql
     networks:
@@ -48,24 +46,6 @@ services:
     networks:
       - app
 
-  postgresql:
-    container_name: 'postgresql'
-    image: postgres:13
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_DB: laravel
-      POSTGRES_USER: laravel
-      POSTGRES_PASSWORD: password
-    volumes:
-      - ./docker/volumes/postgresql:/var/lib/postgresql
-    networks:
-      - app
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME}" ]
-      retries: 3
-      timeout: 5s
-
   phpmyadmin:
     container_name: 'phpmyadmin'
     image: phpmyadmin
@@ -79,6 +59,25 @@ services:
       - mysql
     networks:
       - app
+
+  postgres:
+    container_name: "postgres"
+    image: postgres:latest
+    volumes:
+      - "./docker/volumes/postgres:/var/lib/postgres"
+    environment:
+      - POSTGRES_DB=laravel
+      - POSTGRES_USER=laravel
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    networks:
+      - app
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME}" ]
+      retries: 3
+      timeout: 5s
+
   phppgadmin:
     container_name: 'phppgadmin'
     image: 'dpage/pgadmin4'
@@ -88,9 +87,10 @@ services:
     ports:
       - 8081:80
     depends_on:
-      - postgresql
+      - postgres
     networks:
       - app
+
   redis:
     container_name: 'redis'
     image: 'redis:alpine'
@@ -100,6 +100,7 @@ services:
       - ./docker/volumes/redis:/data
     networks:
       - app
+
   elasticsearch:
     container_name: 'elasticsearch'
     image: 'docker.elastic.co/elasticsearch/elasticsearch:7.15.0'
@@ -109,13 +110,12 @@ services:
       - '9200:9200'
     networks:
       - app
+
 networks:
   app:
     driver: bridge
 
 volumes:
-  app:
-    driver: local
   mysql:
     driver: local
     driver_opts:
@@ -128,9 +128,9 @@ volumes:
       type: none
       o: bind
       device: ./docker/volumes/redis
-  postgresql:
+  postgres:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ./docker/volumes/postgresql
+      device: ./docker/volumes/postgres
