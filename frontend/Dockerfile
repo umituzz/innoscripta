@@ -4,6 +4,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY . ./
 COPY package.json ./
+COPY .env.example .env
 RUN npm install --production
 
 # Builder Stage

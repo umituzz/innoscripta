@@ -4,11 +4,7 @@ use App\Http\Controllers\Panel\Article\ArticlesController;
 use App\Http\Controllers\Panel\Dashboard\HomepageController;
 use App\Http\Controllers\Panel\User\NotificationsController;
 use App\Http\Controllers\Panel\User\ProfileController;
-use App\Http\Controllers\TwitterAuthController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('auth/twitter', [TwitterAuthController::class, 'redirectToTwitter']);
-Route::get('auth/twitter/callback', [TwitterAuthController::class, 'handleTwitterCallback']);
 
 require __DIR__.'/auth.php';
 
