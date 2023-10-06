@@ -51,6 +51,23 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    postgresql:
+        container_name: 'sail_postgresql'
+        image: 'postgres:13'
+        ports:
+            - '${FORWARD_DB_PORT:-5432}:5432'
+        environment:
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD}'
+            POSTGRES_DB: '${DB_DATABASE}'
+        volumes:
+            - 'sail-postgresql:/var/lib/postgresql/data'
+        networks:
+            - sail
+        healthcheck:
+            test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME}" ]
+            retries: 3
+            timeout: 5s
     phpmyadmin:
         container_name: 'sail_phpmyadmin'
         image: phpmyadmin
@@ -62,6 +79,18 @@ services:
             - 8080:80
         depends_on:
             - mysql
+        networks:
+            - sail
+    phppgadmin:
+        container_name: 'sail_phppgadmin'
+        image: 'dpage/pgadmin4'
+        environment:
+            PGADMIN_DEFAULT_EMAIL: 'laravel@gmail.com'
+            PGADMIN_DEFAULT_PASSWORD: 'password'
+        ports:
+            - 8081:80
+        depends_on:
+            - postgresql
         networks:
             - sail
     redis:
@@ -96,4 +125,6 @@ volumes:
     sail-mysql:
         driver: local
     sail-redis:
+        driver: local
+    sail-postgresql:
         driver: local

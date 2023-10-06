@@ -39,7 +39,9 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
 
             collect($items)->map(function ($item) use ($sourceId) {
 
-                $fistAuthor = explode(',', $item->author)[0] ?? AuthorEnums::NEWS_AUTHOR;
+                if (!empty($item->author)) {
+                    $fistAuthor = explode(',', $item->author)[0];
+                }
 
                 $author = $this->authorService->firstOrCreate('name', [
                     'name' => $fistAuthor ?? AuthorEnums::NEWS_AUTHOR,
