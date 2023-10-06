@@ -139,7 +139,7 @@ services:
       context: ./microservices/python
       dockerfile: Dockerfile
     ports:
-      - "8085:6000"
+      - "8085:8085"
     networks:
       - app
 
