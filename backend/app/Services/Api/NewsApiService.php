@@ -23,7 +23,7 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
             $url = $this->getUrl();
             $response = $this->httpService->getResult($url);
 
-            if (!$response) {
+            if (! $response) {
                 $this->logInfo(__('No data received from the API'));
 
                 return false;
