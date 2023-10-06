@@ -79,7 +79,18 @@ services:
       - mysql
     networks:
       - app
-
+  phppgadmin:
+    container_name: 'phppgadmin'
+    image: 'dpage/pgadmin4'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'laravel@gmail.com'
+      PGADMIN_DEFAULT_PASSWORD: 'password'
+    ports:
+      - 8081:80
+    depends_on:
+      - postgresql
+    networks:
+      - app
   redis:
     container_name: 'redis'
     image: 'redis:alpine'
@@ -117,3 +128,9 @@ volumes:
       type: none
       o: bind
       device: ./docker/volumes/redis
+  postgresql:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./docker/volumes/postgresql
