@@ -1,12 +1,15 @@
 from flask import Flask
 from pymongo import MongoClient
 from datetime import datetime
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 app = Flask(__name__)
 
-mongo_uri = "mongodb://localhost:27017"
-db_name = "mongodb"
-collection_name = "logs"
+mongo_uri = os.getenv("MONGO_URI")
+db_name = os.getenv("DB_NAME")
+collection_name = os.getenv("COLLECTION_NAME")
 client = MongoClient(mongo_uri)
 db = client[db_name]
 collection = db[collection_name]
