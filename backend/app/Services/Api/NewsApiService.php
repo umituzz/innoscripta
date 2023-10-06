@@ -39,7 +39,7 @@ class NewsApiService extends BaseApiService implements ApiServiceInterface
 
             collect($items)->map(function ($item) use ($sourceId) {
 
-                if (!empty($item->author)) {
+                if (! empty($item->author)) {
                     $fistAuthor = explode(',', $item->author)[0];
                 }
 
