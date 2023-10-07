@@ -2,7 +2,7 @@ const express = require('express');
 const {MongoClient} = require('mongodb');
 require('dotenv').config();
 const app = express();
-const port = process.env.MONGO_DB_PORT;
+const port = 4000;
 const mongoUri = process.env.MONGO_DB_URL;
 const dbName = process.env.MONGO_DB;
 const collectionName = 'logs';
