@@ -101,8 +101,8 @@ return [
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
             'options' => [
-                'database' =>  env('DB_DATABASE')
-            ]
+                'database' => env('DB_DATABASE'),
+            ],
         ],
 
     ],
