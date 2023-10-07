@@ -5,7 +5,6 @@ import {PreferenceItemInterface} from "@/interfaces/PreferenceItemInterface";
 import {usePreferenceContext} from "@/contexts/PreferenceContext";
 
 function PreferenceItemMolecule({title, formId, items, onSubmit, checked}: PreferenceItemInterface) {
-    const { handleCheckboxChange } = usePreferenceContext();
     const [checkedItems, setCheckedItems] = useState({itemIds: []});
 
     useEffect(() => {
@@ -13,6 +12,17 @@ function PreferenceItemMolecule({title, formId, items, onSubmit, checked}: Prefe
             setCheckedItems({itemIds: checked});
         }
     }, [checked]);
+
+    const handleCheckboxChange = (itemId) => {
+        const updatedSourceIds = [...checkedItems.itemIds];
+        if (updatedSourceIds.includes(itemId)) {
+            updatedSourceIds.splice(updatedSourceIds.indexOf(itemId), 1);
+        } else {
+            updatedSourceIds.push(itemId);
+        }
+
+        setCheckedItems({itemIds: updatedSourceIds});
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();

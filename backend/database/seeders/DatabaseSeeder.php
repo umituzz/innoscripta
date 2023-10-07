@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             SourceSeeder::class,
             AuthorSeeder::class,
             CategorySeeder::class,
-            PreferenceableSeeder::class,
+//            PreferenceableSeeder::class,
             ArticleSeeder::class,
         ]);
     }

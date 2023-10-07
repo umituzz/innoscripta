@@ -75,16 +75,7 @@ export const PreferenceProvider = ({children}) => {
         }
     };
 
-    const handleCheckboxChange = (itemId) => {
-        const updatedSourceIds = [...checkedItems.sourceIds];
-        if (updatedSourceIds.includes(itemId)) {
-            updatedSourceIds.splice(updatedSourceIds.indexOf(itemId), 1);
-        } else {
-            updatedSourceIds.push(itemId);
-        }
 
-        setCheckedItems({sourceIds: updatedSourceIds});
-    };
 
     return (
         <PreferenceContext.Provider
@@ -94,8 +85,7 @@ export const PreferenceProvider = ({children}) => {
                 checkedSources,
                 checkedAuthors,
                 checkedCategories,
-                handleSubmit,
-                handleCheckboxChange
+                handleSubmit
             }}
         >
             {children}

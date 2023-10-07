@@ -1,10 +1,10 @@
 import React from "react";
 import InputComponent from "@/atomic-design/atoms/InputComponent";
 import ButtonComponent from "@/atomic-design/atoms/ButtonComponent";
-import ToastMessageComponent from "@/atomic-design/atoms/ToastMessageComponent";
 import {useLoginContext} from "@/contexts/LoginContext";
 import Loading from "@/components/Loading";
 import Link from "next/link";
+import ToastMessage from "@/components/ToastMessage";
 
 const LoginMolecule = () => {
     const {
@@ -49,7 +49,7 @@ const LoginMolecule = () => {
                         </ButtonComponent>
                     </form>
 
-                    <ToastMessageComponent message={toastMessage?.message} type={toastMessage?.type}/>
+                    <ToastMessage message={toastMessage?.message} type={toastMessage?.type}/>
 
                     <p className="mt-3">
                         {`Don't have an account? `}
