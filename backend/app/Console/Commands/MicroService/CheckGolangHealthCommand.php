@@ -4,8 +4,8 @@ namespace App\Console\Commands\MicroService;
 
 use App\Traits\Logger;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Support\Facades\Http;
 
 /**
  * Class CheckGolangHealthCommand
@@ -34,7 +34,7 @@ class CheckGolangHealthCommand extends Command
                 $this->logInfo('Golang project is not running.');
             }
         } catch (RequestException $exception) {
-            $this->logError('Error while checking Golang project health: ' . $exception);
+            $this->logError('Error while checking Golang project health: '.$exception);
         }
     }
 }
