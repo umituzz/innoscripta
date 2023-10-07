@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
 
 /**
- * Class PythonHealthCommand
+ * Class CheckPythonHealthCommand
  */
-class PythonHealthCommand extends Command
+class CheckPythonHealthCommand extends Command
 {
     use Logger;
 

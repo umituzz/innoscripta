@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
 
 /**
- * Class NodejsHealthCommand
+ * Class CheckNodejsHealthCommand
  */
-class NodejsHealthCommand extends Command
+class CheckNodejsHealthCommand extends Command
 {
     use Logger;
 
