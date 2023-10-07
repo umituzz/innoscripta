@@ -173,6 +173,7 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
         Matchish\ScoutElasticSearch\ElasticSearchServiceProvider::class,
+        MongoDB\Laravel\MongoDBServiceProvider::class,
     ])->toArray(),
 
     /*

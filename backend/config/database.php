@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -95,28 +95,15 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => env('MONGODB_CONNECTION_STRING'),
-            'database' => env('MONGODB_DATABASE', 'mongodb'),
-            'host' => env('MONGO_DB_HOST', 'localhost'),
-            'port' => env('MONGO_DB_PORT', 27017),
-            'username' => env('MONGO_DB_USERNAME', ''),
-            'password' => env('MONGO_DB_PASSWORD', ''),
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', 27017),
+            'database' => env('DB_DATABASE', 'mongodb'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
             'options' => [
-                'database' => 'admin',
-            ],
+                'database' =>  env('DB_DATABASE')
+            ]
         ],
-
-        //        'mongodb' => [
-        //            'driver'   => 'mongodb',
-        //            'host'     => env('MONGO_DB_HOST', 'mongodb'),
-        //            'port'     => env('MONGO_DB_PORT', 27017),
-        //            'database' => env('MONGO_DB_DATABASE', 'mongodb'),
-        //            'username' => env('MONGO_DB_USERNAME', ''),
-        //            'password' => env('MONGO_DB_PASSWORD', ''),
-        //            'options'  => [
-        //                'database' => 'admin',
-        //            ],
-        //        ],
 
     ],
 

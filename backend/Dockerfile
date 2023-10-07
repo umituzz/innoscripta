@@ -10,6 +10,8 @@ RUN docker-php-ext-install mysqli pdo_mysql pcntl pdo_pgsql
 
 RUN docker-php-ext-configure pcntl --enable-pcntl
 
+RUN pecl install mongodb && docker-php-ext-enable mongodb
+
 WORKDIR /
 
 COPY .env.example .env
