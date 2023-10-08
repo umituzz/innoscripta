@@ -2,31 +2,22 @@
 
 namespace App\Console\Commands\MicroService;
 
-use App\Traits\Logger;
-use Illuminate\Console\Command;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
 /**
  * Class CheckPythonHealthCommand
  */
-class CheckPythonHealthCommand extends Command
+class CheckPythonHealthCommand extends BaseMicroserviceCommand
 {
-    use Logger;
-
     protected $signature = 'microservice:check-python-health';
 
     protected $description = 'Check if the Python microservice is running';
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function handle(): void
     {
         try {
-            $response = Http::get('http://localhost:8085');
+            $response = $this->httpService->get('http://localhost:8085');
 
             if ($response->ok()) {
                 $this->logInfo('Python microservice is running.');

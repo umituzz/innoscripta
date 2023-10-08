@@ -2,31 +2,21 @@
 
 namespace App\Console\Commands\MicroService;
 
-use App\Traits\Logger;
-use Illuminate\Console\Command;
 use Illuminate\Http\Client\RequestException;
-use Illuminate\Support\Facades\Http;
 
 /**
  * Class CheckGolangHealthCommand
  */
-class CheckGolangHealthCommand extends Command
+class CheckGolangHealthCommand extends BaseMicroserviceCommand
 {
-    use Logger;
-
     protected $signature = 'microservice:check-golang-health';
 
     protected $description = 'Check if the Golang project is running';
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function handle(): void
     {
         try {
-            $response = Http::get('http://localhost:5000');
+            $response = $this->httpService->get('http://localhost:5000');
 
             if ($response->ok()) {
                 $this->logInfo('Golang project is running.');
