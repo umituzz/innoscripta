@@ -10,19 +10,21 @@ const AuthMenu = () => {
     return (
         <Nav className="ms-auto my-2 my-lg-0" navbarScroll>
             {isAuthenticated ? (
-                <Dropdown className="d-none d-lg-inline">
-                    <Dropdown.Toggle variant="link" id="user-dropdown" className="user-dropdown-toggle">
-                        <span className="user-name">{authUser ? authUser.name : 'Guest'}</span>
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu className="user-dropdown-menu">
-                        <Dropdown.Item>
-                            <Link href="/user/preferences" className="nav-link">Preferences</Link>
-                        </Dropdown.Item>
-                    </Dropdown.Menu>
-                    <Button variant="link" onClick={handleLogout} className="logout-button">
-                        <BoxArrowRight size={22} />
-                    </Button>
-                </Dropdown>
+               <>
+                   <Dropdown className="d-none d-lg-inline">
+                       <Dropdown.Toggle variant="link" id="user-dropdown" className="user-dropdown-toggle">
+                           <span className="user-name">{authUser ? authUser.name : 'Guest'}</span>
+                       </Dropdown.Toggle>
+                       <Dropdown.Menu className="user-dropdown-menu">
+                           <Dropdown.Item>
+                               <Link href="/user/preferences" className="nav-link">Preferences</Link>
+                           </Dropdown.Item>
+                       </Dropdown.Menu>
+                       <Button variant="link" onClick={handleLogout} className="logout-button">
+                           <BoxArrowRight size={22} />
+                       </Button>
+                   </Dropdown>
+               </>
             ) : (
                 <>
                     <Link href="/login" className="nav-link">
