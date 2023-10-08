@@ -20,11 +20,9 @@ class SetupCommand extends Command
 
         Artisan::call('redis:flush-db');
 
-        Artisan::call('api:guardian');
         Artisan::call('api:news');
         Artisan::call('api:mediaStack');
+        Artisan::call('api:guardian');
         Artisan::call('api:newyorkTimes');
-
-        Artisan::call('scout:import "App\\\Models\\\Article"');
     }
 }
