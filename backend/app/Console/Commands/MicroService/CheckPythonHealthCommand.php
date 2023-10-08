@@ -3,7 +3,6 @@
 namespace App\Console\Commands\MicroService;
 
 use Illuminate\Http\Client\RequestException;
-use Illuminate\Support\Facades\Http;
 
 /**
  * Class CheckPythonHealthCommand
